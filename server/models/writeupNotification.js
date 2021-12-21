@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const WriteUp = new mongoose.Schema( {
-    _id: {
+const WriteUpNotification = new mongoose.Schema({
+    "_id": {
         "requester":{
             type: String,
             required: [true, 'This is a mandatory field']
@@ -19,10 +19,10 @@ const WriteUp = new mongoose.Schema( {
         type: String,
         required: [true, 'This is a mandatory field']
     },
-    "message" : {
-        type: String,
-        required: [true, 'This is a mandatory field']
+    "active":{
+        type: Boolean,
+        default: true
     }
-});
+})
 
-module.exports = mongoose.model("WriteUp", WriteUp);
+module.exports = mongoose.model("WriteUpNotification", WriteUpNotification);

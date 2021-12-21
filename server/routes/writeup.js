@@ -1,35 +1,22 @@
 import WriteUp from "../models/writeup";
-import moongoose from "mongoose";
-
 
 const registerWriteUpRouter = (router) => {
-    // get all writeups
+
+    // get all write-ups
     router.get("/writeup", async(req, res) => {
         const writeup = await WriteUp.find();
         res.send(writeup);
     });
 
-    // get writeup
-    router.get("/writeup/:user", async(req, res) => {
+    // get write-ups received
+    router.get("/writeup/requested/:requester", async(req, res) => {
         try {
-            const writeUp = await WriteUp.find({"user": req.params.user});
-            res.send(writeUp);
-        } catch (error) {
-            res.send(error);
-        }
-
-    });
-
-    // get writeup aggregate
-    router.get("/writeup/aggregate/:user", async(req, res) => {
-        try {
-            WriteUp.aggregate([
-                {
+            // const writeUp = await WriteUp.find({"requester": req.params.requester});
+            WriteUp.aggregate([{
                     $match: {
-                        "user": req.params.user
+                        "requester": req.params.requester
                     }
-                },
-                {
+                }, {
                     $lookup: {
                         "from": "users",
                         "localField": "author",
@@ -41,37 +28,76 @@ const registerWriteUpRouter = (router) => {
                 if(err) throw err;
                 res.send(result);
             })
+            // res.send(writeUp);
         } catch (error) {
             res.send(error);
         }
 
     });
 
-    // get writeup
-    router.get("/writeup/:user/:author", async(req, res) => {
+    // get write-ups posted
+    router.get("/writeup/authored/:author", async(req, res) => {
         try {
-            const writeUp = await WriteUp.find({
-                "_id" :{
-                    "user": req.params.user,
+            // const writeUp = await WriteUp.find({"author": req.params.author});
+            WriteUp.aggregate([{
+                $match: {
                     "author": req.params.author
                 }
-            });
-            res.send(writeUp);
+            }, {
+                $lookup: {
+                    "from": "users",
+                    "localField": "requester",
+                    "foreignField": "email",
+                    "as": "requesterDetails"
+                }
+            }
+            ]).exec(function(err, result){
+                if(err) throw err;
+                res.send(result);
+            })
+            // res.send(writeUp);
         } catch (error) {
             res.send(error);
         }
 
     });
+
+    // get writeup aggregate
+    // router.get("/writeup/aggregate/:user", async(req, res) => {
+    //     try {
+    //         WriteUp.aggregate([
+    //             {
+    //                 $match: {
+    //                     "user": req.params.user
+    //                 }
+    //             },
+    //             {
+    //                 $lookup: {
+    //                     "from": "users",
+    //                     "localField": "author",
+    //                     "foreignField": "email",
+    //                     "as": "authorDetails"
+    //                 }
+    //             }
+    //         ]).exec(function(err, result){
+    //             if(err) throw err;
+    //             res.send(result);
+    //         })
+    //     } catch (error) {
+    //         res.send(error);
+    //     }
+    //
+    // });
 
     // add writeup
     router.post("/writeup", async(req,res) => {
         try {
             const writeUp = new WriteUp({
                 _id: {
-                    user: req.body.user,
+                    requester: req.body.requester,
                     author: req.body.author,
                 },
-                user: req.body.user,
+                requester: req.body.requester,
                 author: req.body.author,
                 message: req.body.message
             });
@@ -83,13 +109,13 @@ const registerWriteUpRouter = (router) => {
 
     });
 
-    // delete user
-    router.delete("/writeup/:user/:author", async(req,res)=>{
+    // delete writeup
+    router.delete("/writeup/:author/:requester", async(req,res)=>{
         try{
-            console.log(req.params.user, req.params.author);
+            console.log(req.params.requester, req.params.author);
             const writeUp = await WriteUp.deleteOne({
                 "_id" :{
-                    "user": req.params.user,
+                    "requester": req.params.requester,
                     "author": req.params.author
                 }
             });
