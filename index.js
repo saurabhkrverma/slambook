@@ -2,8 +2,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 const routes =  require('./server/routes');
 const app = express();
+import path from "path";
+
+const DIST_DIR = path.join(__dirname, "./dist");
 
 app.use(express.json());
+app.use(express.static(DIST_DIR));
 app.use("/api", routes);
 app.use("/", (req,res)=>{
     res.send("welcome to scrapbook !!");
