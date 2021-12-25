@@ -1,6 +1,4 @@
-import User from "../models/user";
-import _ from "lodash";
-
+import User from "../../models/user";
 
 const registerUserRouter = (router) => {
     // get all users
@@ -29,6 +27,8 @@ const registerUserRouter = (router) => {
                 email: email,
                 name: name
             });
+            const hashedPassword = await user.hashPassword(req.body.password);
+            user.password = hashedPassword;
             await user.save();
             res.send(user);
         } catch (error) {
@@ -44,7 +44,7 @@ const registerUserRouter = (router) => {
     // delete user
     router.delete("/user/:email", async(req,res)=>{
         try{
-            const email = req.body.email ? req.body.email.toLowerCase() : undefined;
+            const email = req.params.email ? req.params.email.toLowerCase() : undefined;
             const user = await User.deleteOne({email: email})
             res.status(204).send();
         } catch (error) {
@@ -56,7 +56,7 @@ const registerUserRouter = (router) => {
     //update user
     router.patch("/user/:email", async(req,res)=>{
         try{
-            const email = req.body.email ? req.body.email.toLowerCase() : undefined;
+            const email = req.params.email ? req.params.email.toLowerCase() : undefined;
             const user = await User.findOne({email: email})
 
             if(!user) {

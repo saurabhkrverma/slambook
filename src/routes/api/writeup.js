@@ -1,4 +1,4 @@
-import WriteUp from "../models/writeup";
+import WriteUp from "../../models/writeup";
 
 const registerWriteUpRouter = (router) => {
 
@@ -62,33 +62,6 @@ const registerWriteUpRouter = (router) => {
 
     });
 
-    // get writeup aggregate
-    // router.get("/writeup/aggregate/:user", async(req, res) => {
-    //     try {
-    //         WriteUp.aggregate([
-    //             {
-    //                 $match: {
-    //                     "user": req.params.user
-    //                 }
-    //             },
-    //             {
-    //                 $lookup: {
-    //                     "from": "users",
-    //                     "localField": "author",
-    //                     "foreignField": "email",
-    //                     "as": "authorDetails"
-    //                 }
-    //             }
-    //         ]).exec(function(err, result){
-    //             if(err) throw err;
-    //             res.send(result);
-    //         })
-    //     } catch (error) {
-    //         res.send(error);
-    //     }
-    //
-    // });
-
     // add writeup
     router.post("/writeup", async(req,res) => {
         try {
@@ -112,7 +85,6 @@ const registerWriteUpRouter = (router) => {
     // delete writeup
     router.delete("/writeup/:author/:requester", async(req,res)=>{
         try{
-            console.log(req.params.requester, req.params.author);
             const writeUp = await WriteUp.deleteOne({
                 "_id" :{
                     "requester": req.params.requester,

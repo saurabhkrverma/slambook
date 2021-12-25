@@ -1,5 +1,5 @@
-import WriteUpNotification from "../models/writeupNotification";
-import User from "../models/user";
+import WriteUpNotification from "../../models/writeupNotification";
+import User from "../../models/user";
 
 const registerWriteupNotificationRouter = (router) => {
 
