@@ -38,14 +38,20 @@ app.use(authentication.authenticateRequest);
 // middleware to register routes
 app.use("/", routes);
 
-mongoose
-    .connect(mongoConnectionURI, {useNewUrlParser: true})
-    .then(()=>{
-        console.log("DB connection made successfully");
-        app.listen((process.env.PORT || 5000), () =>{
-            console.log("server is running on port 5000")
-        })
-    });
+
+try {
+    mongoose
+        .connect(mongoConnectionURI, {useNewUrlParser: true})
+        .then(()=>{
+            console.log("DB connection made successfully");
+            app.listen((process.env.PORT || 5000), () =>{
+                console.log("server is running on port 5000")
+            })
+        });
+} catch (error) {
+    console.log(error);
+}
+
 
 
 
