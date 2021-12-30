@@ -3,7 +3,7 @@ import ReactDom from "react-dom";
 
 const Init = () => {
     return (
-        <div>Welcome to scrapbook homepage :)</div>
+        <div>Welcome to slambook homepage :)</div>
     )
 }
 

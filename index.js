@@ -11,6 +11,8 @@ import path from "path";
 
 const DIST_DIR = path.join(__dirname, "./dist");
 
+const mongoConnectionURI = `mongodb+srv://sauraverma:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+
 // middleware to use the json parser
 app.use(express.json());
 // middleware to serve static content like html css
@@ -21,7 +23,7 @@ app.use(session({
         return uuid()
     },
     store: MongoStore.create({
-        mongoUrl: "mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/scrapbook"
+        mongoUrl: mongoConnectionURI
     }),
     secret: 'moina',
     resave: false,
@@ -37,7 +39,7 @@ app.use(authentication.authenticateRequest);
 app.use("/", routes);
 
 mongoose
-    .connect("mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/scrapbook?retryWrites=true&w=majority", {useNewUrlParser: true})
+    .connect(mongoConnectionURI, {useNewUrlParser: true})
     .then(()=>{
         console.log("DB connection made successfully");
         app.listen((process.env.PORT || 5000), () =>{
