@@ -9,9 +9,9 @@ import routes from './src/routes';
 const app = express();
 import path from "path";
 
-const DIST_DIR = path.join(__dirname, "./dist");
+export const DIST_DIR = path.join(__dirname, "./dist");
 
-const mongoConnectionURI = `mongodb+srv://sauraverma:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
 app.use(express.json());

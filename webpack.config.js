@@ -13,20 +13,33 @@ const cssPlugin = new MiniCssExtractPlugin({
 });
 
 module.exports = {
-    "mode": process.env.PORT || "development",
-    "entry": "./client/index.js",
-    "output": {
-        "path": path.join(__dirname, "dist"),
-        "filename": "index.js"
+    mode: "development",
+    devtool: 'source-map',
+    entry: ["./client/index.js"],
+    output: {
+        path: path.join(__dirname, "dist"),
+        filename: "index.js"
     },
-    "plugins": [htmlPlugin, cssPlugin],
-    "module": {
-      "rules": [{
-          "test": /\.(js|jsx)$/,
-          "exclude": /node_modules/,
-          "use": [{
+    plugins: [htmlPlugin, cssPlugin],
+    module: {
+      rules: [{
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: [{
               "loader": "babel-loader"
           }]
+      },{
+          test: /\.s?css$/,
+          exclude: /node_modules/,
+          use: [{
+              loader: MiniCssExtractPlugin.loader,
+          },
+              {
+                  loader: "css-loader",
+              },
+              {
+                  loader: "sass-loader"
+              }]
       }]
   }
 };

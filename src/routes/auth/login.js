@@ -58,7 +58,11 @@ const registerLoginRouter = (router) => {
         try {
             const user = await _promisifyPassport(req, res, next);
             req.login(user, (err) => {
-                return res.send('You were authenticated & logged in!\n');
+                const response = {
+                    email: user.email,
+                    name: user.name
+                }
+                return res.send(response);
             })
         } catch (error) {
             return res.status(400).send(error);
