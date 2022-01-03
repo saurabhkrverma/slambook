@@ -27,7 +27,12 @@ app.use(session({
     }),
     secret: 'moina',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        sameSite: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: parseInt(30*60*1000)
+    },
 }));
 // initialise passport
 app.use(passport.initialize());
