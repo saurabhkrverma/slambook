@@ -7,7 +7,7 @@ const authenticateRequest = (req, res, next) => {
     } else if(req.isAuthenticated()){
         next();
     } else {
-        res.redirect("/");
+        return res.status(401).send();
     }
 }
 

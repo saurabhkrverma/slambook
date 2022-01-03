@@ -1,18 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    logoutUser() {
+
+    }
+
     render() {
-        if(!this.props.session.name) {
+        if(!this.props.user.name) {
             return (<Navigate to={"/login"}></Navigate>)
         }
         return (
-            <div>Welcome to the home page, {this.props.session.name} !!</div>
+            <div>
+                Welcome to the Home page, {this.props.user.name} !!
+                <Button variant="primary" onClick={this.logoutUser}>Primary</Button>
+            </div>
         )
     }
 
@@ -20,7 +28,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        session: state.session
+        user: state.user
     }
 }
 

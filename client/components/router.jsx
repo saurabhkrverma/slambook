@@ -1,8 +1,8 @@
 import React from 'react';
 import {Routes, Route, Navigate} from "react-router-dom";
 import Navbar from './navbar.jsx';
-import Home from './home.jsx';
 import Login from "./login.jsx";
+import Home from "./home.jsx";
 
 
 class Router extends React.Component {

@@ -7,16 +7,16 @@ import createSlamBookStore from './store';
 import Router from "./components/router.jsx";
 import './css/index.scss'
 
-const Init = () => {
-    return (
-        <Provider store={createSlamBookStore()}>
+const Init =  async () => {
+    const slamBookStore =  await createSlamBookStore();
+    return ReactDom.render(
+        <Provider store={slamBookStore}>
             <Container fluid>
                 <BrowserRouter>
                     <Router/>
                 </BrowserRouter>
             </Container>
-        </Provider>
-    )
+        </Provider>, document.getElementById('root'));
 }
 
-ReactDom.render(<Init/>, document.getElementById('root'));
+Init();

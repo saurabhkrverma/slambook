@@ -1,10 +1,13 @@
 import User from "../../models/user";
+import { RESPONSE_TYPES } from "../../configs/constants"
+import { buildResponse } from "../../utils/responseBuilder"
 
 const registerUserRouter = (router) => {
     // get all users
     router.get("/users", async(req, res) => {
         const users = await User.find();
-        res.send(users);
+        const response = buildResponse(req, RESPONSE_TYPES.GET_USERS_SUCCESS, users);
+        res.send(response);
     });
 
     // get user
@@ -70,7 +73,6 @@ const registerUserRouter = (router) => {
             await user.save();
             res.send(user);
         } catch(error) {
-            console.log(error);
             res.send(error);
         }
     })

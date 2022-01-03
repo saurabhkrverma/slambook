@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik'
-import { loginUserAction } from '../actions/session';
+import { loginUserAction } from '../actions/user';
 import * as yup from 'yup';
 import { Navigate } from "react-router-dom";
 
@@ -27,7 +27,7 @@ class Login extends React.Component {
 
     render() {
         const defaultValues = {};
-        if(this.props.session.name){
+        if(this.props.user.name){
             return (<Navigate to={"/home"}></Navigate>);
         }
         return (
@@ -61,7 +61,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        session: state.session
+        user: state.user
     };
 };
 
