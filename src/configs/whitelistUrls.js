@@ -5,7 +5,9 @@ const whitelistUrls = {
     "/api/user": true,
     "/api/user/": true,
     "/api/initialiseApp": true,
-    "/api/initialiseApp/":true
+    "/api/initialiseApp/":true,
+    "/favicon.ico":true,
+    "/favicon.ico/":true
 };
 
 export default whitelistUrls;

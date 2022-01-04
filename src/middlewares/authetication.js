@@ -7,7 +7,12 @@ const authenticateRequest = (req, res, next) => {
     } else if(req.isAuthenticated()){
         next();
     } else {
-        return res.status(401).send();
+        const regexp = /^\/api/i;
+        if(regexp.test(req.url)){
+            return res.status(401).send();
+        } else {
+            return res.redirect("/");
+        }
     }
 }
 
