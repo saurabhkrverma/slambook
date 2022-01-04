@@ -3,7 +3,7 @@ import { MESSAGES } from '../../configs/constants'
 import { RESPONSE_TYPES } from '../../configs/constants';
 
 const registerLogoutRouter = (router) => {
-    router.get("/logout", async(req, res, next) => {
+    router.post("/logout", async(req, res, next) => {
         try{
             req.logout();
             res.status(200).clearCookie('connect.sid');

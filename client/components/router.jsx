@@ -1,6 +1,5 @@
 import React from 'react';
 import {Routes, Route, Navigate} from "react-router-dom";
-import Navbar from './navbar.jsx';
 import Login from "./login.jsx";
 import Home from "./home.jsx";
 
@@ -13,7 +12,6 @@ class Router extends React.Component {
     render() {
         return (
             <div>
-                <Navbar />
                 <Routes>
                     <Route path="/login" element={<Login />} />
                     <Route path="/home" element={<Home />} />

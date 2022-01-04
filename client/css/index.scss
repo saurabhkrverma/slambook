@@ -1,1 +1,8 @@
 @import "~bootstrap/scss/bootstrap.scss";
+@import "./header";
+
+body {
+  font-family:Montserrat,sans-serif;
+  font-size: 14px;
+  background-color: white;
+}

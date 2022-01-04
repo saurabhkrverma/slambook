@@ -29,7 +29,7 @@ export const loginUserAction = (credentials) => async dispatch => {
         }
     };
 
-export const logout = () => async dispatch => {
+export const logoutUserAction = () => async dispatch => {
     try {
         const response = await logoutUser();
         const data = _.get(response, 'data');

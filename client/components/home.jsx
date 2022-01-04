@@ -19,7 +19,6 @@ class Home extends React.Component {
         return (
             <div>
                 Welcome to the Home page, {this.props.user.name} !!
-                <Button variant="primary" onClick={this.logoutUser}>Primary</Button>
             </div>
         )
     }
