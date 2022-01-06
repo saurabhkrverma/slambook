@@ -11,9 +11,9 @@ import path from "path";
 
 export const DIST_DIR = path.join(__dirname, "./dist");
 
-const mongoConnectionURI = `mongodb://localhost:27017/scrapbook`
+// const mongoConnectionURI = `mongodb://localhost:27017/scrapbook`
 
-// const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
 app.use(express.json());
