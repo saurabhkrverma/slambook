@@ -48,6 +48,14 @@ export const buildResponse = (req, responseType, payload) => {
             response.data.users = _getUsers(payload);
             break;
         }
+        case RESPONSE_TYPES.USER_REGISTRATION_SUCCESS: {
+            response.messages.push(payload);
+            break;
+        }
+        case RESPONSE_TYPES.USER_REGISTRATION_FAILURE: {
+            response.errors.push(payload);
+            break;
+        }
         default:
             break;
     }

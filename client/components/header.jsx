@@ -20,13 +20,13 @@ class Header extends React.Component {
             return(
                 <Nav variant="pills" defaultActiveKey="/home">
                     <Nav.Item>
-                        <Nav.Link to="/home">home</Nav.Link>
+                        <Nav.Link to="/home" disabled>home</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link to="/settings">settings</Nav.Link>
+                        <Nav.Link to="/settings" disabled>settings</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link to="/notifications">notifications</Nav.Link>
+                        <Nav.Link to="/notifications" disabled>notifications</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link onClick={this.handleLogout} >logout</Nav.Link>

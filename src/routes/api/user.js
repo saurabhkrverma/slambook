@@ -1,5 +1,5 @@
 import User from "../../models/user";
-import { RESPONSE_TYPES } from "../../configs/constants"
+import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 
 const registerUserRouter = (router) => {
@@ -33,12 +33,15 @@ const registerUserRouter = (router) => {
             const hashedPassword = await user.hashPassword(req.body.password);
             user.password = hashedPassword;
             await user.save();
-            res.send(user);
+            const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
+            res.send(response);
         } catch (error) {
             if(error.code === 11000) {
-               res.status(409).send({"error msg": "email already exists"});
+                const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_FAILURE, MESSAGES.USER_REGISTRATION_FAILURE_EMAIL_EXISTS);
+               res.status(409).send(response);
             } else {
-                res.send(error);
+                const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_FAILURE, MESSAGES.USER_REGISTRATION_FAILURE_EMAIL_EXISTS);
+                res.send(response);
             }
         }
 

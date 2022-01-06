@@ -1,47 +1,55 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik'
-import { loginUserAction } from '../actions/user';
+import { connect } from 'react-redux';
+import { registerUserAction} from '../actions/user'
+
 import * as yup from 'yup';
 
-class Login extends React.Component {
+class UserRegistration extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.loginSchema = yup.object().shape({
+        this.registerUserSchema = yup.object().shape({
+            name: yup.string().required(),
             email: yup.string().required(),
             password: yup.string().required()
         });
-
-        this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
-        this.renderUserLoginForm = this.renderUserLoginForm.bind(this);
+        this.onRegisterUserFormSubmit = this.onRegisterUserFormSubmit.bind(this);
+        this.renderUserRegistrationForm = this.renderUserRegistrationForm.bind(this);
     }
 
-    onLoginFormSubmit(values, actions) {
-        // make call to submit this credentials to server;
-        const credentials = {
+    onRegisterUserFormSubmit(values, actions) {
+        const userInfo = {
+            name: values.name,
             email: values.email,
             password: values.password
         }
-        this.props.loginUser(credentials);
+
+        this.props.registerUser(userInfo);
     }
 
-    renderUserLoginForm(){
-        const loginFormDefaultValues = {};
+    renderUserRegistrationForm(){
+        const registerUserFormDefaultValues = {};
         return (
-            <Formik initialValues={loginFormDefaultValues} validationSchema={this.loginSchema} onSubmit={this.onLoginFormSubmit}>
+            <Formik initialValues={registerUserFormDefaultValues} validationSchema={this.registerUserSchema} onSubmit={this.onRegisterUserFormSubmit}>
                     {(props)=>(
                         <Form noValidate onSubmit={props.handleSubmit}>
 
-                            <Form.Group className="mb-3" controlId="login-form-email-id">
+                            <Form.Group className="mb-3" controlId="user-registration-form-name">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control name="name" type="email" placeholder="Enter name" value={props.values.name}  onChange={props.handleChange} isValid={!props.errors.name} isInvalid={!!props.errors.name}/>
+                                <Form.Control.Feedback type="invalid">{props.errors.name}</Form.Control.Feedback>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="user-registration-form-email-id">
                                 <Form.Label>Email address</Form.Label>
                                 <Form.Control name="email" type="email" placeholder="Enter email" value={props.values.email}  onChange={props.handleChange} isValid={!props.errors.email} isInvalid={!!props.errors.email}/>
                                 <Form.Control.Feedback type="invalid">{props.errors.email}</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="login-form-password">
+                            <Form.Group className="mb-3" controlId="user-registration-form-password">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control name={"password"} type="password" placeholder="Password" value={props.values.password}  onChange={props.handleChange} isValid={!props.errors.password} isInvalid={!!props.errors.password}/>
                                 <Form.Control.Feedback type="invalid">{props.errors.password}</Form.Control.Feedback>
@@ -58,15 +66,15 @@ class Login extends React.Component {
     }
 
     render() {
-        return this.renderUserLoginForm();
+        return this.renderUserRegistrationForm();
     }
 
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (credentials) => dispatch(loginUserAction(credentials))
+        registerUser: (userInfo) => dispatch(registerUserAction(userInfo))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(UserRegistration);

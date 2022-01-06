@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from "../actions/user";
+import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, REGISTER_NEW_USER } from "../actions/user";
 
 const _nullUser = {
     email: null,
@@ -12,6 +12,8 @@ const userReducer = (state = _nullUser, action) => {
         case RECEIVE_CURRENT_USER:
             return _.get(action,'data.user',state);
         case LOGOUT_CURRENT_USER:
+            return _.get(action,'data.user',state);
+        case REGISTER_NEW_USER:
             return _.get(action,'data.user',state);
         default:
             return state;

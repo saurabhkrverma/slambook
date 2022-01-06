@@ -1,15 +1,15 @@
 import _ from "lodash";
-import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from "../actions/user";
+import {RECEIVE_ERRORS, DISMISS_ALERT_BOX} from "../actions/user";
 
 const errorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
-        case RECEIVE_CURRENT_USER:
+        case RECEIVE_ERRORS:
             return _.get(action,'data.errors',state);
-        case LOGOUT_CURRENT_USER:
-            return _.get(action,'data.errors',state);
+        case DISMISS_ALERT_BOX:
+            return [];
         default:
-            return state;
+            return _.get(action,'data.errors',state);
     }
 }
 

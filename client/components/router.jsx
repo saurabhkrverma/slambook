@@ -1,7 +1,7 @@
 import React from 'react';
-import {Routes, Route, Navigate} from "react-router-dom";
-import Login from "./login.jsx";
+import {Routes, Route} from "react-router-dom";
 import Home from "./home.jsx";
+import Welcome from "./welcome.jsx";
 
 
 class Router extends React.Component {
@@ -13,9 +13,9 @@ class Router extends React.Component {
         return (
             <div>
                 <Routes>
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Welcome />} />
                     <Route path="/home" element={<Home />} />
-                    <Route path="*" element={<Login />} />
+                    <Route path="*" element={<Welcome />} />
                 </Routes>
             </div>
         )
