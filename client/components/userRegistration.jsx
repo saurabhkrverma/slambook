@@ -13,7 +13,7 @@ class UserRegistration extends React.Component {
 
         this.registerUserSchema = yup.object().shape({
             name: yup.string().required(),
-            email: yup.string().required(),
+            email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
             password: yup.string().required()
         });
         this.onRegisterUserFormSubmit = this.onRegisterUserFormSubmit.bind(this);
@@ -55,9 +55,11 @@ class UserRegistration extends React.Component {
                                 <Form.Control.Feedback type="invalid">{props.errors.password}</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
+                            <Form.Group className="mb-3 text-align-center" controlId="user-registration-form-submit">
+                                <Button variant="secondary" type="submit" disabled={!(props.isValid && props.dirty)}>
+                                    Register
+                                </Button>
+                            </Form.Group>
 
                         </Form>
                     )}

@@ -39,7 +39,7 @@ class Welcome extends React.Component {
                 <div>
                     <UserRegistration {...this.props} />
                     <br/>
-                    <div>
+                    <div className={"text-align-center"}>
                         <strong>Already have an account? </strong>
                         <span>
                             <a href="#" onClick={this.toggleForm}>Login</a>
@@ -53,7 +53,7 @@ class Welcome extends React.Component {
                 <div>
                     <Login {...this.props} />
                     <br/>
-                    <div>
+                    <div className={"text-align-center"}>
                         <strong>Don't have an account? </strong>
                         <span>
                             <a href="#" onClick={this.toggleForm}>Register</a>

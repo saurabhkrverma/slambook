@@ -11,7 +11,7 @@ class Login extends React.Component {
         super(props);
 
         this.loginSchema = yup.object().shape({
-            email: yup.string().required(),
+            email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
             password: yup.string().required()
         });
 
@@ -47,9 +47,11 @@ class Login extends React.Component {
                                 <Form.Control.Feedback type="invalid">{props.errors.password}</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
+                            <Form.Group className="mb-3 text-align-center" controlId="login-form-submit">
+                                <Button variant="secondary" type="submit" disabled={!(props.isValid && props.dirty)}>
+                                    Login
+                                </Button>
+                            </Form.Group>
 
                         </Form>
                     )}
