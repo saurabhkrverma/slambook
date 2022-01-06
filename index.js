@@ -12,8 +12,9 @@ import path from "path";
 export const DIST_DIR = path.join(__dirname, "./dist");
 
 // const mongoConnectionURI = `mongodb://localhost:27017/scrapbook`
+//const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
-const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+const mongoConnectionURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
 app.use(express.json());
@@ -36,6 +37,8 @@ app.use(session({
         maxAge: parseInt(30*60*1000)
     },
 }));
+// enabling secure cookie for heroku
+app.set('trust proxy', 1);
 // initialise passport
 app.use(passport.initialize());
 // ask passport to use the session object
