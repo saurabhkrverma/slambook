@@ -25,7 +25,6 @@ class Welcome extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("is this a good approach");
         if((!this.props.user || !this.props.user.name) && prevState.registerUser === true){
             this.setState((prevState)=>({
                 registerUser:false

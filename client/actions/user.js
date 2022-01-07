@@ -1,29 +1,24 @@
+import { ACTIONS } from "../config/constants"
 import { loginUser, logoutUser, registerUser } from '../utils/apiUtils';
 import _ from 'lodash';
 
-export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
-export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
-export const REGISTER_NEW_USER = "REGISTER_NEW_USER";
-export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
-export const DISMISS_ALERT_BOX = "DISMISS_ALERT_BOX";
-
 const receiveCurrentUser = data => ({
-    type: RECEIVE_CURRENT_USER,
+    type: ACTIONS.RECEIVE_CURRENT_USER,
     data
 });
 
 const logoutCurrentUser = data => ({
-    type: LOGOUT_CURRENT_USER,
+    type: ACTIONS.LOGOUT_CURRENT_USER,
     data
 });
 
 const registerNewUser = data => ({
-    type: REGISTER_NEW_USER,
+    type: ACTIONS.REGISTER_NEW_USER,
     data
 })
 
 const receiveErrors = data => ({
-    type: RECEIVE_ERRORS,
+    type: ACTIONS.RECEIVE_ERRORS,
     data
 })
 

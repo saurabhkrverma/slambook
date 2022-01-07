@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Alert } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { DISMISS_ALERT_BOX } from '../actions/user'
+import { ACTIONS } from "../config/constants"
 
 class AlertBar extends React.Component {
 
@@ -75,7 +75,7 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        closeAlertBarAction: () => dispatch({type: DISMISS_ALERT_BOX})
+        closeAlertBarAction: () => dispatch({type: ACTIONS.DISMISS_ALERT_BOX})
     }
 }
 

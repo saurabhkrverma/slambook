@@ -1,16 +1,16 @@
 import _ from "lodash";
-import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, REGISTER_NEW_USER, DISMISS_ALERT_BOX } from "../actions/user";
+import { ACTIONS } from "../config/constants";
 
 const messagesReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
-        case RECEIVE_CURRENT_USER:
+        case ACTIONS.RECEIVE_CURRENT_USER:
             return _.get(action,'data.messages',state);
-        case LOGOUT_CURRENT_USER:
+        case ACTIONS.LOGOUT_CURRENT_USER:
             return _.get(action,'data.messages',state);
-        case REGISTER_NEW_USER:
+        case ACTIONS.REGISTER_NEW_USER:
             return _.get(action,'data.messages',state);
-        case DISMISS_ALERT_BOX:
+        case ACTIONS.DISMISS_ALERT_BOX:
             return [];
         default:
             return state;

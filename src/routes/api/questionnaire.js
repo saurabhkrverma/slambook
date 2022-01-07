@@ -13,7 +13,6 @@ const registerQuestionnaireRouter = (router) => {
             const questionnaire = await Questionnaire.find({
                 "email": _.get(req,"user.email")
             });
-            console.log("kyub be", questionnaire, _.get(req,"user.email"));
             const response = buildResponse(req, RESPONSE_TYPES.QUESTIONNAIRE_FETCH_SUCCESS, questionnaire);
             res.send(response);
         } catch (err) {

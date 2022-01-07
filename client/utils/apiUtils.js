@@ -19,3 +19,7 @@ export const initialiseApp = () => {
 export const registerUser = (userInfo) => {
     return axios.post("/api/user", userInfo);
 }
+
+export const loadCollections = () => {
+    return axios.get("/api/questionnaire");
+}

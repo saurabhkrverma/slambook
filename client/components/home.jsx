@@ -18,7 +18,9 @@ class Home extends React.Component {
         }
         return (
             <div>
-                Welcome to the Home page, {this.props.user.name} !!
+                Welcome to the Home page, {this.props.user.name} !! <br/>
+                posts your slambook will show up here...coming soon :)
+
             </div>
         )
     }
