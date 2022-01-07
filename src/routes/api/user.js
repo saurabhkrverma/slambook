@@ -6,7 +6,7 @@ const registerUserRouter = (router) => {
     // get all users
     router.get("/users", async(req, res) => {
         const users = await User.find();
-        const response = buildResponse(req, RESPONSE_TYPES.GET_USERS_SUCCESS, users);
+        const response = buildResponse(req, RESPONSE_TYPES.USER_FETCH_SUCCESS, users);
         res.send(response);
     });
 
