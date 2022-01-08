@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Questionnaire = new mongoose.Schema( {
+const Collection = new mongoose.Schema( {
     "email":{
         type: String,
         required: [true, 'email is required'],
@@ -26,4 +26,4 @@ const Questionnaire = new mongoose.Schema( {
     }
 });
 
-module.exports = mongoose.model("Questionnaire", Questionnaire);
+module.exports = mongoose.model("Collection", Collection);

@@ -7,10 +7,10 @@ export const MESSAGES = {
     'USER_REGISTRATION_SUCCESS': 'user have been registered successfully, please login to continue',
     'USER_REGISTRATION_FAILURE_EMAIL_EXISTS': 'user registration failed, email already exists',
     'USER_REGISTRATION_FAILURE': 'user registration failed',
-    "QUESTIONNAIRE_ADDITION_SUCCESS": "questionnaire was added successfully",
-    "QUESTIONNAIRE_ADDITION_FAILURE": "questionnaire couldn\'t be added",
-    "REQUEST_SUBMISSION_SUCCESS": "request to fill the questionnaire submitted successfully",
-    "REQUEST_SUBMISSION_FAILURE": "request to fill the questionnaire couldn't be submitted",
+    "COLLECTION_ADDITION_SUCCESS": "collection was added successfully",
+    "COLLECTION_ADDITION_FAILURE": "collection couldn\'t be added",
+    "REQUEST_SUBMISSION_SUCCESS": "request to fill the collection submitted successfully",
+    "REQUEST_SUBMISSION_FAILURE": "request to fill the collection couldn't be submitted",
 };
 
 export const RESPONSE_TYPES = {
@@ -22,10 +22,10 @@ export const RESPONSE_TYPES = {
     "USER_LOGOUT_FAILURE": "USER_LOGOUT_FAILURE",
     "USER_REGISTRATION_SUCCESS": "USER_REGISTRATION_SUCCESS",
     "USER_REGISTRATION_FAILURE": "USER_REGISTRATION_FAILURE",
-    "QUESTIONNAIRE_ADDITION_SUCCESS": "QUESTIONNAIRE_ADDITION_SUCCESS",
-    "QUESTIONNAIRE_ADDITION_FAILURE": "QUESTIONNAIRE_ADDITION_FAILURE",
-    "QUESTIONNAIRE_FETCH_SUCCESS": "QUESTIONNAIRE_FETCH_SUCCESS",
-    "QUESTIONNAIRE_FETCH_FAILURE": "QUESTIONNAIRE_FETCH_FAILURE",
+    "COLLECTION_ADDITION_SUCCESS": "COLLECTION_ADDITION_SUCCESS",
+    "COLLECTION_ADDITION_FAILURE": "COLLECTION_ADDITION_FAILURE",
+    "COLLECTION_FETCH_SUCCESS": "COLLECTION_FETCH_SUCCESS",
+    "COLLECTION_FETCH_FAILURE": "COLLECTION_FETCH_FAILURE",
     "REQUEST_SUBMISSION_SUCCESS": "REQUEST_SUBMISSION_SUCCESS",
     "REQUEST_SUBMISSION_FAILURE": "REQUEST_SUBMISSION_FAILURE"
 }

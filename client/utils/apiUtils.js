@@ -21,5 +21,5 @@ export const registerUser = (userInfo) => {
 }
 
 export const loadCollections = () => {
-    return axios.get("/api/questionnaire");
+    return axios.get("/api/collection");
 }

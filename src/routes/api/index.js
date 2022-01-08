@@ -1,6 +1,6 @@
 import express from "express";
 import registerUserRouter from "./user";
-import registerQuestionnaireRouter from "./questionnaire";
+import registerQuestionnaireRouter from "./collection";
 import registerRequestRouter from "./request"
 // import registerWriteupNotificationRouter from "./writeupNotification"
 import { buildResponse } from '../../utils/responseBuilder'

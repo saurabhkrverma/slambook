@@ -1,6 +1,6 @@
 import _ from "lodash";
 import {v4 as uuid} from 'uuid';
-import Questionnaire from "../../models/request";
+import Collection from "../../models/request";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 import * as CONSTANTS from "constants";
@@ -14,10 +14,10 @@ const registerRequestRouter = (router) => {
             const request = await Request.find({
                 "email": _.get(req,"user.email")
             });
-            const response = buildResponse(req, RESPONSE_TYPES.QUESTIONNAIRE_FETCH_SUCCESS, request);
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, request);
             res.send(response);
         } catch (err) {
-            const response = buildResponse(req, RESPONSE_TYPES.QUESTIONNAIRE_FETCH_FAILURE, err);
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_FAILURE, err);
             res.send(response);
         }
     });
@@ -48,7 +48,7 @@ const registerRequestRouter = (router) => {
     // delete request
     router.delete("/request/:collectionId", async(req,res)=>{
         try{
-            const request = await Questionnaire.deleteOne({
+            const request = await Collection.deleteOne({
                 "collectionId": _.get(req,"params.collectionId")
             });
             res.status(204).send();
