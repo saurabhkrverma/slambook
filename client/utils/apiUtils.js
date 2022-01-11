@@ -11,7 +11,6 @@ export const logoutUser = (credentials) => {
 };
 
 // api endpoints
-
 export const initialiseApp = () => {
     return axios.get("/api/initialiseApp");
 }
@@ -22,4 +21,12 @@ export const registerUser = (userInfo) => {
 
 export const loadCollections = () => {
     return axios.get("/api/collection");
+}
+
+export const updateCollection = (collection) => {
+    return axios.patch("/api/collection", collection);
+}
+
+export const deleteCollection = (collection) => {
+    return axios.delete(`/api/collection/${collection.collectionId}`);
 }

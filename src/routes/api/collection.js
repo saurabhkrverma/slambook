@@ -81,13 +81,32 @@ const registerQuestionnaireRouter = (router) => {
                 email: _.get(req,"body.email") || _.get(req,"user.email"),
                 name: _.get(req,"body.name"),
                 collectionId: uuid(),
-                form: _.get(req,"body.form")
+                questionnaire: _.get(req,"body.questionnaire")
             });
             await collection.save();
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS, MESSAGES.COLLECTION_ADDITION_SUCCESS);
             res.send(response);
         } catch (error) {
+            console.log(error);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_ADDITION_FAILURE, MESSAGES.COLLECTION_ADDITION_FAILURE);
+            res.send(response);
+        }
+
+    });
+
+    router.patch("/collection", async(req,res) => {
+        try {
+            const collectionId = _.get(req,"body.collectionId");
+            const collection = await Collection.findOne({
+                "collectionId": collectionId
+            });
+            collection.questionnaire = _.get(req,"body.questionnaire", collection.questionnaire);
+            await collection.save();
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS, MESSAGES.COLLECTION_PATCH_SUCCESS);
+            res.send(response);
+        } catch (error) {
+            console.log(error);
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_PATCH_FAILURE, MESSAGES.COLLECTION_PATCH_FAILURE);
             res.send(response);
         }
 
@@ -99,10 +118,12 @@ const registerQuestionnaireRouter = (router) => {
             const collection = await Collection.deleteOne({
                 "collectionId": _.get(req,"params.collectionId")
             });
-            res.status(204).send();
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS, MESSAGES.COLLECTION_DELETE_SUCCESS);
+            res.send(response);
         } catch (error) {
-
-            res.send(error);
+            console.log(error);
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS, MESSAGES.COLLECTION_DELETE_SUCCESS);
+            res.send(response);
         }
     });
 };

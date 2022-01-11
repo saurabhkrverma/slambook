@@ -1,5 +1,15 @@
 import mongoose from "mongoose";
 
+const CollectionForm = new mongoose.Schema({
+    "question":{
+        type: String,
+        required: [true, 'This is a mandatory field']
+    },
+    "answer":{
+        type: String
+    },
+},{ _id : false });
+
 const Collection = new mongoose.Schema( {
     "email":{
         type: String,
@@ -20,8 +30,8 @@ const Collection = new mongoose.Schema( {
         required: [true, 'This is a mandatory field'],
         unique: true
     },
-    "form" : {
-        type: Array,
+    "questionnaire" : {
+        type: [CollectionForm],
         required: [true, 'This is a mandatory field']
     }
 });

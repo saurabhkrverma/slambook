@@ -6,3 +6,13 @@
   padding: 0;
   margin:12px 0;
 }
+
+.card-header .card-header-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collections-card .card-action-button {
+  display: flex;
+  justify-content: space-between;
+}

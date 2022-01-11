@@ -17,11 +17,15 @@ class AlertBar extends React.Component {
         this.props.closeAlertBarAction();
     }
 
+    timeoutAlert(){
+        console.log(this);
+    }
+
     renderAlertMessages () {
         if (this.props.errors && this.props.errors.length > 0) {
             const consolidateErrors =  this.props.errors.map((err,idx)=>{
                 return (
-                    <div>
+                    <div key={`alertbar-error-${idx}`}>
                         <span>
                             {err}
                         </span>
@@ -29,7 +33,7 @@ class AlertBar extends React.Component {
                 )
             });
             return (
-                <Alert key={"errorAlert"} variant={'danger'}  onClick={this.closeAlertBar} dismissible>
+                <Alert key={"alertbar-error"} variant={'danger'}  onload={this.timeoutAlert} onClick={this.closeAlertBar} dismissible>
                     {consolidateErrors}
                 </Alert>
             );
@@ -37,7 +41,7 @@ class AlertBar extends React.Component {
         } else if (this.props.messages && this.props.messages.length > 0) {
             const consolidateMessages =  this.props.messages.map((msg,idx)=>{
                 return (
-                    <div>
+                    <div key={`alertbar-message-${idx}`}>
                         <span>
                             {msg}
                         </span>
@@ -45,7 +49,7 @@ class AlertBar extends React.Component {
                 )
             });
             return (
-                <Alert key={"messageAlert"} variant={'success'} onClick={this.closeAlertBar} dismissible>
+                <Alert key={"alertbar-message"} variant={'success'} onClick={this.closeAlertBar} dismissible>
                     {consolidateMessages}
                 </Alert>
             );

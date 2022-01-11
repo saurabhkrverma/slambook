@@ -24,7 +24,7 @@ const _createCollectionObject = (collection={}) => {
         email: _.get(collection,'email'),
         name: _.get(collection,'name'),
         collectionId: _.get(collection,'collectionId'),
-        form: _.get(collection,'form'),
+        questionnaire: _.get(collection,'questionnaire'),
     }
     return filteredCollection;
 };
@@ -94,6 +94,17 @@ export const buildResponse = (req, responseType, payload) => {
             break;
         }
 
+        case RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS:
+        case RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS: {
+            response.messages.push(payload);
+            break;
+        }
+        case RESPONSE_TYPES.COLLECTION_DELETE_FAILURE:
+        case RESPONSE_TYPES.COLLECTION_PATCH_FAILURE: {
+            response.errors.push(payload);
+            break;
+        }
+
         case RESPONSE_TYPES.REQUEST_SUBMISSION_SUCCESS: {
             response.messages.push(payload);
             break;
@@ -103,6 +114,7 @@ export const buildResponse = (req, responseType, payload) => {
             response.errors.push(payload);
             break;
         }
+
         default:
             break;
     }
