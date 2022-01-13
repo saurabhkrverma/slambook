@@ -21,7 +21,8 @@ const _getInitialState = async () => {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const createSlamBookStore = async () => {
-    const initState = await _getInitialState();
+    let initState = await _getInitialState();
+    // initState.app = {};
     return createStore(rootReducer, initState, composeEnhancers(applyMiddleware(thunk)));
 }
 

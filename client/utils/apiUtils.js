@@ -19,6 +19,11 @@ export const registerUser = (userInfo) => {
     return axios.post("/api/user", userInfo);
 }
 
+export const createCollection = (collection) => {
+    debugger;
+    return axios.post("/api/collection",collection);
+}
+
 export const loadCollections = () => {
     return axios.get("/api/collection");
 }

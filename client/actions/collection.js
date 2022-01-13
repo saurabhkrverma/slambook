@@ -1,8 +1,15 @@
 import { ACTIONS } from "../config/constants"
-import {deleteCollection, loadCollections, updateCollection} from '../utils/apiUtils';
+import {createCollection, deleteCollection, loadCollections, updateCollection} from '../utils/apiUtils';
 import _ from 'lodash';
 
 // actions
+const _addCollection = (data) => {
+    return {
+        type: ACTIONS.ADD_COLLECTION,
+        data
+    }
+}
+
 const _loadCollections = (data) => {
     return {
         type: ACTIONS.LOAD_COLLECTIONS,
@@ -59,11 +66,31 @@ export const deleteCollectionAction =(collection) => async dispatch => {
         const response = await deleteCollection(collection);
         const data = _.get(response, 'data');
         if (response.status === 200) {
+            if(data && data.data) {
+                data.data.collections = [collection];
+            }
             return dispatch(_deleteCollection(data));
         }
 
     } catch (err) {
         //todo: error handling
+        return;
+    }
+}
+
+export const addCollectionAction = (collection) => async dispatch => {
+    try {
+        const response = await createCollection(collection);
+        const data = _.get(response, 'data');
+        if (response.status === 200) {
+            if(data && data.data) {
+                data.data.collections = [collection];
+            }
+            dispatch(loadCollectionsAction());
+            return dispatch(_addCollection(data));
+        }
+    } catch {
+        // todo: error handling
         return;
     }
 }
