@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate, Link } from 'react-router-dom';
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Carousel, Card} from 'react-bootstrap'
 import Collections from "./collections.jsx"
 
 class Home extends React.Component {
@@ -19,7 +19,7 @@ class Home extends React.Component {
         }
         return (
             <Row>
-                <Collections {...this.props}/>
+                {<Collections {...this.props}/>}
             </Row>
         )
     }

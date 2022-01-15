@@ -18,19 +18,19 @@ export const DEFAULT_COLLECTION = {
     "name": "Create New Slambook",
     "questionnaire": [
         {
-            "question":"this is question one",
+            "question":"My name in your phone",
         },
         {
-            "question":"this is question two",
+            "question":"A nick name for me",
         },
         {
-            "question":"this is question three",
+            "question":"Name for my autobiography",
         },
         {
-            "question":"this is question four",
+            "question":"superpower you wish to give me",
         },
         {
-            "question":"this is question five",
+            "question": "A message for me",
         },
 
     ],

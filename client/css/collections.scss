@@ -1,10 +1,11 @@
+
 .collections-cards {
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .collections-cards .collections-card {
   padding: 0;
-  margin:12px 0;
+  margin: 12px
 }
 
 .card-header .card-header-content {
@@ -13,6 +14,5 @@
 }
 
 .collections-card .card-action-button {
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
 }

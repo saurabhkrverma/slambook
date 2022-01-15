@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux"
 import {Navigate} from "react-router-dom";
-import {Row, Card, Form, Button} from "react-bootstrap";
-import { addCollectionAction, loadCollectionsAction, updateCollectionAction, deleteCollectionAction }  from "../actions/collection";
+import {Row, Card, Form, Button, Carousel} from "react-bootstrap";
+import { addCollectionAction, loadCollectionsAction, deleteCollectionAction }  from "../actions/collection";
 import { DEFAULT_COLLECTION } from "../config/constants"
 import { Formik, Field, FieldArray } from 'formik'
 
@@ -17,6 +17,18 @@ class Collections extends React.Component {
         this.props.loadCollections();
     }
 
+    renderFooter(collection, props) {
+        if(!collection.sampleCollection) {
+            return (
+                <Card.Footer className="text-muted">
+                   share this collection with friends
+                </Card.Footer>
+            )
+        } else {
+            return null;
+        }
+    }
+
     handleSubmit(values, actions) {
         if(values.sampleCollection){
             values.name = values.collection_name;
@@ -29,8 +41,8 @@ class Collections extends React.Component {
     renderNameField(collection, props){
         if(collection.sampleCollection){
             return (
-                <Form.Group className="mb-3" key={"collection_name"}>
-                    <Form.Label>slambook's name</Form.Label>
+                <Form.Group className="mb-3 form-inline"  key={"collection_name"}>
+                    <Form.Label><i>slambook's name</i></Form.Label>
                     <Field className="form-control" name={"collection_name"} placeholder={"name for your slambook"} />
                 </Form.Group>
             )
@@ -44,26 +56,26 @@ class Collections extends React.Component {
         if(collection.sampleCollection){
             return (
                 <div className="form-group card-action-button" key={`formik-${collection.collectionId}-submit`}>
-                    <Button type="submit" disabled={!(props.isValid && props.dirty)}>Save</Button>
+                    <Button type="submit" disabled={!(props.isValid && props.dirty)} variant="outline-success">Save</Button>
                 </div>
             )
         } else {
             return (
                 <div className="form-group card-action-button" key={`formik-${collection.collectionId}-submit`}>
-                    <Button type="submit">Delete</Button>
+                    <Button type="submit" variant="outline-danger">Delete</Button>
                 </div>
             )
         }
     }
 
-    renderQuestions(props) {
+    renderQuestions(collection, props) {
         return (
             <div>
                 {
                     props.values.questionnaire.map((obj, index) => (
                         <Form.Group className="mb-3" key={index}>
-                            <Form.Label>{ `Question ${index+1}` }</Form.Label>
-                            <Field className="form-control" name={`questionnaire.${index}.question`} />
+                            <Field className="form-control" name={`questionnaire.${index}.question`} disabled={!collection.sampleCollection}/>
+                            <></>
                         </Form.Group>
                     ))
                 }
@@ -73,28 +85,32 @@ class Collections extends React.Component {
 
     renderCollection(collection) {
         return (
-            <Card bg={"light"}
-                  key={collection.collectionId}
-                  text={"dark"}
-                  className="col-10  col-md-3 collections-card">
-                <Card.Header as="h5">{`${collection.name}`}</Card.Header>
-                <Card.Body>
-                    <Formik initialValues={collection} onSubmit={this.handleSubmit} key={`formik-${collection.collectionId}`}>
-                        {(props)=>(
-                            <Form noValidate onSubmit={props.handleSubmit} key={`form-${collection.collectionId}`}>
-                                {this.renderNameField(collection,props)}
+            <Carousel.Item>
+                <Card bg={"light"}
+                      key={collection.collectionId}
+                      text={"dark"}
+                      className="collections-card"
+                      border="secondary">
+                    <Card.Header as="h5">{`${collection.name}`}</Card.Header>
+                    <Card.Body>
+                        <Formik initialValues={collection} onSubmit={this.handleSubmit} key={`formik-${collection.collectionId}`}>
+                            {(props)=>(
+                                <Form noValidate onSubmit={props.handleSubmit} key={`form-${collection.collectionId}`}>
+                                    {this.renderNameField(collection,props)}
+                                    {(collection.sampleCollection ? <hr/>: null)}
+                                    <FieldArray
+                                        name="questionnaire"
+                                        render={arrayHelpers => this.renderQuestions(collection, props)} />
 
-                                <FieldArray
-                                    name="questionnaire"
-                                    render={arrayHelpers => this.renderQuestions(props)} />
+                                    {this.renderSubmitButton(collection, props)}
 
-                                {this.renderSubmitButton(collection, props)}
-
-                            </Form>
-                        )}
-                    </Formik>
-                </Card.Body>
-            </Card>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Card.Body>
+                    {this.renderFooter(collection)}
+                </Card>
+            </Carousel.Item>
         )
     }
 
@@ -115,7 +131,9 @@ class Collections extends React.Component {
         } else {
             return (
              <Row className={"collections-cards"}>
-                 {this.renderCollections()}
+                 <Carousel variant="dark" className={"col-sm-10, col-md-3"}>
+                    {this.renderCollections()}
+                 </Carousel>
              </Row>
             )
         }
