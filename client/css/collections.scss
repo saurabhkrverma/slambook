@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.carousel-indicators {
+  visibility: hidden;
+}
+
 .collections-cards .collections-card {
   padding: 0;
   margin: 12px
