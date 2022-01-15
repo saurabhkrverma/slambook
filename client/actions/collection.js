@@ -69,6 +69,7 @@ export const deleteCollectionAction =(collection) => async dispatch => {
             if(data && data.data) {
                 data.data.collections = [collection];
             }
+            dispatch(loadCollectionsAction());
             return dispatch(_deleteCollection(data));
         }
 
@@ -83,9 +84,6 @@ export const addCollectionAction = (collection) => async dispatch => {
         const response = await createCollection(collection);
         const data = _.get(response, 'data');
         if (response.status === 200) {
-            if(data && data.data) {
-                data.data.collections = [collection];
-            }
             dispatch(loadCollectionsAction());
             return dispatch(_addCollection(data));
         }

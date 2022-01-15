@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Request = new mongoose.Schema({
+const Post = new mongoose.Schema({
     "_id": {
         "email":{
             type: String,
@@ -35,4 +35,4 @@ const Request = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("WriteUpNotification", Request);
+module.exports = mongoose.model("Post", Post);

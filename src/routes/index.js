@@ -8,11 +8,8 @@ const router = express.Router();
 router.use("/api", apiRouter);
 router.use("/auth", authRouter);
 
-router.get("/request/:collectionId", (req,res)=> {
-    if(req.session) {
-        req.session.request = req.params.collectionId;
-    }
-    req.redirect("/");
+router.get("/post/:collectionId", async (req,res)=> {
+    res.send("share it with others");
 });
 
 router.get("*", (req,res)=>{

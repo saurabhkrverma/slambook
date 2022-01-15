@@ -29,10 +29,10 @@ const _createCollectionObject = (collection={}) => {
     return filteredCollection;
 };
 
-const _getCollections = (questionnaires = []) => {
+const _getCollection = (questionnaires = []) => {
     const filteredCollections = questionnaires.map((collection)=> {
         return _createCollectionObject(collection);
-    })
+    });
     return filteredCollections;
 };
 
@@ -85,7 +85,7 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS: {
-            response.data.collections = _getCollections(payload);
+            response.data.collections = _getCollection(payload);
             break;
         }
 

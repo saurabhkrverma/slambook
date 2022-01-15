@@ -1,4 +1,4 @@
-import * as authentication from './authetication'
+import * as authentication from './authetication';
 
 module.exports = {
     authentication

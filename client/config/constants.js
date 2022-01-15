@@ -14,8 +14,8 @@ export const ACTIONS = {
 
 
 export const DEFAULT_COLLECTION = {
-    "collectionId": "sample_collection_id",
-    "name": "collection name",
+    "collectionId": "create_collection",
+    "name": "Create New Slambook",
     "questionnaire": [
         {
             "question":"this is question one",
@@ -33,5 +33,6 @@ export const DEFAULT_COLLECTION = {
             "question":"this is question five",
         },
 
-    ]
+    ],
+    "sampleCollection": true
 }

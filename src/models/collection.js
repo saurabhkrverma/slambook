@@ -33,7 +33,7 @@ const Collection = new mongoose.Schema( {
     "questionnaire" : {
         type: [CollectionForm],
         required: [true, 'This is a mandatory field']
-    }
+    },
 });
 
 module.exports = mongoose.model("Collection", Collection);

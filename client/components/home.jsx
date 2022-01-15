@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate, Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
+import Collections from "./collections.jsx"
 
 class Home extends React.Component {
     constructor(props) {
@@ -17,11 +18,9 @@ class Home extends React.Component {
             return (<Navigate to={"/login"}></Navigate>)
         }
         return (
-            <div>
-                Welcome to the Home page, {this.props.user.name} !! <br/>
-                posts your slambook will show up here...coming soon :)
-
-            </div>
+            <Row>
+                <Collections {...this.props}/>
+            </Row>
         )
     }
 

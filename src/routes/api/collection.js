@@ -4,75 +4,21 @@ import Collection from "../../models/collection";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 
-const registerQuestionnaireRouter = (router) => {
+const registerCollectionRouter = (router) => {
 
     // get all write-ups
     router.get("/collection/", async(req, res) => {
         try {
-            const collection = await Collection.find({
+            const collections = await Collection.find({
                 "email": _.get(req,"user.email")
             });
-            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, collection);
+            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, collections);
             res.send(response);
         } catch (err) {
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_FAILURE, err);
             res.send(response);
         }
     });
-
-    // get write-ups received
-    // router.get("/collection/requested/:requester", async(req, res) => {
-    //     try {
-    //         // const collection = await collection.find({"requester": req.params.requester});
-    //         collection.aggregate([{
-    //                 $match: {
-    //                     "requester": req.params.requester
-    //                 }
-    //             }, {
-    //                 $lookup: {
-    //                     "from": "users",
-    //                     "localField": "author",
-    //                     "foreignField": "email",
-    //                     "as": "authorDetails"
-    //                 }
-    //             }
-    //         ]).exec(function(err, result){
-    //             if(err) throw err;
-    //             res.send(result);
-    //         })
-    //         // res.send(collection);
-    //     } catch (error) {
-    //         res.send(error);
-    //     }
-    //
-    // });
-
-    // get write-ups posted
-    // router.get("/collection/authored/:author", async(req, res) => {
-    //     try {
-    //         // const collection = await collection.find({"author": req.params.author});
-    //         collection.aggregate([{
-    //             $match: {
-    //                 "author": req.params.author
-    //             }
-    //         }, {
-    //             $lookup: {
-    //                 "from": "users",
-    //                 "localField": "requester",
-    //                 "foreignField": "email",
-    //                 "as": "requesterDetails"
-    //             }
-    //         }
-    //         ]).exec(function(err, result){
-    //             if(err) throw err;
-    //             res.send(result);
-    //         })
-    //         // res.send(collection);
-    //     } catch (error) {
-    //         res.send(error);
-    //     }
-    //
-    // });
 
     // add collection
     router.post("/collection", async(req,res) => {
@@ -128,4 +74,4 @@ const registerQuestionnaireRouter = (router) => {
     });
 };
 
-export default registerQuestionnaireRouter;
+export default registerCollectionRouter;

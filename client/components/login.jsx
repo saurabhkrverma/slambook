@@ -29,7 +29,10 @@ class Login extends React.Component {
     }
 
     renderUserLoginForm(){
-        const loginFormDefaultValues = {};
+        const loginFormDefaultValues = {
+            "email": "",
+            "password": ""
+        };
         return (
             <Formik initialValues={loginFormDefaultValues} validationSchema={this.loginSchema} onSubmit={this.onLoginFormSubmit}>
                     {(props)=>(

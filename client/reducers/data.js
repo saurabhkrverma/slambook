@@ -13,17 +13,9 @@ const dataReducer = (state = [], action) => {
         case ACTIONS.LOAD_COLLECTIONS:
             return _.get(action,'data.data',state);
         case ACTIONS.DELETE_COLLECTION:
-            // remove this collection
-            const newState = Object.assign({},state);
-            if(action.data && action.data && action.data.data.collections) {
-                newState.collections = newState.collections.filter((collection)=> {
-                    return collection.collectionId !== action.data.data.collections[0].collectionId
-                });
-                return newState;
-            } else {
-                return newState;
-            }
-            break;
+            return _.get(action,'data.data',state);
+        case ACTIONS.ADD_COLLECTION:
+            return _.get(action,'data.data',state);
         default:
             return state;
     }
