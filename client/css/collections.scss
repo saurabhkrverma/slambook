@@ -7,10 +7,21 @@
   visibility: hidden;
 }
 
+.carousel-control-prev, .carousel-control-next {
+  width: 5%;
+}
+
 .collections-cards .collections-card {
   padding: 0;
   margin: 12px
 }
+
+.collections-card .collections-card-body-loading{
+  padding: 150px 0;
+  display: flex;
+  justify-content: center;
+}
+
 
 .card-header .card-header-content {
   display: flex;

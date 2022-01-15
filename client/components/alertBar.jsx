@@ -28,6 +28,7 @@ class AlertBar extends React.Component {
                     </div>
                 )
             });
+            const closeAlertBox = setTimeout(this.closeAlertBar,2000);
             return (
                 <Alert key={"alertbar-error"} variant={'danger'}  onClick={this.closeAlertBar} dismissible>
                     {consolidateErrors}
