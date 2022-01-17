@@ -24,15 +24,6 @@ class Header extends React.Component {
                         <Nav.Link as={Link} to="/home">home</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link as={Link} to="/collections">collections</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link to="/notifications">notifications</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link to="/settings">settings</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
                         <Nav.Link onClick={this.handleLogout} >logout</Nav.Link>
                     </Nav.Item>
                 </Nav>
