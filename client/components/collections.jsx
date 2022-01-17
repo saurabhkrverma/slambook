@@ -54,18 +54,13 @@ class Collections extends React.Component {
     }
 
     render(){
-        if(!this.props.user.name) {
-            return (<Navigate to={"/login"}></Navigate>)
-        } else {
-            return (
-             <Row className={"collections-cards"}>
-                 <Carousel variant="dark" className={"col-sm-10, col-md-3"}>
-                    {this.renderCollections()}
-                 </Carousel>
-             </Row>
-            )
-        }
-
+        return (
+         <Row className={"collections-cards"}>
+             <Carousel variant="dark" className={"col-sm-10, col-md-3"}>
+                {this.renderCollections()}
+             </Carousel>
+         </Row>
+        )
     }
 
 }

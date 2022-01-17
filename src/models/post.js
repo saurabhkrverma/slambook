@@ -1,37 +1,28 @@
 import mongoose from 'mongoose';
 
-const Post = new mongoose.Schema({
-    "_id": {
-        "email":{
-            type: String,
-            required: [true, 'email is required'],
-            validate: {
-                validator: function(email) {
-                    return /^\S+@\S+\.\S+/.test(email);
-                },
-                message: props => `${props.value} is not a valid email id!`
-            }
-        },
-        "collectionId": {
-            type: String,
-            required: [true, 'This is a mandatory field'],
-            unique: true
-        },
-    },
-    "email":{
+const CollectionForm = new mongoose.Schema({
+    "question":{
         type: String,
-        required: [true, 'email is required'],
-        validate: {
-            validator: function(email) {
-                return /^\S+@\S+\.\S+/.test(email);
-            },
-            message: props => `${props.value} is not a valid email id!`
-        }
+        required: [true, 'This is a mandatory field']
     },
+    "answer":{
+        type: String,
+        required: [true, 'This is a mandatory field']
+    },
+},{ _id : false });
+
+const Post = new mongoose.Schema({
     "collectionId": {
         type: String,
-        required: [true, 'This is a mandatory field'],
-        unique: true
+        required: [true, 'This is a mandatory field']
+    },
+    "questionnaire" : {
+        type: [CollectionForm],
+        required: [true, 'This is a mandatory field']
+    },
+    "name":{
+        type: String,
+        required: [true, 'This is a mandatory field']
     }
 })
 
