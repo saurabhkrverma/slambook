@@ -19,6 +19,20 @@ const _getUsers = (users=[])=> {
     return filteredUsers;
 }
 
+const _getPosts = (slambooks= []) => {
+    const posts = slambooks.reduce((prevSlambook, slambook, ) => {
+        const posts = slambook.posts.reduce((prevPost, post)=>{
+            const updatedPost = Object.assign({}, post);
+            updatedPost.slambookName = slambook.name;
+            delete updatedPost._id;
+            return prevPost.concat(updatedPost);
+        },[]);
+        return prevSlambook.concat(posts);
+    },[])
+    console.log(posts);
+    return posts
+}
+
 const _createCollectionObject = (collection={}) => {
     const filteredCollection = {
         email: _.get(collection,'email'),
@@ -111,6 +125,16 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.REQUEST_SUBMISSION_FAILURE: {
+            response.errors.push(payload);
+            break;
+        }
+
+        case RESPONSE_TYPES.POST_FETCH_SUCCESS: {
+            response.data.posts = _getPosts(payload);
+            break;
+        }
+
+        case RESPONSE_TYPES.POST_FETCH_FAILURE: {
             response.errors.push(payload);
             break;
         }

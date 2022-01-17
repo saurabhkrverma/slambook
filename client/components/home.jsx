@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Navigate } from "react-router-dom"
 import {Row} from 'react-bootstrap'
 import Collections from "./collections.jsx"
 import Posts from "./posts.jsx"
@@ -26,11 +27,20 @@ class Home extends React.Component {
     }
 
     render() {
-        return(
-            <Row>
-                {this.renderPosts()}
-            </Row>
-        )
+        if(!this.props.user.name) {
+            return (<Navigate to={"/login"}></Navigate>)
+        } else {
+            return(
+                <Row>
+                    <div>
+                        {this.renderCollections()}
+                    </div>
+                    <div>
+                        {this.renderPosts()}
+                    </div>
+                </Row>
+            )
+        }
     }
 
 }

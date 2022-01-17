@@ -14,7 +14,9 @@ export const MESSAGES = {
     "COLLECTION_PATCH_SUCCESS": "collection updated successfully",
     "COLLECTION_PATCH_FAILURE": "collection couldn\'t be updated",
     "COLLECTION_DELETE_SUCCESS": "collected deleted successfully",
-    "COLLECTION_DELETE_FAILURE": "collection couln\'t be deleted"
+    "COLLECTION_DELETE_FAILURE": "collection couldn\'t be deleted",
+    "POST_FETCH_SUCCESS": "posts fetch successfully",
+    "POST_FETCH_FAILURE": "post couldn\'t be fetched"
 };
 
 export const RESPONSE_TYPES = {
@@ -35,6 +37,8 @@ export const RESPONSE_TYPES = {
     "COLLECTION_DELETE_SUCCESS": "COLLECTION_DELETE_SUCCESS",
     "COLLECTION_DELETE_FAILURE": "COLLECTION_DELETE_FAILURE",
     "REQUEST_SUBMISSION_SUCCESS": "REQUEST_SUBMISSION_SUCCESS",
-    "REQUEST_SUBMISSION_FAILURE": "REQUEST_SUBMISSION_FAILURE"
+    "REQUEST_SUBMISSION_FAILURE": "REQUEST_SUBMISSION_FAILURE",
+    "POST_FETCH_SUCCESS": "POST_FETCH_SUCCESS",
+    "POST_FETCH_FAILURE": "POST_FETCH_FAILURE"
 }
 

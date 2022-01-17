@@ -19,6 +19,8 @@ export const registerUser = (userInfo) => {
     return axios.post("/api/user", userInfo);
 }
 
+
+// api-collections
 export const createCollection = (collection) => {
     debugger;
     return axios.post("/api/collection",collection);
@@ -34,4 +36,11 @@ export const updateCollection = (collection) => {
 
 export const deleteCollection = (collection) => {
     return axios.delete(`/api/collection/${collection.collectionId}`);
+}
+
+
+// api-posts
+
+export const getPosts = () => {
+    return axios.get("/api/post");
 }

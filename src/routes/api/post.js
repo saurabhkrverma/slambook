@@ -9,9 +9,7 @@ const registerPostRouter = (router) => {
     // get all write-ups
     router.get("/post/", async(req, res) => {
         try {
-            console.log("aa bhi raha hai yahan kya ?");
-
-            const test = await Collection.aggregate([{
+            const posts = await Collection.aggregate([{
                 $match: { "email": _.get(req,"user.email")}
                 },{
                 $lookup:{
@@ -26,22 +24,12 @@ const registerPostRouter = (router) => {
                     "posts": 1
                 }
             }]);
-            // const test = await Collection.aggregate.lookup({
-            //     from: Post, //or Races.collection.name
-            //     localField: "collectionId",
-            //     foreignField: "collectionId",
-            // });
-
-            // const collections = await Collection.find({
-            //     "email": _.get(req,"user.email")
-            // }, {collectionId: 1});
-
-            console.log("check collections and fetch collection ID", JSON.stringify(test));
-            // console.log("check the actual posts collected", posts);
-            res.send(test);
+            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, posts);
+            res.send(response);
         } catch (err) {
-            console.log("error haan", err);
-            res.send(err);
+            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, MESSAGES.POST_FETCH_FAILURE);
+            res.send(response);
+
         }
     });
 

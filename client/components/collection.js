@@ -62,15 +62,15 @@ export const Collection = (collection, handleSubmit) => {
     return (
         <Carousel.Item>
             <Card bg={"light"}
-                  key={collection.collectionId}
+                  key={`${collection.collectionId}-collection`}
                   text={"dark"}
                   className="collections-card"
                   border="secondary">
                 <Card.Header as="h5">{`${collection.name}`}</Card.Header>
                 <Card.Body>
-                    <Formik initialValues={collection} onSubmit={handleSubmit} key={`formik-${collection.collectionId}`}>
+                    <Formik initialValues={collection} onSubmit={handleSubmit} key={`formik-${collection.collectionId}-collection`}>
                         {(props)=>(
-                            <Form noValidate onSubmit={props.handleSubmit} key={`form-${collection.collectionId}`}>
+                            <Form noValidate onSubmit={props.handleSubmit} key={`form-${collection.collectionId}-collection`}>
                                 {_renderNameField(collection,props)}
                                 {(collection.sampleCollection ? <hr/>: null)}
                                 <FieldArray
