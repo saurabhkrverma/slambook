@@ -35,6 +35,9 @@ class Home extends React.Component {
                     <div>
                         {this.renderCollections()}
                     </div>
+                    <br/>
+                    <h5 style={{"text-align":"center"}}>Posts</h5>
+                    <hr></hr>
                     <div>
                         {this.renderPosts()}
                     </div>
