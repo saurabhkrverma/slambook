@@ -9,7 +9,7 @@ import { RESPONSE_TYPES } from '../../configs/constants';
 // configure passport to use a local strategy
 passport.use(new LocalStrategy(  {usernameField: 'email', passwordField: "password" },  async function(username, password, done){
     try{
-        const user = await User.findOne({email: username});
+        const user = await User.findOne({email: username.toLowerCase()});
         if(user === null) {
             const loginError = new Error(MESSAGES.USER_LOGIN_FAILURE_INCORRECT_EMAIL, { cause: RESPONSE_TYPES.USER_LOGIN_FAILURE });
             done(loginError);

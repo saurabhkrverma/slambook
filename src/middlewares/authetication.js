@@ -8,7 +8,11 @@ const authenticateRequest = (req, res, next) => {
         next();
     } else {
         const regexp = /^\/api/i;
-        if(regexp.test(req.url)){
+        if(/^\/api\/post\//i.test(req.url) && req.method === "POST") {
+            console.log("check this out", req.url, req.method)
+            next();
+        }
+        else if(regexp.test(req.url)){
             return res.status(401).send();
         } else {
             return res.redirect("/");

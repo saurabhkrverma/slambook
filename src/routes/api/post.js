@@ -45,12 +45,12 @@ const registerPostRouter = (router) => {
                 name
             });
             await post.save();
-            // const response = buildResponse(req, RESPONSE_TYPES.REQUEST_SUBMISSION_SUCCESS, MESSAGES.REQUEST_SUBMISSION_SUCCESS);
-            return res.send("done");
+            const response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_SUCCESS, MESSAGES.POST_SUBMISSION_SUCCESS);
+            return res.send(response);
         } catch (error) {
-            console.log("error aa rahi hai", error);
-            // const response = buildResponse(req, RESPONSE_TYPES.REQUEST_SUBMISSION_FAILURE, error);
-            return res.send(error);
+            console.log(error);
+            const response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_FAILURE, MESSAGES.POST_SUBMISSION_FAILURE);
+            return res.send(response);
         }
         res.send(response);
     });

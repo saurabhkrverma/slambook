@@ -28,8 +28,7 @@ const _getPosts = (slambooks= []) => {
             return prevPost.concat(updatedPost);
         },[]);
         return prevSlambook.concat(posts);
-    },[])
-    console.log(posts);
+    },[]);
     return posts
 }
 
@@ -135,6 +134,16 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.POST_FETCH_FAILURE: {
+            response.errors.push(payload);
+            break;
+        }
+
+        case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS: {
+            response.messages.push(payload);
+            break;
+        }
+
+        case RESPONSE_TYPES.POST_SUBMISSION_FAILURE: {
             response.errors.push(payload);
             break;
         }
