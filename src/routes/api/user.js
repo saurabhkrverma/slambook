@@ -1,11 +1,12 @@
 import User from "../../models/user";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
+import { readUser, readUsers, createUser, deleteUser, updateUser } from "../../models/utils/userQueries"
 
 const registerUserRouter = (router) => {
     // get all users
     router.get("/users", async(req, res) => {
-        const users = await User.find();
+        const users = await readUsers(req);
         const response = buildResponse(req, RESPONSE_TYPES.USER_FETCH_SUCCESS, users);
         res.send(response);
     });
@@ -13,7 +14,7 @@ const registerUserRouter = (router) => {
     // get user
     router.get("/users/:email", async(req, res) => {
         try {
-            const users = await User.find({email: req.params.email});
+            const users = await readUser(req);
             res.send(users);
         } catch (error) {
             res.send(error);
@@ -24,15 +25,7 @@ const registerUserRouter = (router) => {
     // add user
     router.post("/user", async(req,res) => {
         try {
-            const email = req.body.email ? req.body.email.toLowerCase() : undefined;
-            const name = req.body.name;
-            const user = new User({
-                email: email,
-                name: name
-            });
-            const hashedPassword = await user.hashPassword(req.body.password);
-            user.password = hashedPassword;
-            await user.save();
+            const userCreated = await createUser(req);
             const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
             res.send(response);
         } catch (error) {
@@ -50,30 +43,18 @@ const registerUserRouter = (router) => {
     // delete user
     router.delete("/user/:email", async(req,res)=>{
         try{
-            const email = req.params.email ? req.params.email.toLowerCase() : undefined;
-            const user = await User.deleteOne({email: email})
+            const userDeleted = await deleteUser(req);
             res.status(204).send();
-        } catch (error) {
-
-            res.send(error);
+        } catch (err) {
+            console.log(err)
+            res.send(err);
         }
     });
 
     //update user
     router.patch("/user/:email", async(req,res)=>{
         try{
-            const email = req.params.email ? req.params.email.toLowerCase() : undefined;
-            const user = await User.findOne({email: email})
-
-            if(!user) {
-                res.status(404).send();
-            }
-
-            if(req.body.name){
-                user.name = req.body.name;
-            }
-
-            await user.save();
+            const userUpdated = updateUser(req);
             res.send(user);
         } catch(error) {
             res.send(error);

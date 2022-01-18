@@ -1,17 +1,13 @@
-import _ from "lodash";
-import {v4 as uuid} from 'uuid';
-import Collection from "../../models/collection";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
+import {deleteCollection, readCollections, createCollection, updateCollection} from "../../models/utils/collectionQueries"
 
 const registerCollectionRouter = (router) => {
 
     // get all write-ups
     router.get("/collection/", async(req, res) => {
         try {
-            const collections = await Collection.find({
-                "email": _.get(req,"user.email")
-            });
+            const collections = await readCollections(req);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, collections);
             res.send(response);
         } catch (err) {
@@ -23,13 +19,7 @@ const registerCollectionRouter = (router) => {
     // add collection
     router.post("/collection", async(req,res) => {
         try {
-            const collection = new Collection({
-                email: _.get(req,"body.email") || _.get(req,"user.email"),
-                name: _.get(req,"body.name"),
-                collectionId: uuid(),
-                questionnaire: _.get(req,"body.questionnaire")
-            });
-            await collection.save();
+            const collectionCreated = await createCollection(req);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS, MESSAGES.COLLECTION_ADDITION_SUCCESS);
             res.send(response);
         } catch (error) {
@@ -42,12 +32,7 @@ const registerCollectionRouter = (router) => {
 
     router.patch("/collection", async(req,res) => {
         try {
-            const collectionId = _.get(req,"body.collectionId");
-            const collection = await Collection.findOne({
-                "collectionId": collectionId
-            });
-            collection.questionnaire = _.get(req,"body.questionnaire", collection.questionnaire);
-            await collection.save();
+            const collectionUpdated = await updateCollection(req);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS, MESSAGES.COLLECTION_PATCH_SUCCESS);
             res.send(response);
         } catch (error) {
@@ -61,9 +46,7 @@ const registerCollectionRouter = (router) => {
     // delete collection
     router.delete("/collection/:collectionId", async(req,res)=>{
         try{
-            const collection = await Collection.deleteOne({
-                "collectionId": _.get(req,"params.collectionId")
-            });
+            const collectionDeleted = await deleteCollection(req);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS, MESSAGES.COLLECTION_DELETE_SUCCESS);
             res.send(response);
         } catch (error) {
