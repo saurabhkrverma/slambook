@@ -27,8 +27,8 @@ class Collections extends React.Component {
     }
 
     renderCollections(){
-        const collections = this.props.data.collections;
-        if(collections){
+        const collections = this.props.collections;
+        if(collections && collections.length > 0){
             collections.push(DEFAULT_COLLECTION);
             return collections.map(collection => Collection(collection, this.handleSubmit));
         } else {
@@ -67,8 +67,7 @@ class Collections extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        app:state.app,
-        data: state.data,
+        collections: state.data.collections,
         user: state.user
     }
 }

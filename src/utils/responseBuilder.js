@@ -58,10 +58,30 @@ export const buildResponse = (req, responseType, payload) => {
         user: {}
     };
     switch(responseType) {
-        case RESPONSE_TYPES.USER_LOGIN_SUCCESS: {
+        // messages
+        case RESPONSE_TYPES.USER_LOGIN_SUCCESS:
+        case RESPONSE_TYPES.USER_REGISTRATION_SUCCESS:
+        case RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS:
+        case RESPONSE_TYPES.COLLECTION_FETCH_FAILURE:
+        case RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS:
+        case RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS:
+        case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS: {
             response.messages.push(payload);
             break;
         }
+
+        // errors
+        case RESPONSE_TYPES.USER_REGISTRATION_FAILURE:
+        case RESPONSE_TYPES.COLLECTION_ADDITION_FAILURE:
+        case RESPONSE_TYPES.COLLECTION_DELETE_FAILURE:
+        case RESPONSE_TYPES.COLLECTION_PATCH_FAILURE:
+        case RESPONSE_TYPES.POST_FETCH_FAILURE:
+        case RESPONSE_TYPES.POST_SUBMISSION_FAILURE: {
+            response.errors.push(payload);
+            break;
+        }
+
+        // data - user
         case RESPONSE_TYPES.USER_LOGIN_FAILURE: {
             response.errors.push(payload.message);
             break;
@@ -78,79 +98,21 @@ export const buildResponse = (req, responseType, payload) => {
             response.data.users = _getUsers(payload);
             break;
         }
-        case RESPONSE_TYPES.USER_REGISTRATION_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
-        case RESPONSE_TYPES.USER_REGISTRATION_FAILURE: {
-            response.errors.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.COLLECTION_ADDITION_FAILURE: {
-            response.errors.push(payload);
-            break;
-        }
-
+        // data - collections
         case RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS: {
             response.data.collections = _getCollection(payload);
             break;
         }
-
-        case RESPONSE_TYPES.COLLECTION_FETCH_FAILURE: {
-            response.messages.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS:
-        case RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
-        case RESPONSE_TYPES.COLLECTION_DELETE_FAILURE:
-        case RESPONSE_TYPES.COLLECTION_PATCH_FAILURE: {
-            response.errors.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.REQUEST_SUBMISSION_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.REQUEST_SUBMISSION_FAILURE: {
-            response.errors.push(payload);
-            break;
-        }
-
+        //data - posts
         case RESPONSE_TYPES.POST_FETCH_SUCCESS: {
             response.data.posts = _getPosts(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.POST_FETCH_FAILURE: {
-            response.errors.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
-
-        case RESPONSE_TYPES.POST_SUBMISSION_FAILURE: {
-            response.errors.push(payload);
             break;
         }
 
         default:
             break;
     }
+
     response.user = _createUserObject(_.get(req, 'user', {}));
     return response;
 };

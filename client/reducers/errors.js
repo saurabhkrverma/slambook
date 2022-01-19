@@ -4,6 +4,7 @@ import { ACTIONS } from "../config/constants";
 const errorsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
+        case ACTIONS.LOGOUT_CURRENT_USER:
         case ACTIONS.RECEIVE_ERRORS:
             return _.get(action,'data.errors',state);
         case ACTIONS.DISMISS_ALERT_BOX:

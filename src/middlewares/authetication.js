@@ -9,7 +9,6 @@ const authenticateRequest = (req, res, next) => {
     } else {
         const regexp = /^\/api/i;
         if(/^\/api\/post\//i.test(req.url) && req.method === "POST") {
-            console.log("check this out", req.url, req.method)
             next();
         }
         else if(regexp.test(req.url)){
