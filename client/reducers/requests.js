@@ -1,16 +1,15 @@
 import _ from "lodash";
 import { ACTIONS } from "../config/constants";
 
-const postsReducer = (state = [], action) => {
+const requestsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case ACTIONS.LOGOUT_CURRENT_USER:
-        case ACTIONS.LOAD_POSTS:
         case ACTIONS.SUBMIT_POSTS:
-            return _.get(action,'data.data.posts',[]);
+            return _.get(action,'data.data.requests',[]);
         default:
             return state;
     }
 }
 
-export default postsReducer;
+export default requestsReducer;

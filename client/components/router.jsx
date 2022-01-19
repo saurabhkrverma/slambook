@@ -3,6 +3,7 @@ import {Routes, Route} from "react-router-dom";
 import Home from "./home.jsx";
 import Welcome from "./welcome.jsx";
 import Collections  from "./collections.jsx"
+import PostRequest from "./postRequest.jsx";
 
 
 class Router extends React.Component {
@@ -17,6 +18,7 @@ class Router extends React.Component {
                     <Route path="/login" element={<Welcome />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/collections" element={<Collections />} />
+                    <Route path="/request" element={<PostRequest />} />
                     <Route path="*" element={<Welcome />} />
                 </Routes>
             </div>

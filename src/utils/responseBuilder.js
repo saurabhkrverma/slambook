@@ -117,6 +117,11 @@ export const buildResponse = (req, responseType, payload) => {
             break;
     }
 
+
+    if(req.session && req.session.post) {
+        response.data.requests = [ req.session.post ];
+        delete req.session.post;
+    }
     response.user = _createUserObject(_.get(req, 'user', {}));
     return response;
 };

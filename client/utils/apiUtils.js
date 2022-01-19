@@ -44,3 +44,7 @@ export const deleteCollection = (collection) => {
 export const getPosts = () => {
     return axios.get("/api/post");
 }
+
+export const submitPost = (post) => {
+    return axios.post("/public/post", post);
+}

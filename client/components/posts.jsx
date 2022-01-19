@@ -13,7 +13,7 @@ class Posts extends React.Component {
         this.props.loadPosts();
     }
 
-    renderCollections(){
+    renderPosts(){
         const posts = this.props.posts;
 
         if(posts && posts.length>0){
@@ -27,7 +27,7 @@ class Posts extends React.Component {
     render(){
         return (
             <Row className={"collections-cards"}>
-                {this.renderCollections()}
+                {this.renderPosts()}
             </Row>
         )
     }

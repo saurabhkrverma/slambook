@@ -11,10 +11,13 @@ const registerPostRouter = (router) => {
         try {
             const post = await readCollection(req);
             const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, post);
-            res.send(response);
+            req.session.post = post;
+            // res.send(response);
+            res.redirect("/");
         } catch (err) {
             const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, MESSAGES.POST_FETCH_FAILURE);
-            res.send(response);
+            // res.send(response);
+            return res.redirect("/");
         }
     });
 

@@ -10,6 +10,7 @@ const messagesReducer = (state = [], action) => {
         case ACTIONS.UPDATE_COLLECTION:
         case ACTIONS.DELETE_COLLECTION:
         case ACTIONS.ADD_COLLECTION:
+        case ACTIONS.SUBMIT_POSTS:
             return _.get(action,'data.messages',state);
         case ACTIONS.DISMISS_ALERT_BOX:
             return [];

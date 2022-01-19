@@ -65,6 +65,11 @@ class Welcome extends React.Component {
     }
 
     render() {
+        debugger;
+        if(this.props.requests && this.props.requests.length > 0) {
+            return (<Navigate to={"/request"}></Navigate>);
+        }
+
         if(this.props.user && this.props.user.name){
             return (<Navigate to={"/home"}></Navigate>);
         }
@@ -86,7 +91,8 @@ class Welcome extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        requests: state.data.requests
     };
 };
 

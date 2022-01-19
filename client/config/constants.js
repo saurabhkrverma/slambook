@@ -11,6 +11,7 @@ export const ACTIONS = {
     DELETE_COLLECTION: "DELETE_COLLECTION",
     // posts
     LOAD_POSTS: "LOAD_POSTS",
+    SUBMIT_POSTS: "SUBMIT_POSTS",
     //errors
     RECEIVE_ERRORS: "RECEIVE_ERRORS",
     //app

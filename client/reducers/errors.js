@@ -6,6 +6,7 @@ const errorsReducer = (state = [], action) => {
     switch (action.type) {
         case ACTIONS.LOGOUT_CURRENT_USER:
         case ACTIONS.RECEIVE_ERRORS:
+        case ACTIONS.SUBMIT_POSTS:
             return _.get(action,'data.errors',state);
         case ACTIONS.DISMISS_ALERT_BOX:
             return [];
