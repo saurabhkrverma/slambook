@@ -2,6 +2,18 @@ import _ from "lodash";
 import Collection from "../collection";
 import {v4 as uuid} from "uuid";
 
+export const readCollection = async (req) => {
+    try {
+        const collection = await Collection.findOne({
+            "collectionId": _.get(req,"params.postId")
+        });
+        return collection;
+    } catch (err) {
+        throw err;
+    }
+
+}
+
 export const readCollections = async (req) => {
     try {
         const collections = await Collection.find({

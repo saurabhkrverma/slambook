@@ -8,7 +8,7 @@ const authenticateRequest = (req, res, next) => {
         next();
     } else {
         const regexp = /^\/api/i;
-        if(/^\/api\/post\//i.test(req.url) && req.method === "POST") {
+        if(/^\/public/i.test(req.url)) {
             next();
         }
         else if(regexp.test(req.url)){

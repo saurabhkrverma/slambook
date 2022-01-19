@@ -42,11 +42,15 @@ const _createCollectionObject = (collection={}) => {
     return filteredCollection;
 };
 
-const _getCollection = (questionnaires = []) => {
-    const filteredCollections = questionnaires.map((collection)=> {
-        return _createCollectionObject(collection);
-    });
-    return filteredCollections;
+const _getCollections = (questionnaires = []) => {
+    if(Array.isArray(questionnaires)) {
+        const filteredCollections = questionnaires.map((collection)=> {
+            return _createCollectionObject(collection);
+        });
+        return filteredCollections;
+    } else {
+        return _createCollectionObject(questionnaires);
+    }
 };
 
 
@@ -100,7 +104,7 @@ export const buildResponse = (req, responseType, payload) => {
         }
         // data - collections
         case RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS: {
-            response.data.collections = _getCollection(payload);
+            response.data.collections = _getCollections(payload);
             break;
         }
         //data - posts
