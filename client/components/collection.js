@@ -8,9 +8,11 @@ const  _questionnaire = (collection, props) => {
         const fieldValue = _.get(obj, "question");
         return (
             <Form.Group className="mb-3" key={`questionnaire.${index}.question`}>
-                <Form.Control className="form-control" name={`questionnaire.${index}.question`} placeholder={"question here"}
+                <Form.Control className="form-control" name={`questionnaire.${index}.question`}
+                              placeholder={"question here"}
                               onChange={props.handleChange}
                               value={fieldValue}
+                              disabled={!collection.sampleCollection}
                               isValid={!fieldError}
                               isInvalid={!!fieldError}/>
                 <Form.Control.Feedback type="invalid">{fieldError}</Form.Control.Feedback>

@@ -15,6 +15,7 @@ export const readPosts = async (req) => {
             }},{
             $project: {
                 "email": 1,
+                "collectionName": 1,
                 "name": 1,
                 "posts": 1
             }

@@ -9,11 +9,9 @@ const  _renderPosts = (post, props) => {
                 props.values.questionnaire.map((obj, index) => (
                     <div>
                         <Form.Group className="mb-3" key={`${index}-question`}>
-                            <Form.Label><i>{obj.question}</i></Form.Label>
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" key={`${index}-answer`}>
-                            <Field className="form-control" name={`questionnaire.${index}.answer`} disabled/>
+                            <Form.Label><b>{obj.question}</b></Form.Label>
+                            <br/>
+                            <Form.Label><i>{obj.answer}</i></Form.Label>
                         </Form.Group>
 
                     </div>
@@ -30,7 +28,7 @@ export const Post = (post, handleSubmit) => {
               text={"dark"}
               className="collections-card col-sm-10 col-md-3"
               border="secondary">
-            <Card.Header as="h5">{`${post.slambookName} by ${post.name}`}</Card.Header>
+            <Card.Header as="h5">{`${post.collectionName} by ${post.name}`}</Card.Header>
             <Card.Body>
                 <Formik initialValues={post} onSubmit={handleSubmit} key={`formik-${post.collectionId}-post`}>
                     {(props)=>(

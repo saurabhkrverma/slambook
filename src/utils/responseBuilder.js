@@ -23,7 +23,7 @@ const _getPosts = (slambooks= []) => {
     const posts = slambooks.reduce((prevSlambook, slambook, ) => {
         const posts = slambook.posts.reduce((prevPost, post)=>{
             const updatedPost = Object.assign({}, post);
-            updatedPost.slambookName = slambook.name;
+            updatedPost.collectionName = slambook.collectionName;
             delete updatedPost._id;
             return prevPost.concat(updatedPost);
         },[]);
