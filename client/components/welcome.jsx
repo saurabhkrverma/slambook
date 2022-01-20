@@ -65,7 +65,6 @@ class Welcome extends React.Component {
     }
 
     render() {
-        debugger;
         if(this.props.requests && this.props.requests.length > 0) {
             return (<Navigate to={"/request"}></Navigate>);
         }

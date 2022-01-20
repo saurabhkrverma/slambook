@@ -30,7 +30,7 @@ export const createCollection = async (req) => {
     try {
         const collection = new Collection({
             email: _.get(req,"body.email") || _.get(req,"user.email"),
-            name: _.get(req,"body.name"),
+            collectionName: _.get(req,"body.collectionName"),
             collectionId: uuid(),
             questionnaire: _.get(req,"body.questionnaire")
         });

@@ -21,7 +21,7 @@ const Collection = new mongoose.Schema( {
             message: props => `${props.value} is not a valid email id!`
         }
     },
-    "name":{
+    "collectionName":{
         type: String,
         required: [true, 'This is a mandatory field']
     },

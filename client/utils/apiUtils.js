@@ -22,7 +22,6 @@ export const registerUser = (userInfo) => {
 
 // api-collections
 export const createCollection = (collection) => {
-    debugger;
     return axios.post("/api/collection",collection);
 }
 

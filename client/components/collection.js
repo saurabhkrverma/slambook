@@ -1,27 +1,36 @@
 import {Button, Card, Carousel, Form} from "react-bootstrap";
-import {Field, FieldArray, Formik} from "formik";
+import { FieldArray, Formik} from "formik";
 import React from "react";
 
 const  _questionnaire = (collection, props) => {
-    return (
-        <div>
-            {
-                props.values.questionnaire.map((obj, index) => (
-                    <Form.Group className="mb-3" key={index}>
-                        <Field className="form-control" name={`questionnaire.${index}.question`} disabled={!collection.sampleCollection}/>
-                    </Form.Group>
-                ))
-            }
-        </div>
-    );
+    const questionnaires = props.values.questionnaire.map((obj, index) => {
+        const fieldError = _.get(props, `errors.questionnaire.${index}.question`);
+        const fieldValue = _.get(obj, "question");
+        return (
+            <Form.Group className="mb-3" key={`questionnaire.${index}.question`}>
+                <Form.Control className="form-control" name={`questionnaire.${index}.question`} placeholder={"question here"}
+                              onChange={props.handleChange}
+                              value={fieldValue}
+                              isValid={!fieldError}
+                              isInvalid={!!fieldError}/>
+                <Form.Control.Feedback type="invalid">{fieldError}</Form.Control.Feedback>
+            </Form.Group>
+        )
+    });
+
+    return questionnaires;
 }
 
 const _renderNameField = (collection, props) => {
     if(collection.sampleCollection){
         return (
-            <Form.Group className="mb-3 form-inline"  key={"collection_name"}>
-                <Form.Label><i>slambook's name</i></Form.Label>
-                <Field className="form-control" name={"collection_name"} placeholder={"name for your slambook"} />
+            <Form.Group className="mb-3 form-inline"  key={"collectionName"}>
+                <Form.Label><i>{"slambook's name"}</i></Form.Label>
+                <Form.Control className="form-control" name={`collectionName`} placeholder={"name for your slambook"}
+                              onChange={props.handleChange}
+                              isValid={!props.errors.collectionName}
+                              isInvalid={!!props.errors.collectionName}/>
+                <Form.Control.Feedback type="invalid">{props.errors.collectionName}</Form.Control.Feedback>
             </Form.Group>
         )
     } else {
@@ -58,7 +67,7 @@ const _renderFooter = (collection, props) => {
     }
 }
 
-export const Collection = (collection, handleSubmit) => {
+export const Collection = (collection, handleSubmit, validationSchema={}) => {
     return (
         <Carousel.Item>
             <Card bg={"light"}
@@ -66,13 +75,16 @@ export const Collection = (collection, handleSubmit) => {
                   text={"dark"}
                   className="collections-card"
                   border="secondary">
-                <Card.Header as="h5">{`${collection.name}`}</Card.Header>
+                <Card.Header as="h5">{(collection.sampleCollection) ? collection.name : `${collection.collectionName}`}</Card.Header>
                 <Card.Body>
-                    <Formik initialValues={collection} onSubmit={handleSubmit} key={`formik-${collection.collectionId}-collection`}>
+                    <Formik initialValues={collection} onSubmit={handleSubmit}  validationSchema={validationSchema} key={`formik-${collection.collectionId}-collection`}>
                         {(props)=>(
                             <Form noValidate onSubmit={props.handleSubmit} key={`form-${collection.collectionId}-collection`}>
+
                                 {_renderNameField(collection,props)}
+
                                 {(collection.sampleCollection ? <hr/>: null)}
+
                                 <FieldArray
                                     name="questionnaire"
                                     render={arrayHelpers => _questionnaire(collection, props)} />

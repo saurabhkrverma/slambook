@@ -1,16 +1,26 @@
 import React from 'react';
 import { connect } from "react-redux"
-import {Navigate} from "react-router-dom";
 import {Row, Carousel, Card, Spinner} from "react-bootstrap";
 import { addCollectionAction, loadCollectionsAction, deleteCollectionAction }  from "../actions/collection";
-import { DEFAULT_COLLECTION } from "../config/constants"
 import Collection from './collection';
+import * as yup from "yup";
 
 class Collections extends React.Component {
     constructor(props) {
         super(props);
 
+        this.validationSchema = yup.object().shape({
+            collectionName: yup.string().required("slambook name is required"),
+            questionnaire: yup.array()
+                .of(
+                    yup.object().shape({
+                        question: yup.string().required("Required")
+                    })
+                )
+        });
+
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.renderCollections = this.renderCollections.bind(this);
     }
 
     componentDidMount() {
@@ -28,9 +38,8 @@ class Collections extends React.Component {
 
     renderCollections(){
         const collections = this.props.collections;
-        if(collections && collections.length > 0){
-            collections.push(DEFAULT_COLLECTION);
-            return collections.map(collection => Collection(collection, this.handleSubmit));
+        if(collections){
+            return collections.map(collection => Collection(collection, this.handleSubmit, this.validationSchema));
         } else {
             return (
                 <Carousel.Item>

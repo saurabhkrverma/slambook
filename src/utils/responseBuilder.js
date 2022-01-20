@@ -35,7 +35,7 @@ const _getPosts = (slambooks= []) => {
 const _createCollectionObject = (collection={}) => {
     const filteredCollection = {
         email: _.get(collection,'email'),
-        name: _.get(collection,'name'),
+        collectionName: _.get(collection,'collectionName'),
         collectionId: _.get(collection,'collectionId'),
         questionnaire: _.get(collection,'questionnaire'),
     }

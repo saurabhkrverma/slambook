@@ -23,6 +23,7 @@ export const ACTIONS = {
 export const DEFAULT_COLLECTION = {
     "collectionId": "create_collection",
     "name": "Create New Slambook",
+    "collectionName": "",
     "questionnaire": [
         {
             "question":"My name in your phone",
