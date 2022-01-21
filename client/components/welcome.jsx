@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import {Row, Col, Spinner, Modal} from 'react-bootstrap';
 import { Navigate } from "react-router-dom";
 import UserRegistration from './userRegistration.jsx';
 import Login from './login.jsx';
@@ -65,6 +65,7 @@ class Welcome extends React.Component {
     }
 
     render() {
+
         if(this.props.requests && this.props.requests.length > 0) {
             return (<Navigate to={"/request"}></Navigate>);
         }

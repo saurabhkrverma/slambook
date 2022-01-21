@@ -1,4 +1,5 @@
 import { ACTIONS } from "../config/constants"
+import { showLoader, hideLoader }  from "./app";
 import {createCollection, deleteCollection, loadCollections, updateCollection} from '../utils/apiUtils';
 import _ from 'lodash';
 
@@ -34,6 +35,7 @@ const _deleteCollection = (data) => {
 // action creators
 export const loadCollectionsAction = () => async dispatch => {
     try {
+        dispatch(showLoader());
         const response = await loadCollections();
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -44,6 +46,8 @@ export const loadCollectionsAction = () => async dispatch => {
         //todo: error handling
         return;
 
+    } finally {
+        dispatch(hideLoader());
     }
 };
 
@@ -58,6 +62,9 @@ export const updateCollectionAction =(collection) => async dispatch => {
     } catch (err) {
         //todo: error handling
         return;
+    }
+    finally {
+        dispatch(hideLoader());
     }
 }
 
@@ -76,6 +83,8 @@ export const deleteCollectionAction =(collection) => async dispatch => {
     } catch (err) {
         //todo: error handling
         return;
+    } finally {
+        dispatch(hideLoader());
     }
 }
 
@@ -90,5 +99,7 @@ export const addCollectionAction = (collection) => async dispatch => {
     } catch {
         // todo: error handling
         return;
+    } finally {
+        dispatch(hideLoader());
     }
 }

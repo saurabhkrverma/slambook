@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import createSlamBookStore from './store';
 import Header from './components/header.jsx'
 import AlertBar from './components/alertBar.jsx'
+import Loader from "./components/loader.jsx";
 import Router from "./components/router.jsx";
 import './css/index.scss'
 
@@ -17,6 +18,7 @@ const Init =  async () => {
                 <BrowserRouter>
                     <Header/>
                     <AlertBar />
+                    <Loader/>
                     <Router/>
                 </BrowserRouter>
             </Container>
