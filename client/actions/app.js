@@ -12,7 +12,7 @@ export const showLoader = () => {
 
 export const hideLoader = () => {
     return {
-        type: ACTIONS.SHOW_LOADER,
+        type: ACTIONS.HIDE_LOADER,
         data: {
             showLoader: false
         }
