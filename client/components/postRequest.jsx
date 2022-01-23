@@ -12,11 +12,12 @@ class PostRequest extends React.Component {
         super(props);
 
         this.validationSchema = yup.object().shape({
+            name: yup.string().required("your name is required"),
             questionnaire: yup.array()
                 .of(
                     yup.object().shape({
                         question: yup.string(),
-                        answer: yup.string().required()
+                        answer: yup.string().required("Required")
                     })
                 )
         });

@@ -2,6 +2,19 @@ import { Button, Card, Form } from "react-bootstrap";
 import { FieldArray, Formik } from "formik";
 import React from "react";
 
+const _renderNameField = (post, props) => {
+    return (
+        <Form.Group className="mb-3 form-inline"  key={"name"}>
+            <Form.Label><i>{"Your name"}</i></Form.Label>
+            <Form.Control className="form-control" name={`name`} placeholder={"your name"}
+                          onChange={props.handleChange}
+                          isValid={!props.errors.name}
+                          isInvalid={!!props.errors.name}/>
+            <Form.Control.Feedback type="invalid">{props.errors.name}</Form.Control.Feedback>
+        </Form.Group>
+    )
+}
+
 const  _renderSubmitButton = (post, props) => {
     return (
         <div className="form-group card-action-button" key={`formik-${post.collectionId}-submit`}>
@@ -35,11 +48,13 @@ export const Post = (post, handleSubmit, validationSchema) => {
               text={"dark"}
               className="collections-card col-sm-10 col-md-3"
               border="secondary">
-            <Card.Header as="h5">{`${post.name}`}</Card.Header>
+            <Card.Header as="h5">{`${post.collectionName}`}</Card.Header>
             <Card.Body>
                 <Formik initialValues={post} onSubmit={handleSubmit}  validationSchema={validationSchema} key={`formik-${post.collectionId}-post`}>
                     {(props)=>(
                         <Form noValidate onSubmit={props.handleSubmit} key={`form-${post.collectionId}-post`}>
+
+                            {_renderNameField(post,props)}
 
                             <FieldArray
                                 name="posts"

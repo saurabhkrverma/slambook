@@ -1,6 +1,27 @@
-import {Button, Card, Carousel, Form} from "react-bootstrap";
+import {Button, Card, Carousel, Row, Form} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
+
+const _copyLink = (collection) => {
+    const elemId = `share_link_${collection.collectionId}`;
+    const elem = document.getElementById(elemId);
+    elem.hidden = false;
+}
+
+const _renderFooter = (collection, props) => {
+    if(!collection.sampleCollection) {
+        const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
+        return (
+            <Card.Footer className="text-muted">
+                <label>Share it with friends: &nbsp; </label>
+                <Button variant="outline-dark" onClick={()=>{_copyLink(collection)}}>Copy Link</Button>
+                <input type="text" id={`share_link_${collection.collectionId}`} value={shareLink} hidden={true} style={{"width":"100%"}}/>
+            </Card.Footer>
+        )
+    } else {
+        return null;
+    }
+}
 
 const  _questionnaire = (collection, props) => {
     const questionnaires = props.values.questionnaire.map((obj, index) => {
@@ -54,18 +75,6 @@ const  _renderSubmitButton = (collection, props) => {
                 <Button type="submit" variant="outline-danger">Delete</Button>
             </div>
         )
-    }
-}
-
-const _renderFooter = (collection, props) => {
-    if(!collection.sampleCollection) {
-        return (
-            <Card.Footer className="text-muted">
-                share this collection with friends
-            </Card.Footer>
-        )
-    } else {
-        return null;
     }
 }
 
