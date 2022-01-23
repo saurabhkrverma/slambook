@@ -6,6 +6,21 @@ import buildResponse from '../../utils/responseBuilder';
 import { MESSAGES } from '../../configs/constants'
 import { RESPONSE_TYPES } from '../../configs/constants';
 
+//serialize user
+passport.serializeUser((user, done)=>{
+    done(null, user.id);
+});
+
+// deserialize user
+passport.deserializeUser(async (id, done)=>{
+    try {
+        const user = await User.findOne({_id: id});
+        done(null, user);
+    } catch (err) {
+        done (err, null);
+    }
+});
+
 // configure passport to use a local strategy
 passport.use(new LocalStrategy(  {usernameField: 'email', passwordField: "password" },  async function(username, password, done){
     try{
@@ -26,21 +41,6 @@ passport.use(new LocalStrategy(  {usernameField: 'email', passwordField: "passwo
     }
 
 }));
-
-//serialize user
-passport.serializeUser((user, done)=>{
-    done(null, user.id);
-});
-
-// deserialize user
-passport.deserializeUser(async (id, done)=>{
-    try {
-        const user = await User.findOne({id: id});
-        done(null, user);
-    } catch (err) {
-        done (err, null);
-    }
-});
 
 const _promisifyPassport =  async (req, res, next) => {
     try{
