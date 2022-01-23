@@ -83,8 +83,6 @@ export const deleteCollectionAction =(collection) => async dispatch => {
     } catch (err) {
         //todo: error handling
         return;
-    } finally {
-        dispatch(hideLoader());
     }
 }
 
@@ -99,7 +97,5 @@ export const addCollectionAction = (collection) => async dispatch => {
     } catch {
         // todo: error handling
         return;
-    } finally {
-        dispatch(hideLoader());
     }
 }
