@@ -1,5 +1,6 @@
-import { ACTIONS } from "../config/constants"
+import {hideLoader, showLoader} from "./app";
 import {loginUser, logoutUser, registerUser, resetPassword} from '../utils/apiUtils';
+import { ACTIONS } from "../config/constants"
 import _ from 'lodash';
 
 const receiveCurrentUser = data => ({
@@ -41,11 +42,14 @@ export const loginUserAction = (credentials) => async dispatch => {
         //todo: error handling
         return;
 
+    } finally {
+        dispatch(hideLoader());
     }
 };
 
 export const logoutUserAction = () => async dispatch => {
     try {
+        dispatch(showLoader());
         const response = await logoutUser();
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -54,11 +58,14 @@ export const logoutUserAction = () => async dispatch => {
 
     } catch(error) {
         return dispatch(receiveErrors(data));
+    } finally {
+        dispatch(hideLoader());
     }
 };
 
 export const registerUserAction = (userInfo) => async (dispatch) => {
     try{
+        dispatch(showLoader());
         const response = await registerUser(userInfo);
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -70,7 +77,8 @@ export const registerUserAction = (userInfo) => async (dispatch) => {
         } else {
             return dispatch(receiveErrors({errors:['something went wring']}));
         }
-
+    } finally {
+        dispatch(hideLoader());
     }
 }
 
@@ -87,5 +95,7 @@ export const updateUserAction = (userInfo) => async (dispatch) => {
         } else {
             return dispatch(receiveErrors({errors:['something went wring']}));
         }
+    } finally {
+        dispatch(hideLoader());
     }
 }

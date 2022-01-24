@@ -55,6 +55,7 @@ export const loadCollectionsAction = () => async dispatch => {
 
 export const updateCollectionAction =(collection) => async dispatch => {
     try {
+        dispatch(showLoader());
         const response = await updateCollection(collection);
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -75,6 +76,7 @@ export const updateCollectionAction =(collection) => async dispatch => {
 
 export const deleteCollectionAction =(collection) => async dispatch => {
     try {
+        dispatch(showLoader());
         const response = await deleteCollection(collection);
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -96,6 +98,7 @@ export const deleteCollectionAction =(collection) => async dispatch => {
 
 export const addCollectionAction = (collection) => async dispatch => {
     try {
+        dispatch(showLoader());
         const response = await createCollection(collection);
         const data = _.get(response, 'data');
         if (response.status === 200) {

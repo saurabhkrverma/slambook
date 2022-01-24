@@ -1,4 +1,3 @@
-import User from "../../models/user";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 import { updatePassword } from "../../models/utils/userQueries"

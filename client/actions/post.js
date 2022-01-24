@@ -1,3 +1,4 @@
+import {hideLoader, showLoader} from "./app";
 import { getPosts, submitPost } from "../utils/apiUtils"
 import { ACTIONS } from "../config/constants"
 import _ from "lodash";
@@ -20,6 +21,7 @@ const _submitPosts = (data) => {
 
 export const getPostsAction = () => async (dispatch) => {
     try {
+        dispatch(showLoader());
         const response = await getPosts();
         const data = _.get(response, 'data');
         if (response.status === 200) {
@@ -30,6 +32,8 @@ export const getPostsAction = () => async (dispatch) => {
         // todo error hadling here
         console.log(err);
         return;
+    } finally {
+        dispatch(hideLoader());
     }
 }
 
@@ -45,5 +49,7 @@ export const submitPostAction = (post) => async (dispatch) => {
         // todo error hadling here
         console.log(err);
         return;
+    } finally {
+        dispatch(hideLoader());
     }
 }
