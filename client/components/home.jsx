@@ -36,7 +36,7 @@ class Home extends React.Component {
                         {this.renderCollections()}
                     </div>
                     <br/>
-                    <h5 style={{"text-align":"center"}}>Posts</h5>
+                    <h5 className={"posts-section-header"}>Posts</h5>
                     <hr></hr>
                     <div>
                         {this.renderPosts()}

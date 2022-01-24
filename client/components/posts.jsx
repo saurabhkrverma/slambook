@@ -19,7 +19,13 @@ class Posts extends React.Component {
         if(posts && posts.length>0){
             return posts.map(post => Post(post, this.handleSubmit));
         } else {
-            return null;
+            return (
+                <Row className={"posts-no-post"}>
+                    <h5>
+                        No posts yet, share the slambook with friends now and get started !
+                    </h5>
+                </Row>
+            )
         }
 
     }

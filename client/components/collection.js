@@ -12,7 +12,7 @@ const _renderFooter = (collection, props) => {
     if(!collection.sampleCollection) {
         const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
         return (
-            <Card.Footer className="text-muted">
+            <Card.Footer className="text-muted card-collection-footer">
                 <label>Share it with friends: &nbsp; </label>
                 <Button variant="outline-dark" onClick={()=>{_copyLink(collection)}}>Copy Link</Button>
                 <input type="text" id={`share_link_${collection.collectionId}`} value={shareLink} hidden={true} style={{"width":"100%"}}/>

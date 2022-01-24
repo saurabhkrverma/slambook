@@ -65,7 +65,7 @@ class Collections extends React.Component {
     render(){
         return (
          <Row className={"collections-cards"}>
-             <Carousel variant="dark" className={"col-sm-10, col-md-3"}>
+             <Carousel variant="dark" className={"col-sm-10, col-md-3"} hover={true}>
                 {this.renderCollections()}
              </Carousel>
          </Row>
