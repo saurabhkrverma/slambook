@@ -32,6 +32,11 @@ const _deleteCollection = (data) => {
     }
 }
 
+const _receiveErrors = data => ({
+    type: ACTIONS.RECEIVE_ERRORS,
+    data
+})
+
 // action creators
 export const loadCollectionsAction = () => async dispatch => {
     try {
@@ -44,9 +49,9 @@ export const loadCollectionsAction = () => async dispatch => {
         // todo: else part
     } catch (err) {
         if(err.response) {
-            return dispatch(receiveErrors(err.response.data));
+            return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wring']}));
         }
     } finally {
         dispatch(hideLoader());
@@ -64,9 +69,9 @@ export const updateCollectionAction =(collection) => async dispatch => {
 
     } catch (err) {
         if(err.response) {
-            return dispatch(receiveErrors(err.response.data));
+            return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wring']}));
         }
     }
     finally {
@@ -89,9 +94,9 @@ export const deleteCollectionAction =(collection) => async dispatch => {
 
     } catch (err) {
         if(err.response) {
-            return dispatch(receiveErrors(err.response.data));
+            return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wring']}));
         }
     }
 }
@@ -107,9 +112,9 @@ export const addCollectionAction = (collection) => async dispatch => {
         }
     } catch (err) {
         if(err.response) {
-            return dispatch(receiveErrors(err.response.data));
+            return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wring']}));
         }
     }
 }

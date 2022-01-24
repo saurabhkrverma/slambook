@@ -8,10 +8,12 @@ import Header from './components/header.jsx'
 import AlertBar from './components/alertBar.jsx'
 import Loader from "./components/loader.jsx";
 import Router from "./components/router.jsx";
-import './css/index.scss'
+import './css/index.scss';
+import { initializeAppAction }  from "./actions/app";
 
 const Init =  async () => {
     const slamBookStore =  await createSlamBookStore();
+    slamBookStore.dispatch(initializeAppAction());
     return ReactDom.render(
         <Provider store={slamBookStore}>
             <Container fluid>

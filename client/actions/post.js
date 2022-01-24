@@ -18,6 +18,11 @@ const _submitPosts = (data) => {
     }
 }
 
+const _receiveErrors = data => ({
+    type: ACTIONS.RECEIVE_ERRORS,
+    data
+})
+
 
 export const getPostsAction = () => async (dispatch) => {
     try {
@@ -29,9 +34,11 @@ export const getPostsAction = () => async (dispatch) => {
         }
 
     } catch (err) {
-        // todo error hadling here
-        console.log(err);
-        return;
+        if(err.response) {
+            return dispatch(_receiveErrors(err.response.data));
+        } else {
+            return dispatch(_receiveErrors({errors:['something went wring']}));
+        }
     } finally {
         dispatch(hideLoader());
     }
@@ -46,9 +53,11 @@ export const submitPostAction = (post) => async (dispatch) => {
         }
 
     } catch (err) {
-        // todo error hadling here
-        console.log(err);
-        return;
+        if(err.response) {
+            return dispatch(_receiveErrors(err.response.data));
+        } else {
+            return dispatch(_receiveErrors({errors:['something went wring']}));
+        }
     } finally {
         dispatch(hideLoader());
     }

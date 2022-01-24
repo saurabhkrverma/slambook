@@ -5,6 +5,7 @@ const requestsReducer = (state = [], action) => {
     Object.freeze(state);
     switch (action.type) {
         case ACTIONS.LOGOUT_CURRENT_USER:
+        case ACTIONS.INITIALIZE_APP:
             return _.get(action,'data.data.requests',[]);
         case ACTIONS.SUBMIT_POSTS:
             const err = _.get(action,'data.errors',[]);

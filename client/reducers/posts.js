@@ -7,6 +7,7 @@ const postsReducer = (state = [], action) => {
         case ACTIONS.LOGOUT_CURRENT_USER:
         case ACTIONS.LOAD_POSTS:
         case ACTIONS.SUBMIT_POSTS:
+        case ACTIONS.INITIALIZE_APP:
             return _.get(action,'data.data.posts',[]);
         default:
             return state;

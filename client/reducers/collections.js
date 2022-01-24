@@ -6,6 +6,7 @@ const collectionsReducer = (state = [], action) => {
     switch (action.type) {
         case ACTIONS.LOGOUT_CURRENT_USER:
         case ACTIONS.LOAD_COLLECTIONS:
+        case ACTIONS.INITIALIZE_APP:
             const collections =  _.get(action,'data.data.collections',[]);
             collections.push(DEFAULT_COLLECTION);
             return collections;
