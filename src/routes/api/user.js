@@ -52,10 +52,11 @@ const registerUserRouter = (router) => {
     });
 
     //update user
-    router.patch("/user/:email", async(req,res)=>{
+    router.patch("/user", async(req,res)=>{
         try{
             const userUpdated = updateUser(req);
-            res.send(user);
+            const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
+            res.send(response);
         } catch(error) {
             res.send(error);
         }

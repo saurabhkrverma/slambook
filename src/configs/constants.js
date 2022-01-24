@@ -5,6 +5,8 @@ export const MESSAGES = {
     'USER_LOGIN_FAILURE_INCORRECT_EMAIL': 'Provided email doesn\'t exists',
     'USER_LOGOUT_SUCCESS': 'user logged out successfully',
     'USER_LOGOUT_FAILURE': 'user couldn\'t be logged out',
+    "USER_PASSWORD_RESET_SUCCESS": "password updated successfully",
+    "USER_PASSWORD_RESET_FAILURE": "password couldn\'t be updated",
     'USER_REGISTRATION_SUCCESS': 'user have been registered successfully, please login to continue',
     'USER_REGISTRATION_FAILURE_EMAIL_EXISTS': 'user registration failed, email already exists',
     'USER_REGISTRATION_FAILURE': 'user registration failed',
@@ -30,6 +32,8 @@ export const RESPONSE_TYPES = {
     "USER_LOGIN_FAILURE": "USER_LOGIN_FAILURE",
     "USER_LOGOUT_SUCCESS": "USER_LOGOUT_SUCCESS",
     "USER_LOGOUT_FAILURE": "USER_LOGOUT_FAILURE",
+    "USER_PASSWORD_RESET_SUCCESS": "USER_PASSWORD_RESET_SUCCESS",
+    "USER_PASSWORD_RESET_FAILURE": "USER_PASSWORD_RESET_FAILURE",
     "USER_REGISTRATION_SUCCESS": "USER_REGISTRATION_SUCCESS",
     "USER_REGISTRATION_FAILURE": "USER_REGISTRATION_FAILURE",
     //collection model

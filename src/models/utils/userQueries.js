@@ -51,9 +51,38 @@ export const updateUser = async (req) => {
             user.name = req.body.name;
         }
 
+        if(req.body.password) {
+            const hashedPassword = await user.hashPassword(req.body.password);
+            user.password = hashedPassword;
+        }
+
         await user.save();
         return true;
     } catch (err) {
+        throw err;
+    }
+}
+
+export const updatePassword = async (req) => {
+    try {
+        const email = req.body.email ? req.body.email.toLowerCase() : undefined;
+        const password = req.body.password;
+        const user = await User.findOne({email: email})
+
+        if(!user) {
+            return false
+        }
+
+        if(req.body.password) {
+            const hashedPassword = await user.hashPassword(password);
+            user.password = hashedPassword;
+        }
+
+        await user.save();
+
+        return true;
+    } catch (err) {
+        console.log("error ?")
         throw err;
     }
 }

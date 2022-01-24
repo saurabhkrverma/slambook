@@ -65,6 +65,7 @@ export const buildResponse = (req, responseType, payload) => {
         // messages
         case RESPONSE_TYPES.USER_LOGIN_SUCCESS:
         case RESPONSE_TYPES.USER_REGISTRATION_SUCCESS:
+        case RESPONSE_TYPES.USER_PASSWORD_RESET_SUCCESS:
         case RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS:
         case RESPONSE_TYPES.COLLECTION_FETCH_FAILURE:
         case RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS:
@@ -76,6 +77,7 @@ export const buildResponse = (req, responseType, payload) => {
 
         // errors
         case RESPONSE_TYPES.USER_REGISTRATION_FAILURE:
+        case RESPONSE_TYPES.USER_PASSWORD_RESET_FAILURE:
         case RESPONSE_TYPES.COLLECTION_ADDITION_FAILURE:
         case RESPONSE_TYPES.COLLECTION_DELETE_FAILURE:
         case RESPONSE_TYPES.COLLECTION_PATCH_FAILURE:
