@@ -42,10 +42,12 @@ export const loadCollectionsAction = () => async dispatch => {
             return dispatch(_loadCollections(data));
         }
         // todo: else part
-    } catch (error) {
-        //todo: error handling
-        return;
-
+    } catch (err) {
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wring']}));
+        }
     } finally {
         dispatch(hideLoader());
     }
@@ -60,8 +62,11 @@ export const updateCollectionAction =(collection) => async dispatch => {
         }
 
     } catch (err) {
-        //todo: error handling
-        return;
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wring']}));
+        }
     }
     finally {
         dispatch(hideLoader());
@@ -81,8 +86,11 @@ export const deleteCollectionAction =(collection) => async dispatch => {
         }
 
     } catch (err) {
-        //todo: error handling
-        return;
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wring']}));
+        }
     }
 }
 
@@ -94,8 +102,11 @@ export const addCollectionAction = (collection) => async dispatch => {
             dispatch(loadCollectionsAction());
             return dispatch(_addCollection(data));
         }
-    } catch {
-        // todo: error handling
-        return;
+    } catch (err) {
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wring']}));
+        }
     }
 }

@@ -12,7 +12,7 @@ class Login extends React.Component {
 
         this.loginSchema = yup.object().shape({
             email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
-            password: yup.string().required()
+            password: yup.string().required().min(6)
         });
 
         this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);

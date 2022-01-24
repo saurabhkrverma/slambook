@@ -4,7 +4,7 @@ import {Row, Col, Spinner, Modal} from 'react-bootstrap';
 import { Navigate } from "react-router-dom";
 import UserRegistration from './userRegistration.jsx';
 import Login from './login.jsx';
-import {registerUser} from "../utils/apiUtils";
+import ResetPassword from "./resetPassword.jsx";
 
 class Welcome extends React.Component {
 
@@ -12,15 +12,17 @@ class Welcome extends React.Component {
         super(props);
 
         this.state = {
-            registerUser: false
+            registerUser: false,
+            resetPassword: false
         };
 
         this.toggleForm = this.toggleForm.bind(this);
     }
 
-    toggleForm(){
-        this.setState((prevState)=>({
-            registerUser: !prevState.registerUser
+    toggleForm(registerUser = false, resetPassword = false){
+        this.setState(()=>({
+            registerUser,
+            resetPassword
         }));
     }
 
@@ -33,7 +35,7 @@ class Welcome extends React.Component {
     }
 
     renderForm(){
-        if(this.state.registerUser){
+        if(this.state.registerUser) {
             return (
                 <div>
                     <UserRegistration {...this.props} />
@@ -41,11 +43,25 @@ class Welcome extends React.Component {
                     <div className={"text-align-center"}>
                         <strong>Already have an account? </strong>
                         <span>
-                            <a href="#" onClick={this.toggleForm}>Login</a>
+                            <a href="#" onClick={()=>{this.toggleForm(false, false)}}>Login</a>
                         </span>
                     </div>
                 </div>
 
+            )
+        }
+        else if(this.state.resetPassword){
+            return (
+                <div>
+                    <ResetPassword {...this.props} />
+                    <br/>
+                    <div className={"text-align-center"}>
+                        <strong>Already have an account? </strong>
+                        <span>
+                        <a href="#" onClick={()=>{this.toggleForm(false, false)}}>Login</a>
+                    </span>
+                    </div>
+                </div>
             )
         } else {
             return (
@@ -55,11 +71,16 @@ class Welcome extends React.Component {
                     <div className={"text-align-center"}>
                         <strong>Don't have an account? </strong>
                         <span>
-                            <a href="#" onClick={this.toggleForm}>Register</a>
+                            <a href="#" onClick={()=>{this.toggleForm(true, false)}}>Register</a>
                         </span>
                     </div>
+                    <div className={"text-align-center"}>
+                        <strong>Forgot password? </strong>
+                        <span>
+                        </span>
+                        <a href="#" onClick={()=>{this.toggleForm(false, true)}}>Reset</a>
+                    </div>
                 </div>
-
             )
         }
     }

@@ -68,9 +68,8 @@ export const updatePassword = async (req) => {
         const email = req.body.email ? req.body.email.toLowerCase() : undefined;
         const password = req.body.password;
         const user = await User.findOne({email: email})
-
         if(!user) {
-            return false
+            throw new Error("email not registered");
         }
 
         if(req.body.password) {
@@ -82,7 +81,7 @@ export const updatePassword = async (req) => {
 
         return true;
     } catch (err) {
-        console.log("error ?")
+        console.log(err)
         throw err;
     }
 }

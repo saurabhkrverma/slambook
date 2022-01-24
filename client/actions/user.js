@@ -1,5 +1,5 @@
 import { ACTIONS } from "../config/constants"
-import { loginUser, logoutUser, registerUser } from '../utils/apiUtils';
+import {loginUser, logoutUser, registerUser, resetPassword} from '../utils/apiUtils';
 import _ from 'lodash';
 
 const receiveCurrentUser = data => ({
@@ -11,6 +11,11 @@ const logoutCurrentUser = data => ({
     type: ACTIONS.LOGOUT_CURRENT_USER,
     data
 });
+
+const updateCurrentUser = data => ({
+    type: ACTIONS.UPDATE_CURRENT_USER,
+    data
+})
 
 const registerNewUser = data => ({
     type: ACTIONS.REGISTER_NEW_USER,
@@ -66,5 +71,21 @@ export const registerUserAction = (userInfo) => async (dispatch) => {
             return dispatch(receiveErrors({errors:['something went wring']}));
         }
 
+    }
+}
+
+export const updateUserAction = (userInfo) => async (dispatch) => {
+    try{
+        const response = await resetPassword(userInfo);
+        const data = _.get(response, 'data');
+        if (response.status === 200) {
+            return dispatch(updateCurrentUser(data));
+        }
+    } catch (err) {
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wring']}));
+        }
     }
 }

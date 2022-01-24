@@ -47,3 +47,7 @@ export const getPosts = () => {
 export const submitPost = (post) => {
     return axios.post("/public/post", post);
 }
+
+export const resetPassword = (userInfo) => {
+    return axios.patch("/public/reset/password", userInfo);
+}
