@@ -1,6 +1,6 @@
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
-import  { readPosts, createPost } from "../../models/utils/postQueries"
+import  { readPosts, createPost } from "../../models/services/postServices"
 
 
 const registerPostRouter = (router) => {

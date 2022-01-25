@@ -1,7 +1,7 @@
 import User from "../../models/user";
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
-import { readUser, readUsers, createUser, deleteUser, updateUser } from "../../models/utils/userQueries"
+import { readUser, readUsers, createUser, deleteUser, updateUser } from "../../models/services/userServices"
 
 const registerUserRouter = (router) => {
     // get all users

@@ -1,6 +1,6 @@
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
-import {deleteCollection, readCollections, createCollection, updateCollection} from "../../models/utils/collectionQueries"
+import {deleteCollection, readCollections, createCollection, updateCollection} from "../../models/services/collectionServices"
 
 const registerCollectionRouter = (router) => {
 
