@@ -6,7 +6,9 @@ import { RESPONSE_TYPES }  from '../configs/constants';
 const _createUserObject = (user={}) => {
     const filteredUser = {
         email: _.get(user,'email'),
-        name: _.get(user, 'name')
+        firstName: _.get(user, 'firstName'),
+        lastName: _.get(user, 'lastName'),
+        profilePic: _.get(user, 'profilePic')
     }
 
     return filteredUser;

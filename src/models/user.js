@@ -13,11 +13,11 @@ const User = mongoose.Schema({
             message: props => `${props.value} is not a valid email id!`
         }
     },
-    "password": {
-        type: String,
-        required: [true, 'password is required']
-    },
-    "name": {type: String}
+    "password": {type: String},
+    "firstName": {type: String},
+    "lastName": {type: String},
+    "profilePhoto": {type: String},
+    "source": {type: String}
 });
 
 User.methods.hashPassword = (password) => {

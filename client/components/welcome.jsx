@@ -27,7 +27,7 @@ class Welcome extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if((!this.props.user || !this.props.user.name) && prevState.registerUser === true){
+        if((!this.props.user || !this.props.user.firstName) && prevState.registerUser === true){
             this.setState((prevState)=>({
                 registerUser:false
             }));
@@ -91,7 +91,7 @@ class Welcome extends React.Component {
             return (<Navigate to={"/request"}></Navigate>);
         }
 
-        if(this.props.user && this.props.user.name){
+        if(this.props.user && this.props.user.firstName){
             return (<Navigate to={"/home"}></Navigate>);
         }
 

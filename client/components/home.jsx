@@ -27,7 +27,7 @@ class Home extends React.Component {
     }
 
     render() {
-        if(!this.props.user.name) {
+        if(!this.props.user.firstName) {
             return (<Navigate to={"/login"}></Navigate>)
         } else {
             return(

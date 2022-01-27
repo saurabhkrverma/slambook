@@ -1,3 +1,13 @@
+export const APP_KEYS = {
+    AUTH: {
+        GOOGLE: {
+            CLIENT_ID: "321752025604-gi95un4smok3ej6ompcsjbnhavtumnlj.apps.googleusercontent.com",
+            CLIENT_SECRET: "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",
+            CALLBACK_URL: "/auth/google/callback"
+        }
+    }
+};
+
 export const MESSAGES = {
     // user related messages
     'USER_LOGIN_SUCCESS': 'User have been logged in successfully',

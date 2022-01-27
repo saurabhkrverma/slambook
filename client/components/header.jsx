@@ -17,7 +17,7 @@ class Header extends React.Component {
     }
 
     renderRightPanel() {
-        if(this.props.user && this.props.user.name){
+        if(this.props.user && this.props.user.firstName){
             return(
                 <Nav variant="pills" defaultActiveKey="/home">
                     <Nav.Item>

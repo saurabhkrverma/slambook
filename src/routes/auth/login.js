@@ -1,10 +1,13 @@
+import _ from "lodash";
 import bcrypt from 'bcrypt';
 import passport from "passport";
-var LocalStrategy = require('passport-local').Strategy;
 import User from "../../models/user";
 import buildResponse from '../../utils/responseBuilder';
-import { MESSAGES } from '../../configs/constants'
-import { RESPONSE_TYPES } from '../../configs/constants';
+import { APP_KEYS, MESSAGES, RESPONSE_TYPES } from '../../configs/constants';
+import { createGoogleUser, readUser } from "../../models/services/userServices";
+
+const LocalStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 //serialize user
 passport.serializeUser((user, done)=>{
@@ -20,6 +23,35 @@ passport.deserializeUser(async (id, done)=>{
         done (err, null);
     }
 });
+
+// configure passport to use the google strategy
+passport.use(new GoogleStrategy({
+    clientID: APP_KEYS.AUTH.GOOGLE.CLIENT_ID,
+    clientSecret: APP_KEYS.AUTH.GOOGLE.CLIENT_SECRET,
+    callbackURL: APP_KEYS.AUTH.GOOGLE.CALLBACK_URL
+},async (accessToken, refreshToken, profile, done) => {
+    // todo add this entry in mongo db - this is where the patch call will be used
+    try {
+        // user details
+        const user = {
+            email: _.get(profile, "emails[0].value"),
+            firstName: _.get(profile, "name.givenName"),
+            lastName: _.get(profile, "name.familyName"),
+            profilePhoto: _.get(profile, "photos[0].value"),
+            source: "google"
+        };
+
+        const currentUser = await readUser({}, user);
+        if (!currentUser) {
+            const newUser = await createGoogleUser(user);
+            return done(null, newUser);
+        } else {
+            return done(null, currentUser);
+        }
+    } catch (err) {
+        return done(err, null);
+    }
+}));
 
 // configure passport to use a local strategy
 passport.use(new LocalStrategy(  {usernameField: 'email', passwordField: "password" },  async function(username, password, done){
@@ -89,6 +121,14 @@ const registerLoginRouter = (router) => {
             }
         }
     });
+
+    // google authentication
+    router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+    router.get( '/google/callback', passport.authenticate('google', { failureRedirect: '/' }), async (req, res)=> {
+           res.redirect("/");
+        }
+    );
 
 };
 
