@@ -42,6 +42,12 @@ passport.use(new GoogleStrategy({
         };
 
         const currentUser = await readUser({}, user);
+
+        if (currentUser && currentUser.source !== "google") {
+            //return error
+            return done(null, false, { message: `You have previously signed up with a different signin method` });
+        }
+
         if (!currentUser) {
             const newUser = await createGoogleUser(user);
             return done(null, newUser);
@@ -125,8 +131,14 @@ const registerLoginRouter = (router) => {
     // google authentication
     router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-    router.get( '/google/callback', passport.authenticate('google', { failureRedirect: '/' }), async (req, res)=> {
+    router.get( '/google/callback', passport.authenticate('google', { failureRedirect: '/auth/google/failure' }), async (req, res)=> {
            res.redirect("/");
+        }
+    );
+
+    router.get( '/google/failure', async (req, res)=> {
+            // todo show failure message
+            res.redirect("/");
         }
     );
 

@@ -10,9 +10,9 @@ export const APP_KEYS = {
 
 export const MESSAGES = {
     // user related messages
-    'USER_LOGIN_SUCCESS': 'User have been logged in successfully',
-    'USER_LOGIN_FAILURE_INCORRECT_PASSWORD': 'Incorrect password',
-    'USER_LOGIN_FAILURE_INCORRECT_EMAIL': 'Provided email doesn\'t exists',
+    'USER_LOGIN_SUCCESS': 'user have been logged in successfully',
+    'USER_LOGIN_FAILURE_INCORRECT_PASSWORD': 'incorrect password',
+    'USER_LOGIN_FAILURE_INCORRECT_EMAIL': 'provided email doesn\'t exists',
     'USER_LOGOUT_SUCCESS': 'user logged out successfully',
     'USER_LOGOUT_FAILURE': 'user couldn\'t be logged out',
     "USER_PASSWORD_RESET_SUCCESS": "password updated successfully",
@@ -20,6 +20,8 @@ export const MESSAGES = {
     'USER_REGISTRATION_SUCCESS': 'user have been registered successfully, please login to continue',
     'USER_REGISTRATION_FAILURE_EMAIL_EXISTS': 'user registration failed, email already exists',
     'USER_REGISTRATION_FAILURE': 'user registration failed',
+    "USER_LOGIN_GOOGLE_SUCCESS": "user have been logged in successfully",
+    "USER_LOGIN_GOOGLE_FAILURE": "something went wrong, please try another method",
     // collection related messages
     "COLLECTION_ADDITION_SUCCESS": "collection was added successfully",
     "COLLECTION_ADDITION_FAILURE": "collection couldn\'t be added",
@@ -46,6 +48,8 @@ export const RESPONSE_TYPES = {
     "USER_PASSWORD_RESET_FAILURE": "USER_PASSWORD_RESET_FAILURE",
     "USER_REGISTRATION_SUCCESS": "USER_REGISTRATION_SUCCESS",
     "USER_REGISTRATION_FAILURE": "USER_REGISTRATION_FAILURE",
+    "USER_LOGIN_GOOGLE_SUCCESS": "USER_LOGIN_GOOGLE_SUCCESS",
+    "USER_LOGIN_GOOGLE_FAILURE": "USER_LOGIN_GOOGLE_FAILURE",
     //collection model
     "COLLECTION_ADDITION_SUCCESS": "COLLECTION_ADDITION_SUCCESS",
     "COLLECTION_ADDITION_FAILURE": "COLLECTION_ADDITION_FAILURE",
