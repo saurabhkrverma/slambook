@@ -21,9 +21,13 @@ class Posts extends React.Component {
         } else {
             return (
                 <Row className={"posts-no-post"}>
-                    <h5>
-                        No posts yet, share the slambook with friends now and get started !
-                    </h5>
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <p className="lead">
+                                No posts yet, share the slambook with friends now and get started !
+                            </p>
+                        </div>
+                    </div>
                 </Row>
             )
         }
