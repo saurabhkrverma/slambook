@@ -132,12 +132,17 @@ const registerLoginRouter = (router) => {
     router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
     router.get( '/google/callback', passport.authenticate('google', { failureRedirect: '/auth/google/failure' }), async (req, res)=> {
-           res.redirect("/");
+            if(req.session) {
+                req.session.messages = [ MESSAGES.USER_LOGIN_GOOGLE_SUCCESS ];
+            }
+            res.redirect("/");
         }
     );
 
     router.get( '/google/failure', async (req, res)=> {
-            // todo show failure message
+        if(req.session) {
+            req.session.errors = [ MESSAGES.USER_LOGIN_GOOGLE_FAILURE ];
+        }
             res.redirect("/");
         }
     );

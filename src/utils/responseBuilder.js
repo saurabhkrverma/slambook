@@ -123,11 +123,22 @@ export const buildResponse = (req, responseType, payload) => {
             break;
     }
 
-
+    // check session object for data, messages and errors
     if(req.session && req.session.post) {
         response.data.requests = [ req.session.post ];
         delete req.session.post;
     }
+
+    if(req.session && req.session.messages) {
+        response.messages = response.messages.concat(req.session.messages);
+        delete req.session.messages;
+    }
+
+    if(req.session && req.session.errors) {
+        response.errors = response.errors.concat(req.session.errors);
+        delete req.session.errors;
+    }
+
     response.user = _createUserObject(_.get(req, 'user', {}));
     return response;
 };
