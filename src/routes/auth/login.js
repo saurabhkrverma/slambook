@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
             email: _.get(profile, "emails[0].value"),
             firstName: _.get(profile, "name.givenName"),
             lastName: _.get(profile, "name.familyName"),
-            profilePhoto: _.get(profile, "photos[0].value"),
+            profilePic: _.get(profile, "photos[0].value"),
             source: "google"
         };
 

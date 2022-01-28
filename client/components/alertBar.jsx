@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row, Col, Alert } from 'react-bootstrap';
+import { Row, Col, Alert, Collapse, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { ACTIONS } from "../config/constants"
+import {showLoader} from "../actions/app";
 
 class AlertBar extends React.Component {
 
@@ -18,8 +19,10 @@ class AlertBar extends React.Component {
     }
 
     renderAlertMessages () {
+        let consolidateErrors, consolidateMessages;
+
         if (this.props.errors && this.props.errors.length > 0) {
-            const consolidateErrors =  this.props.errors.map((err,idx)=>{
+             consolidateErrors =  this.props.errors.map((err,idx)=>{
                 return (
                     <div key={`alertbar-error-${idx}`}>
                         <span>
@@ -28,15 +31,8 @@ class AlertBar extends React.Component {
                     </div>
                 )
             });
-            const closeAlertBox = setTimeout(this.closeAlertBar,5000);
-            return (
-                <Alert key={"alertbar-error"} variant={'danger'}  onClick={this.closeAlertBar} dismissible>
-                    {consolidateErrors}
-                </Alert>
-            );
-
         } else if (this.props.messages && this.props.messages.length > 0) {
-            const consolidateMessages =  this.props.messages.map((msg,idx)=>{
+             consolidateMessages =  this.props.messages.map((msg,idx)=>{
                 return (
                     <div key={`alertbar-message-${idx}`}>
                         <span>
@@ -45,15 +41,21 @@ class AlertBar extends React.Component {
                     </div>
                 )
             });
-            const closeAlertBox = setTimeout(this.closeAlertBar,5000);
-            return (
-                <Alert key={"alertbar-message"} variant={'success'} onClick={this.closeAlertBar} dismissible>
-                    {consolidateMessages}
-                </Alert>
-            );
-        } else {
-            return null;
         }
+
+        if(consolidateErrors || consolidateMessages){
+            const closeAlertBox = setTimeout(this.closeAlertBar,5000);
+        }
+
+        return (
+            <Collapse in={(consolidateErrors || consolidateMessages)}>
+                <div>
+                    <Alert key={"alertbar-error"} variant={(consolidateErrors ? 'danger' : 'success')}  onClick={this.closeAlertBar} dismissible>
+                        {(consolidateErrors ? consolidateErrors : consolidateMessages)}
+                    </Alert>
+                </div>
+            </Collapse>
+        )
     }
 
     render() {

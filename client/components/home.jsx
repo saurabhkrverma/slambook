@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
-import { Row, Toast } from 'react-bootstrap'
+import {Col, Row, Toast} from 'react-bootstrap'
 import Collections from "./collections.jsx"
 import Posts from "./posts.jsx"
 
@@ -32,17 +32,18 @@ class Home extends React.Component {
         } else {
             return(
                 <div>
-                    <div className={"welcome-msg-toast"}>
-                        <Toast className="d-inline-block m-1" bg={"secondary"} key={"welcome-msg"}>
-                            <Toast.Header closeButton={false}>
-                                <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                                <strong className="me-auto">Welcome, {this.props.user.firstName}!</strong>
-                            </Toast.Header>
-                            <Toast.Body className={'text-white'}>
-                                Create and share your slambook with friends and read their submissions, all here :)
-                            </Toast.Body>
-                        </Toast>
-                    </div>
+                    <Row>
+                        <Col className={"welcome-msg-container"}>
+                            <div className="jumbotron jumbotron-fluid">
+                                <div className="container">
+                                    <p className="lead">
+                                        Welcome {this.props.user.firstName} &#128512; !! <br/>
+                                        Create your slambook, share it with your friends and see their submissions all at same place.
+                                    </p>
+                                </div>
+                            </div>
+                        </Col>
+                    </Row>
                     <Row>
                         <div>
                             {this.renderCollections()}

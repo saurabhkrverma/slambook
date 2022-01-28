@@ -16,7 +16,7 @@ const User = mongoose.Schema({
     "password": {type: String},
     "firstName": {type: String},
     "lastName": {type: String},
-    "profilePhoto": {type: String},
+    "profilePic": {type: String},
     "source": {type: String}
 });
 
