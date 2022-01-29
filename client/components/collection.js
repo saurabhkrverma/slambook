@@ -1,21 +1,40 @@
-import {Button, Card, Carousel, Row, Form} from "react-bootstrap";
+import {Button, Card, Carousel, Row, Form, InputGroup, FormControl} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
 
 const _copyLink = (collection) => {
-    const elemId = `share_link_${collection.collectionId}`;
-    const elem = document.getElementById(elemId);
-    elem.hidden = false;
+    const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
+    const copyClipboard = document.getElementById(`share_link_${collection.collectionId}_clipboard`);
+    const copyClipboardCheck = document.getElementById(`share_link_${collection.collectionId}_clipboard_check`);
+    navigator.clipboard.writeText(shareLink).then(function() {
+        copyClipboard.hidden = true;
+        copyClipboardCheck.hidden = false;
+    }, function() {
+        copyClipboard.hidden = false;
+        copyClipboardCheck.hidden = true;
+    });
 }
 
 const _renderFooter = (collection, props) => {
     if(!collection.sampleCollection) {
         const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
         return (
-            <Card.Footer className="text-muted card-collection-footer">
-                <label>Share it with friends: &nbsp; </label>
-                <Button variant="outline-dark" onClick={()=>{_copyLink(collection)}}>Copy Link</Button>
-                <input type="text" id={`share_link_${collection.collectionId}`} value={shareLink} hidden={true} style={{"width":"100%"}}/>
+            <Card.Footer className="text-muted">
+
+                <label>copy link and share with your friends </label>
+
+                <InputGroup className="mb-3">
+                    <FormControl aria-describedby="basic-addon2" type="text" id={`share_link_${collection.collectionId}`} value={shareLink} disabled={true}/>
+                    <Button variant="outline-success" id="button-addon1" onClick={()=>{_copyLink(collection)}} >
+                        <span id={`share_link_${collection.collectionId}_clipboard`}>
+                            <i className="bi bi-clipboard"></i>
+                        </span>
+                        <span id={`share_link_${collection.collectionId}_clipboard_check`} hidden={true}>
+                            <i className="bi bi-clipboard-check"></i>
+                        </span>
+                    </Button>
+                </InputGroup>
+
             </Card.Footer>
         )
     } else {
