@@ -1,4 +1,4 @@
-import { Button, Card, Form } from "react-bootstrap";
+import {Button, Card, Col, Form} from "react-bootstrap";
 import { FieldArray, Formik } from "formik";
 import React from "react";
 

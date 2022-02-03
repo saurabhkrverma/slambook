@@ -8,11 +8,11 @@ const _filterCollectionWithUserDetails = (collection={}) => {
         collectionName: _.get(collection,'collectionName'),
         collectionId: _.get(collection,'collectionId'),
         questionnaire: _.get(collection,'questionnaire'),
-        user: [{
+        user: {
             firstName: _.get(collection,"user[0].firstName"),
             lastName: _.get(collection,"user[0].lastName"),
             email: _.get(collection,"user[0].email")
-        }]
+        }
     }
     return filteredCollection;
 };

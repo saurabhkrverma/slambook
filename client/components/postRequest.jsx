@@ -1,7 +1,8 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {Navigate} from "react-router-dom";
+import _ from "lodash";
 import Post from "./postRequest";
 import { submitPostAction }  from "../actions/post"
 import * as yup from "yup";
@@ -44,10 +45,21 @@ class PostRequest extends React.Component {
         if(!(this.props.requests && this.props.requests.length > 0)) {
             return (<Navigate to={"/"}></Navigate>);
         }
-
+        const user = _.get(this.props, "requests[0].user", {});
         return (
-            <Row className={"collections-cards"}>
-                {this.renderPosts()}
+            <Row>
+                <Col className={"welcome-msg-container"}>
+                    <div className="jumbotron jumbotron-fluid">
+                        <div className="container">
+                            <p className="lead">
+                                Hi, <b>{user.firstName}</b> requested you to fill this slambook.
+                            </p>
+                        </div>
+                    </div>
+                </Col>
+                <Row className={"collections-cards"}>
+                    {this.renderPosts()}
+                </Row>
             </Row>
         )
     }
