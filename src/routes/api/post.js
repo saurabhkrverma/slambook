@@ -12,7 +12,8 @@ const registerPostRouter = (router) => {
             const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, posts);
             res.send(response);
         } catch (err) {
-            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, MESSAGES.POST_FETCH_FAILURE);
+            console.log(err);
+            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_FAILURE, MESSAGES.POST_FETCH_FAILURE);
             res.send(response);
 
         }

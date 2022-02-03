@@ -26,7 +26,7 @@ const _getPosts = (slambooks= []) => {
         const posts = slambook.posts.reduce((prevPost, post)=>{
             const updatedPost = Object.assign({}, post);
             updatedPost.collectionName = slambook.collectionName;
-            delete updatedPost._id;
+            updatedPost.user = _createUserObject(post.user);
             return prevPost.concat(updatedPost);
         },[]);
         return prevSlambook.concat(posts);
@@ -115,7 +115,6 @@ export const buildResponse = (req, responseType, payload) => {
         }
         //data - posts
         case RESPONSE_TYPES.POST_FETCH_SUCCESS: {
-            // response.data.posts = payload
             response.data.posts = _getPosts(payload);
             break;
         }

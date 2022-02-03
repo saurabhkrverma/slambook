@@ -13,6 +13,25 @@ export const readPosts = async (req) => {
                 "foreignField": "collectionId",
                 "as": "posts"
             }
+        },{
+            $unwind: "$posts"
+        },{
+            $lookup:{
+                    "from": "users",
+                    "localField": "posts.submitterEmail",
+                    "foreignField": "email",
+                    "as": "posts.user"
+            }
+        }, {
+            $unwind: {
+                "path": "$posts.user",
+                "preserveNullAndEmptyArrays": true
+            }
+        }, {
+            $group: {
+                _id: "$collectionId",
+                "posts": {"$push": "$posts"}
+            }
         }]);
         return posts
     } catch (error) {
