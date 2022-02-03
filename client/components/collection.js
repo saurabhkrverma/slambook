@@ -6,13 +6,15 @@ const _copyLink = (collection) => {
     const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
     const copyClipboard = document.getElementById(`share_link_${collection.collectionId}_clipboard`);
     const copyClipboardCheck = document.getElementById(`share_link_${collection.collectionId}_clipboard_check`);
-    navigator.clipboard.writeText(shareLink).then(function() {
-        copyClipboard.hidden = true;
-        copyClipboardCheck.hidden = false;
-    }, function() {
-        copyClipboard.hidden = false;
-        copyClipboardCheck.hidden = true;
-    });
+    if(navigator && navigator.clipboard) {
+        navigator.clipboard.writeText(shareLink).then(function() {
+            copyClipboard.hidden = true;
+            copyClipboardCheck.hidden = false;
+        }, function() {
+            copyClipboard.hidden = false;
+            copyClipboardCheck.hidden = true;
+        });
+    }
 }
 
 const _renderFooter = (collection, props) => {

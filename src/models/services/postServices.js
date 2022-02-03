@@ -13,15 +13,16 @@ export const readPosts = async (req) => {
                 "foreignField": "collectionId",
                 "as": "posts"
             }},{
-            $project: {
-                "email": 1,
-                "collectionName": 1,
-                "name": 1,
-                "posts": 1
+            $lookup:{
+                "from": "users",
+                "localField": "email",
+                "foreignField": "email",
+                "as": "user"
             }
         }]);
         return posts
     } catch (error) {
+        console.log("error", error);
         throw error;
     }
 };
