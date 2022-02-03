@@ -20,10 +20,21 @@ const Post = new mongoose.Schema({
         type: [CollectionForm],
         required: [true, 'This is a mandatory field']
     },
-    "name":{
+    "submitterName":{
+        type: String
+    },
+    "submitterEmail": {
         type: String,
-        required: [true, 'This is a mandatory field']
-    }
-})
+        required: [true, 'email is required'],
+        validate: {
+            validator: function(email) {
+                return /^\S+@\S+\.\S+/.test(email);
+            },
+            message: props => `${props.value} is not a valid email id!`
+        }
+    },
+});
+
+Post.index({ collectionId: 1, submitterEmail: 1}, { unique: true })
 
 module.exports = mongoose.model("Post", Post);

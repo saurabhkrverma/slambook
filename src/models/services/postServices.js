@@ -12,12 +12,6 @@ export const readPosts = async (req) => {
                 "localField": "collectionId",
                 "foreignField": "collectionId",
                 "as": "posts"
-            }},{
-            $lookup:{
-                "from": "users",
-                "localField": "email",
-                "foreignField": "email",
-                "as": "user"
             }
         }]);
         return posts
@@ -31,11 +25,13 @@ export const createPost = async (req) => {
     try {
         const collectionId = (req.body.collectionId);
         const questionnaire = (req.body.questionnaire);
-        const name = (req.body.name);
+        const submitterName = (req.body.submitterName);
+        const submitterEmail = (req.body.submitterEmail);
         const post = new Post({
             collectionId,
             questionnaire,
-            name
+            submitterName,
+            submitterEmail
         });
         await post.save();
         return true;

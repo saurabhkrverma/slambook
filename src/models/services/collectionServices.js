@@ -3,6 +3,7 @@ import Collection from "../collection";
 import {v4 as uuid} from "uuid";
 
 const _filterCollectionWithUserDetails = (collection={}) => {
+    console.log("collections fetched: ", collection);
     const filteredCollection = {
         email: _.get(collection,'email'),
         collectionName: _.get(collection,'collectionName'),
@@ -10,8 +11,7 @@ const _filterCollectionWithUserDetails = (collection={}) => {
         questionnaire: _.get(collection,'questionnaire'),
         user: {
             firstName: _.get(collection,"user[0].firstName"),
-            lastName: _.get(collection,"user[0].lastName"),
-            email: _.get(collection,"user[0].email")
+            lastName: _.get(collection,"user[0].lastName")
         }
     }
     return filteredCollection;
