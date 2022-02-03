@@ -2,6 +2,46 @@ import _ from "lodash";
 import Collection from "../collection";
 import {v4 as uuid} from "uuid";
 
+const _filterCollectionWithUserDetails = (collection={}) => {
+    const filteredCollection = {
+        email: _.get(collection,'email'),
+        collectionName: _.get(collection,'collectionName'),
+        collectionId: _.get(collection,'collectionId'),
+        questionnaire: _.get(collection,'questionnaire'),
+        user: [{
+            firstName: _.get(collection,"user[0].firstName"),
+            lastName: _.get(collection,"user[0].lastName"),
+            email: _.get(collection,"user[0].email")
+        }]
+    }
+    return filteredCollection;
+};
+
+export const readCollectionWithUserDetails = async (req) => {
+    try {
+        let filteredCollection = []
+        const collection = await Collection.aggregate([{
+            $match: { "collectionId": _.get(req,"params.postId")}
+        },{
+            $lookup:{
+                "from": "users",
+                "localField": "email",
+                "foreignField": "email",
+                "as": "user"
+            }
+        }]);
+
+        if(collection && collection.length > 0){
+            filteredCollection = _filterCollectionWithUserDetails(collection[0]);
+        }
+
+        return filteredCollection;
+    } catch (err) {
+        throw err;
+    }
+
+}
+
 export const readCollection = async (req) => {
     try {
         const collection = await Collection.findOne({

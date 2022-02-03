@@ -1,7 +1,7 @@
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants";
 import { buildResponse } from "../../utils/responseBuilder";
 import  { createPost } from "../../models/services/postServices";
-import { readCollection } from "../../models/services/collectionServices";
+import { readCollectionWithUserDetails } from "../../models/services/collectionServices";
 
 
 const registerPostRouter = (router) => {
@@ -9,14 +9,10 @@ const registerPostRouter = (router) => {
     // get all write-ups
     router.get("/post/:postId", async(req, res) => {
         try {
-            const post = await readCollection(req);
-            const response = buildResponse(req, RESPONSE_TYPES.COLLECTION_FETCH_SUCCESS, post);
+            const post = await readCollectionWithUserDetails(req);
             req.session.post = post;
-            // res.send(response);
             res.redirect("/");
         } catch (err) {
-            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, MESSAGES.POST_FETCH_FAILURE);
-            // res.send(response);
             return res.redirect("/");
         }
     });
