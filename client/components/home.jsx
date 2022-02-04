@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
-import {Col, Row, Toast} from 'react-bootstrap'
+import {Col, Row, Image} from 'react-bootstrap'
 import Collections from "./collections.jsx"
 import Posts from "./posts.jsx"
 
@@ -37,7 +37,9 @@ class Home extends React.Component {
                             <div className="jumbotron jumbotron-fluid">
                                 <div className="container">
                                     <p className="lead">
-                                        Welcome {this.props.user.firstName} &#128512; !! <br/>
+                                        {(this.props.user && this.props.user.profilePic) ? <Image className={"profile-pic"} src={this.props.user.profilePic} roundedCircle={true} fluid={true}></Image> : null}
+                                        <br/>
+                                        Welcome {this.props.user.firstName} &#128512; !!<br/>
                                         Create your slambook, share it with your friends and see their submissions all at same place.
                                     </p>
                                 </div>
