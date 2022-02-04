@@ -1,6 +1,21 @@
+import React from "react";
+import _ from "lodash";
 import {Button, Card, Form} from "react-bootstrap";
 import {Field, FieldArray, Formik} from "formik";
-import React from "react";
+
+const _renderCardHeader = (post) => {
+    const user = _.get(post, 'user', {});
+    if(_.isEmpty(user)) {
+        let userName = _.get(post,"name", "Anonymous");
+        return (
+            <span> {`${post.collectionName} by ${userName}`} </span>
+        )
+    } else {
+        return (
+            <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
+        )
+    }
+}
 
 const  _renderPosts = (post, props) => {
     return (
@@ -28,7 +43,7 @@ export const Post = (post, handleSubmit) => {
               text={"dark"}
               className="collections-card col-sm-10 col-md-3"
               border="secondary">
-            <Card.Header as="h5">{`${post.collectionName} by ${post.name}`}</Card.Header>
+            <Card.Header as="h5">{_renderCardHeader(post)}</Card.Header>
             <Card.Body>
                 <Formik initialValues={post} onSubmit={handleSubmit} key={`formik-${post.collectionId}-post`}>
                     {(props)=>(

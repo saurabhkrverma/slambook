@@ -16,21 +16,36 @@ export const readPosts = async (req) => {
         },{
             $unwind: "$posts"
         },{
+            $project: {
+                "posts._id": 0,
+                "posts.__v":0
+            }
+        },{
             $lookup:{
-                    "from": "users",
-                    "localField": "posts.submitterEmail",
-                    "foreignField": "email",
-                    "as": "posts.user"
+                "from": "users",
+                "localField": "posts.submitterEmail",
+                "foreignField": "email",
+                "as": "posts.user"
             }
         }, {
             $unwind: {
                 "path": "$posts.user",
                 "preserveNullAndEmptyArrays": true
             }
-        }, {
+        },{
             $group: {
-                _id: "$collectionId",
-                "posts": {"$push": "$posts"}
+                _id: {
+                    "collectionId": "$collectionId"
+                },
+                "posts": {
+                    "$push": "$posts"
+                },
+                "collectionId": {
+                    "$first": "collectionId"
+                },
+                "collectionName": {
+                    "$first": "$collectionName"
+                }
             }
         }]);
         return posts
