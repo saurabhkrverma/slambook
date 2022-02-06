@@ -17,6 +17,16 @@ const _copyLink = (collection) => {
     }
 }
 
+const _openShare = async (collection) => {
+    const url = window.location.origin + "/public/post/" + collection.collectionId
+    const shareData = {
+        title: 'Share the slambook',
+        text: `Select the available option to share it with your friends`,
+        url: `${url}`
+      }
+      await navigator.share(shareData)
+}
+
 const _renderFooter = (collection, props) => {
     if(!collection.sampleCollection) {
         const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
@@ -35,6 +45,11 @@ const _renderFooter = (collection, props) => {
                             <i className="bi bi-clipboard-check"></i>
                         </span>
                     </Button>
+                    {navigator.share && <Button variant="outline-success" id="button-addon1" onClick={async ()=>{_openShare(collection)}} >
+                        <span>
+                            <i className="bi bi-share"></i>
+                        </span>
+                    </Button>}
                 </InputGroup>
 
             </Card.Footer>
