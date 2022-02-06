@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux"
 import {Row} from "react-bootstrap";
 import { getPostsAction } from "../actions/post";
-import Post from "./post";
+import Post from "./posts.js";
 
 class Posts extends React.Component {
     constructor(props) {

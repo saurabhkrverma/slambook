@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import {Button, Card, Form} from "react-bootstrap";
+import {Button, Card, Form, Image} from "react-bootstrap";
 import {Field, FieldArray, Formik} from "formik";
 
 const _renderCardHeader = (post) => {
@@ -12,7 +12,10 @@ const _renderCardHeader = (post) => {
         )
     } else {
         return (
-            <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
+            <span>
+                <Image className={"profile-pic"} src={post.user.profilePic} roundedCircle={true} fluid={true}></Image> &nbsp;
+                <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
+            </span>
         )
     }
 }

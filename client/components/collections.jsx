@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux"
 import {Row, Carousel, Card, Spinner} from "react-bootstrap";
 import { addCollectionAction, loadCollectionsAction, deleteCollectionAction }  from "../actions/collection";
-import Collection from './collection';
+import Collection from './collections.js';
 import * as yup from "yup";
 
 class Collections extends React.Component {

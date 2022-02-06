@@ -13,7 +13,8 @@ class PostRequest extends React.Component {
         super(props);
 
         this.validationSchema = yup.object().shape({
-            name: yup.string().required("your name is required"),
+            submitterName: yup.string().required("your name is required"),
+            submitterEmail: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
             questionnaire: yup.array()
                 .of(
                     yup.object().shape({

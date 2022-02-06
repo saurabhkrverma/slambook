@@ -4,13 +4,26 @@ import React from "react";
 
 const _renderNameField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"name"}>
+        <Form.Group className="mb-3 form-inline"  key={"submitterName"}>
             <Form.Label><i>{"Your name"}</i></Form.Label>
-            <Form.Control className="form-control" name={`name`} placeholder={"your name"}
+            <Form.Control className="form-control" name={`submitterName`} placeholder={"your name"}
                           onChange={props.handleChange}
-                          isValid={!props.errors.name}
-                          isInvalid={!!props.errors.name}/>
-            <Form.Control.Feedback type="invalid">{props.errors.name}</Form.Control.Feedback>
+                          isValid={!props.errors.submitterName}
+                          isInvalid={!!props.errors.submitterName}/>
+            <Form.Control.Feedback type="invalid">{props.errors.submitterName}</Form.Control.Feedback>
+        </Form.Group>
+    )
+}
+
+const _renderEmailField = (post, props) => {
+    return (
+        <Form.Group className="mb-3 form-inline"  key={"submitterEmail"}>
+            <Form.Label><i>{"Your email"}</i></Form.Label>
+            <Form.Control className="form-control" name={`submitterEmail`} placeholder={"your email"}
+                          onChange={props.handleChange}
+                          isValid={!props.errors.submitterEmail}
+                          isInvalid={!!props.errors.submitterEmail}/>
+            <Form.Control.Feedback type="invalid">{props.errors.submitterEmail}</Form.Control.Feedback>
         </Form.Group>
     )
 }
@@ -55,6 +68,8 @@ export const Post = (post, handleSubmit, validationSchema) => {
                         <Form noValidate onSubmit={props.handleSubmit} key={`form-${post.collectionId}-post`}>
 
                             {_renderNameField(post,props)}
+
+                            {_renderEmailField(post, props)}
 
                             <FieldArray
                                 name="posts"
