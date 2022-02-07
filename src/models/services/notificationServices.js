@@ -2,13 +2,34 @@ import _ from "lodash";
 import Notification from "../notification";
 
 
-export const readNotifications = async (req, _user) => {
+export const readNotifications = async (req) => {
     try {
-        const _email = _.get(req, "params.email", _.get(_user, "email", "")).toLowerCase();
+        const _email = _.get(req, "user.email");
         const notifications = await Notification.find({email: _email});
         return notifications;
     } catch (err) {
         throw err;
     }
+}
 
+export const createNotification = async (req) => {
+    try {
+        const email = _.get(req, "user.email");
+        const collectionId = _.get(req, "body.collectionId");
+        const submitterEmail = _.get(req, "body.submitterEmail");
+        const submitterName = _.get(req, "body.submitterName");
+
+        const notification = new Notification({
+            email,
+            collectionId,
+            submitterEmail,
+            submitterName
+        });
+        await notification.save();
+        return true;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
