@@ -33,3 +33,46 @@ export const createNotification = async (req) => {
         throw err;
     }
 }
+
+export const countNotifications = async (req) => {
+    try {
+        const _email = _.get(req, "user.email");
+        const notificationsCount = await Notification.countDocuments({email: _email});
+        return notificationsCount;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+export const deleteNotification = async (req) => {
+    try {
+        const email = _.get(req, "user.email");
+        const collectionId = _.get(req, "body.collectionId");
+        const submitterEmail = _.get(req, "body.submitterEmail");
+
+        const notificationDeleted = await Notification.deleteMany({
+            email,
+            collectionId,
+            submitterEmail
+        });
+
+        return true;
+
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
+
+export const deleteAllNotification = async (req) => {
+    try {
+        const email = _.get(req, "user.email");
+        const notificationsDeleteCount = await Notification.remove({email: email});
+        return true;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+}
