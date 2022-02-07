@@ -69,11 +69,14 @@ export const buildResponse = (req, responseType, payload) => {
         case RESPONSE_TYPES.USER_REGISTRATION_SUCCESS:
         case RESPONSE_TYPES.USER_PASSWORD_RESET_SUCCESS:
         case RESPONSE_TYPES.USER_LOGIN_GOOGLE_SUCCESS:
+        case RESPONSE_TYPES.USER_LOGOUT_SUCCESS:
         case RESPONSE_TYPES.COLLECTION_ADDITION_SUCCESS:
         case RESPONSE_TYPES.COLLECTION_FETCH_FAILURE:
         case RESPONSE_TYPES.COLLECTION_PATCH_SUCCESS:
         case RESPONSE_TYPES.COLLECTION_DELETE_SUCCESS:
-        case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS: {
+        case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS:
+        case RESPONSE_TYPES.NOTIFICATION_ADDITION_SUCCESS:
+        case RESPONSE_TYPES.NOTIFICATION_DELETE_SUCCESS: {
             response.messages.push(payload);
             break;
         }
@@ -86,7 +89,10 @@ export const buildResponse = (req, responseType, payload) => {
         case RESPONSE_TYPES.COLLECTION_DELETE_FAILURE:
         case RESPONSE_TYPES.COLLECTION_PATCH_FAILURE:
         case RESPONSE_TYPES.POST_FETCH_FAILURE:
-        case RESPONSE_TYPES.POST_SUBMISSION_FAILURE: {
+        case RESPONSE_TYPES.POST_SUBMISSION_FAILURE:
+        case RESPONSE_TYPES.NOTIFICATION_FETCH_FAILURE:
+        case RESPONSE_TYPES.NOTIFICATION_ADDITION_FAILURE:
+        case RESPONSE_TYPES.NOTIFICATION_DELETE_FAILURE: {
             response.errors.push(payload);
             break;
         }
@@ -96,10 +102,7 @@ export const buildResponse = (req, responseType, payload) => {
             response.errors.push(payload.message);
             break;
         }
-        case RESPONSE_TYPES.USER_LOGOUT_SUCCESS: {
-            response.messages.push(payload);
-            break;
-        }
+
         case RESPONSE_TYPES.USER_LOGOUT_FAILURE: {
             response.errors.push(payload);
             break;
@@ -116,6 +119,11 @@ export const buildResponse = (req, responseType, payload) => {
         //data - posts
         case RESPONSE_TYPES.POST_FETCH_SUCCESS: {
             response.data.posts = _getPosts(payload);
+            break;
+        }
+
+        case RESPONSE_TYPES.NOTIFICATION_FETCH_SUCCESS: {
+            response.data.notifications = payload;
             break;
         }
 

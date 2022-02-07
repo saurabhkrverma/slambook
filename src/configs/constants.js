@@ -30,10 +30,17 @@ export const MESSAGES = {
     "COLLECTION_DELETE_SUCCESS": "collected deleted successfully",
     "COLLECTION_DELETE_FAILURE": "collection couldn\'t be deleted",
     // post related messages
-    "POST_FETCH_SUCCESS": "posts fetch successfully",
+    "POST_FETCH_SUCCESS": "posts fetched successfully",
     "POST_FETCH_FAILURE": "post couldn\'t be fetched",
     "POST_SUBMISSION_SUCCESS": "post submitted successfully",
-    "POST_SUBMISSION_FAILURE": "post couldn\'t be submitted"
+    "POST_SUBMISSION_FAILURE": "post couldn\'t be submitted",
+    // notification related messages
+    "NOTIFICATION_FETCH_SUCCESS": "notifications fetched successfully",
+    "NOTIFICATION_FETCH_FAILURE": "notifications couldn\'t be fetched",
+    "NOTIFICATION_ADDITION_SUCCESS": "notifications added successfully",
+    "NOTIFICATION_ADDITION_FAILURE": "notifications couldn\'t be added",
+    "NOTIFICATION_DELETE_SUCCESS": "notification deleted successfully",
+    "NOTIFICATION_DELETE_FAILURE": "notification couldn\'t be deleted"
 };
 
 export const RESPONSE_TYPES = {
@@ -63,6 +70,13 @@ export const RESPONSE_TYPES = {
     "POST_FETCH_SUCCESS": "POST_FETCH_SUCCESS",
     "POST_FETCH_FAILURE": "POST_FETCH_FAILURE",
     "POST_SUBMISSION_SUCCESS": "POST_SUBMISSION_SUCCESS",
-    "POST_SUBMISSION_FAILURE": "POST_SUBMISSION_FAILURE"
+    "POST_SUBMISSION_FAILURE": "POST_SUBMISSION_FAILURE",
+    // notification model
+    "NOTIFICATION_FETCH_SUCCESS": "NOTIFICATION_FETCH_SUCCESS",
+    "NOTIFICATION_FETCH_FAILURE": "NOTIFICATION_FETCH_FAILURE",
+    "NOTIFICATION_ADDITION_SUCCESS": "NOTIFICATION_ADDITION_SUCCESS",
+    "NOTIFICATION_ADDITION_FAILURE": "NOTIFICATION_ADDITION_FAILURE",
+    "NOTIFICATION_DELETE_SUCCESS": "NOTIFICATION_DELETE_SUCCESS",
+    "NOTIFICATION_DELETE_FAILURE": "NOTIFICATION_DELETE_FAILURE"
 }
 
