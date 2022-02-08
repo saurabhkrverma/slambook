@@ -75,7 +75,7 @@ export const registerUserAction = (userInfo) => async (dispatch) => {
         if(err.response) {
             return dispatch(receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         dispatch(hideLoader());
@@ -93,7 +93,7 @@ export const updateUserAction = (userInfo) => async (dispatch) => {
         if(err.response) {
             return dispatch(receiveErrors(err.response.data));
         } else {
-            return dispatch(receiveErrors({errors:['something went wring']}));
+            return dispatch(receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         dispatch(hideLoader());

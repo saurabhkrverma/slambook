@@ -45,7 +45,7 @@ export const initializeAppAction = () => async (dispatch) => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         return dispatch(hideLoader());

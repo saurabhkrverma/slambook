@@ -13,6 +13,8 @@ export const ACTIONS = {
     // posts
     LOAD_POSTS: "LOAD_POSTS",
     SUBMIT_POSTS: "SUBMIT_POSTS",
+    // notifications
+    LOAD_NOTIFICATIONS: "LOAD_NOTIFICATIONS",
     //errors
     RECEIVE_ERRORS: "RECEIVE_ERRORS",
     //app

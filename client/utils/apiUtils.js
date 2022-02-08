@@ -51,3 +51,8 @@ export const submitPost = (post) => {
 export const resetPassword = (userInfo) => {
     return axios.patch("/public/reset/password", userInfo);
 }
+
+// api-notifications
+export const getNotifications = () => {
+    return axios.get("/api/notification");
+}

@@ -44,7 +44,7 @@ export const readCollectionWithUserDetails = async (req) => {
 export const readCollection = async (req) => {
     try {
         const collection = await Collection.findOne({
-            "collectionId": _.get(req,"params.postId")
+            "collectionId": _.get(req,"body.collectionId")
         });
         return collection;
     } catch (err) {

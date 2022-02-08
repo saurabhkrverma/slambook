@@ -51,7 +51,7 @@ export const loadCollectionsAction = () => async dispatch => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         dispatch(hideLoader());
@@ -71,7 +71,7 @@ export const updateCollectionAction =(collection) => async dispatch => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     }
     finally {
@@ -96,7 +96,7 @@ export const deleteCollectionAction =(collection) => async dispatch => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     }
 }
@@ -114,7 +114,7 @@ export const addCollectionAction = (collection) => async dispatch => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     }
 }

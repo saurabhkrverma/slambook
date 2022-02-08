@@ -1,5 +1,6 @@
 import _ from "lodash";
 import Notification from "../notification";
+import { readCollection } from "./collectionServices";
 
 
 export const readNotifications = async (req) => {
@@ -14,10 +15,16 @@ export const readNotifications = async (req) => {
 
 export const createNotification = async (req) => {
     try {
-        const email = _.get(req, "user.email");
+        let email = _.get(req, "user.email");
         const collectionId = _.get(req, "body.collectionId");
         const submitterEmail = _.get(req, "body.submitterEmail");
         const submitterName = _.get(req, "body.submitterName");
+
+        if(!email) {
+            // used not logged in - anon used filling the slambook
+            const collection = await readCollection(req);
+            email = _.get(collection, "email");
+        }
 
         const notification = new Notification({
             email,

@@ -37,7 +37,7 @@ export const getPostsAction = () => async (dispatch) => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         dispatch(hideLoader());
@@ -56,7 +56,7 @@ export const submitPostAction = (post) => async (dispatch) => {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));
         } else {
-            return dispatch(_receiveErrors({errors:['something went wring']}));
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
         }
     } finally {
         dispatch(hideLoader());
