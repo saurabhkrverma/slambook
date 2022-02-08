@@ -55,6 +55,28 @@ const _getCollections = (questionnaires = []) => {
     }
 };
 
+const _createNotificationObject = (notification={}) => {
+    const filteredNotification = {
+        email: _.get(notification,'email'),
+        collectionName: _.get(notification,'collectionDetails[0].collectionName'),
+        collectionId: _.get(notification,'collectionId'),
+        submitterName: _.get(notification,'submitterName'),
+        submitterEmail: _.get(notification,'submitterEmail'),
+    }
+    return filteredNotification;
+};
+
+const _getNotifications = (notifications=[]) => {
+    if(Array.isArray(notifications)) {
+        const filteredNotifications = notifications.map((notification)=> {
+            return _createNotificationObject(notification);
+        });
+        return filteredNotifications;
+    } else {
+        return _createNotificationObject(notifications);
+    }
+}
+
 
 export const buildResponse = (req, responseType, payload) => {
     const response = {
@@ -123,7 +145,7 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.NOTIFICATION_FETCH_SUCCESS: {
-            response.data.notifications = payload;
+            response.data.notifications = _getNotifications(payload);
             break;
         }
 
