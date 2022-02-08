@@ -15,7 +15,7 @@ class Notifications extends React.Component {
     render() {
         return (
             <div>
-                {this.props.notifications}
+                {JSON.stringify(this.props.notifications)}
             </div>
         )
     }
