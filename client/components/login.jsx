@@ -24,7 +24,7 @@ class Login extends React.Component {
     }
 
     clickOauthFacebookButton(){
-        //todo
+        window.location.href = "/auth/facebook";
     }
 
     onLoginFormSubmit(values, actions) {
@@ -44,7 +44,7 @@ class Login extends React.Component {
                     &nbsp; login with google
                 </Button>
 
-                <Button variant="outline-primary" disabled={true}>
+                <Button variant="outline-primary" onClick={this.clickOauthFacebookButton}>
                     <i className="bi bi-facebook"></i>
                     &nbsp; login with facebook
                 </Button>

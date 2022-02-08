@@ -8,6 +8,7 @@ import { createGoogleUser, readUser } from "../../models/services/userServices";
 
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+var FacebookStrategy = require('passport-facebook');
 
 //serialize user
 passport.serializeUser((user, done)=>{
@@ -23,6 +24,57 @@ passport.deserializeUser(async (id, done)=>{
         done (err, null);
     }
 });
+
+passport.use(new FacebookStrategy({
+    clientID: APP_KEYS.AUTH.FACEBOOK.CLIENT_ID,
+    clientSecret: APP_KEYS.AUTH.FACEBOOK.CLIENT_SECRET,
+    callbackURL: APP_KEYS.AUTH.FACEBOOK.CALLBACK_URL
+  },
+  async function(accessToken, refreshToken, profile, done) {
+    /*
+     Response 
+        {
+            id: '736145830691688',
+            username: undefined,
+            displayName: 'Sanjana Singh',
+            name: {
+                familyName: undefined,
+                givenName: undefined,
+                middleName: undefined
+            },
+            gender: undefined,
+            profileUrl: undefined,
+            provider: 'facebook',
+            _raw: '{"name":"Sanjana Singh","id":"736145830691688"}',
+            _json: { name: 'Sanjana Singh', id: '736145830691688' }
+        }
+    */
+    try {
+        const user = {
+            email: `${profile.id}@fb.com`,
+            firstName: profile.displayName,
+            lastName: _.get(profile, "name.familyName"),
+            profilePic: _.get(profile, "profileUrl"),
+            source: "facebook"
+        };
+
+        const currentUser = await readUser({}, user);
+
+        if (currentUser && currentUser.source !== "facebook") {
+            //return error
+            return done(null, false, { message: `You have previously signed up with a different signin method` });
+        }
+
+        if (!currentUser) {
+            const newUser = await createGoogleUser(user);
+            return done(null, newUser);
+        } else {
+            return done(null, currentUser);
+        }
+    } catch (err) {
+        return done(err, null);
+    }  }
+  ));
 
 // configure passport to use the google strategy
 passport.use(new GoogleStrategy({
@@ -140,6 +192,25 @@ const registerLoginRouter = (router) => {
     );
 
     router.get( '/google/failure', async (req, res)=> {
+        if(req.session) {
+            req.session.errors = [ MESSAGES.USER_LOGIN_GOOGLE_FAILURE ];
+        }
+            res.redirect("/");
+        }
+    );
+
+
+    router.get('/facebook', passport.authenticate('facebook', {
+        scope: ['public_profile', 'email']
+    }));
+
+    router.get('/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect: '/home',
+      failureRedirect: '/'
+    }));
+
+    router.get('/auth/failure', async (req, res)=> {
         if(req.session) {
             req.session.errors = [ MESSAGES.USER_LOGIN_GOOGLE_FAILURE ];
         }

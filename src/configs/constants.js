@@ -4,6 +4,11 @@ export const APP_KEYS = {
             CLIENT_ID: "321752025604-gi95un4smok3ej6ompcsjbnhavtumnlj.apps.googleusercontent.com",
             CLIENT_SECRET: "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",
             CALLBACK_URL: "/auth/google/callback"
+        },
+        FACEBOOK: {
+            CLIENT_ID: "490389222449400",
+            CLIENT_SECRET: "23165b521f4135a15a1528a1a747b6a3",
+            CALLBACK_URL: "/auth/facebook/callback"
         }
     }
 };
