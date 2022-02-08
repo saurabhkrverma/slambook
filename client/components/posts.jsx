@@ -1,23 +1,61 @@
 import React from 'react';
 import { connect } from "react-redux"
-import {Row} from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { getPostsAction } from "../actions/post";
 import Post from "./posts.js";
 
 class Posts extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { posts : [], search:'' };
+        this.copyPosts = []
     }
 
     componentDidMount() {
         this.props.loadPosts();
     }
 
-    renderPosts(){
-        const posts = this.props.posts;
+    componentDidUpdate(props) {
+        if(this.props.posts.length !== props.posts.length) {
+            this.setState({
+                posts: this.props.posts
+            })
+            this.copyPosts = this.props.posts
+        }
+    }
 
-        if(posts && posts.length>0){
-            return posts.map(post => Post(post, this.handleSubmit));
+    searchResults(e) {
+        var lowerCase = e.target.value.toLowerCase();        
+        const filteredData = this.copyPosts.filter((el) => {
+            //if no input the return the original
+            if (lowerCase === '') {
+                this.setState({posts: this.copyPosts, search: ''})
+                return el;
+            }
+            //return the item which contains the user input
+            else {
+                return el.collectionName.toLowerCase().includes(lowerCase) || el.submitterName.toLowerCase().includes(lowerCase)
+            }
+        })
+        this.setState({posts: filteredData, search: lowerCase})
+    }
+
+    renderSearch() {
+        return (
+            <div>
+                <input style={{width:'auto'}} onChange={this.searchResults.bind(this)} class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" />
+            </div>
+        )
+    }
+
+    renderPosts() {
+        if(this.state.posts && this.state.posts.length > 0){
+            return (
+                <>
+                {this.copyPosts && this.copyPosts.length > 0 && this.renderSearch()}
+                    {this.state.posts.map(post => Post(post, this.handleSubmit))}
+                </>
+            )
         } else {
             return (
                 <Row className={"posts-no-post"}>
@@ -31,10 +69,9 @@ class Posts extends React.Component {
                 </Row>
             )
         }
-
     }
 
-    render(){
+    render() {
         return (
             <Row className={"collections-cards"}>
                 {this.renderPosts()}
