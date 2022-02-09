@@ -15,6 +15,7 @@ export const ACTIONS = {
     SUBMIT_POSTS: "SUBMIT_POSTS",
     // notifications
     LOAD_NOTIFICATIONS: "LOAD_NOTIFICATIONS",
+    CLEAR_NOTIFICATION: "CLEAR_NOTIFICATION",
     //errors
     RECEIVE_ERRORS: "RECEIVE_ERRORS",
     //app

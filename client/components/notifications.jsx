@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Alert } from 'react-bootstrap'
-import { getNotificationsAction } from "../actions/notification";
+import { getNotificationsAction, clearNotificationAction } from "../actions/notification";
 
 
 class Notifications extends React.Component {
     constructor(props) {
         super(props);
+        this.clearNotification = this.clearNotification.bind(this);
         this.renderNotifications = this.renderNotifications.bind(this);
     }
 
@@ -14,8 +15,9 @@ class Notifications extends React.Component {
         this.props.loadNotifications();
     }
 
-    closeAlertBar() {
+    clearNotification(notification) {
         // todo: trigger action to remove notification
+        this.props.clearNotification(notification);
     }
 
     renderNotifications() {
@@ -24,7 +26,7 @@ class Notifications extends React.Component {
             return (
                 <Row className={"notification-alert"}>
                     <Col className={"col-sm-10 col-md-3"}>
-                        <Alert variant={(index % 2 === 0) ? "dark": "light"} onClick={this.closeAlertBar} dismissible>
+                        <Alert variant={(index % 2 === 0) ? "dark": "light"} onClick={()=>{this.clearNotification(notification)}} dismissible>
                             {`Hi, ${submitter} have submitted an entry for ${notification.collectionName}`}
                         </Alert>
                     </Col>
@@ -51,7 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadNotifications: () => dispatch(getNotificationsAction())
+        loadNotifications: () => dispatch(getNotificationsAction()),
+        clearNotification: (notification) => dispatch(clearNotificationAction(notification))
     }
 }
 
