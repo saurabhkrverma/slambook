@@ -1,21 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Row, Col, Alert } from 'react-bootstrap'
 import { getNotificationsAction } from "../actions/notification";
 
 
 class Notifications extends React.Component {
     constructor(props) {
         super(props);
+        this.renderNotifications = this.renderNotifications.bind(this);
     }
 
     componentDidMount() {
         this.props.loadNotifications();
     }
 
+    closeAlertBar() {
+        // todo: trigger action to remove notification
+    }
+
+    renderNotifications() {
+        const notifications = this.props.notifications.map((notification, index)=> {
+            const submitter = notification.submitterName || notification.submitterEmail;
+            return (
+                <Row className={"notification-alert"}>
+                    <Col className={"col-sm-10 col-md-3"}>
+                        <Alert variant={(index % 2 === 0) ? "dark": "light"} onClick={this.closeAlertBar} dismissible>
+                            {`Hi, ${submitter} have submitted an entry for ${notification.collectionName}`}
+                        </Alert>
+                    </Col>
+                </Row>
+            )
+        });
+        return notifications;
+    }
+
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.notifications)}
+                {this.renderNotifications()}
             </div>
         )
     }
