@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Alert } from 'react-bootstrap'
-import { getNotificationsAction, clearNotificationAction } from "../actions/notification";
+import { Row, Col, Alert, Button } from 'react-bootstrap'
+import { getNotificationsAction, clearNotificationAction, clearAllNotificationsAction } from "../actions/notification";
 
 
 class Notifications extends React.Component {
     constructor(props) {
         super(props);
         this.clearNotification = this.clearNotification.bind(this);
+        this.clearAllNotification = this.clearAllNotification.bind(this);
         this.renderNotifications = this.renderNotifications.bind(this);
+        this.renderClearAllButton = this.renderClearAllButton.bind(this);
     }
 
     componentDidMount() {
@@ -16,8 +18,23 @@ class Notifications extends React.Component {
     }
 
     clearNotification(notification) {
-        // todo: trigger action to remove notification
         this.props.clearNotification(notification);
+    }
+
+    clearAllNotification() {
+        this.props.clearAllNotifications();
+    }
+
+    noNotificationMessage() {
+        return (
+            <Row className={"notification-alert"}>
+                <Col className={"col-sm-10 col-md-3"}>
+                    <Alert variant={"dark"}>
+                        No new notifications !
+                    </Alert>
+                </Col>
+            </Row>
+        )
     }
 
     renderNotifications() {
@@ -33,7 +50,26 @@ class Notifications extends React.Component {
                 </Row>
             )
         });
+        if(notifications.length > 0) {
+            const clearAllButton = this.renderClearAllButton();
+            notifications.push(clearAllButton);
+        } else {
+            const noNotificationsMessage =this.noNotificationMessage()
+            notifications.push(noNotificationsMessage);
+        }
         return notifications;
+    }
+
+    renderClearAllButton() {
+        return (
+            <Row className={"notification-clear-button"}>
+                <Col className={"col-sm-10 col-md-3"}>
+                    <Button variant="link" onClick={this.clearAllNotification}>Clear all</Button>
+                </Col>
+            </Row>
+
+        )
+
     }
 
     render() {
@@ -54,7 +90,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         loadNotifications: () => dispatch(getNotificationsAction()),
-        clearNotification: (notification) => dispatch(clearNotificationAction(notification))
+        clearNotification: (notification) => dispatch(clearNotificationAction(notification)),
+        clearAllNotifications: () => dispatch(clearAllNotificationsAction())
     }
 }
 

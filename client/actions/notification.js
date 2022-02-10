@@ -1,5 +1,5 @@
 import {hideLoader, showLoader} from "./app";
-import { getNotifications, clearNotification } from "../utils/apiUtils"
+import { getNotifications, clearNotification, clearAllNotifications } from "../utils/apiUtils"
 import { ACTIONS } from "../config/constants"
 import _ from "lodash";
 import {loadCollectionsAction} from "./collection";
@@ -50,6 +50,27 @@ export const clearNotificationAction = (notification) => async (dispatch) => {
     try {
         dispatch(showLoader());
         const response = await clearNotification(notification);
+        const data = _.get(response, 'data');
+        if (response.status === 200) {
+            dispatch(getNotificationsAction());
+            return dispatch(_clearNotification(data));
+        }
+
+    } catch (err) {
+        if(err.response) {
+            return dispatch(_receiveErrors(err.response.data));
+        } else {
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
+        }
+    } finally {
+        dispatch(hideLoader());
+    }
+}
+
+export const clearAllNotificationsAction = () => async(dispatch) => {
+    try {
+        dispatch(showLoader());
+        const response = await clearAllNotifications();
         const data = _.get(response, 'data');
         if (response.status === 200) {
             dispatch(getNotificationsAction());

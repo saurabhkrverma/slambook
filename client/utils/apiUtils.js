@@ -60,3 +60,7 @@ export const getNotifications = () => {
 export const clearNotification = (notification) => {
     return axios.delete("/api/notification", { data: notification });
 }
+
+export const clearAllNotifications = () => {
+    return axios.delete("/api/notification/all");
+}
