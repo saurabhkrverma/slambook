@@ -24,7 +24,7 @@ class Header extends React.Component {
                         <Nav.Link as={Link} to="/home">home</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link as={Link} to="/notifications">notifications</Nav.Link>
+                        <Nav.Link as={Link} to="/notifications">notifications<span className={"notification-alert-count"}>{this.props.notifications.count}</span></Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link onClick={this.handleLogout} >logout</Nav.Link>
@@ -53,6 +53,7 @@ class Header extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        notifications: state.data.notifications,
         messages: state.messages,
         errors: state.errors,
         user: state.user

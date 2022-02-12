@@ -4,10 +4,15 @@ import { Navigate } from "react-router-dom"
 import {Col, Row, Image} from 'react-bootstrap'
 import Collections from "./collections.jsx"
 import Posts from "./posts.jsx"
+import { getNotificationsCountAction } from "../actions/notification"
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.loadNotificationsCount();
     }
 
     renderCollections () {
@@ -70,4 +75,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadNotificationsCount: ()=> dispatch(getNotificationsCountAction())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

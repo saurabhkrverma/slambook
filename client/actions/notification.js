@@ -1,9 +1,15 @@
 import {hideLoader, showLoader} from "./app";
-import { getNotifications, clearNotification, clearAllNotifications } from "../utils/apiUtils"
+import { getNotificationsCount, getNotifications, clearNotification, clearAllNotifications } from "../utils/apiUtils"
 import { ACTIONS } from "../config/constants"
 import _ from "lodash";
-import {loadCollectionsAction} from "./collection";
 
+
+const _getNotificationsCount = (data) => {
+    return {
+        type: ACTIONS.LOAD_NOTIFICATIONS,
+        data
+    }
+}
 
 const _getNotifications = (data) => {
     return {
@@ -25,11 +31,10 @@ const _receiveErrors = data => ({
     data
 })
 
-
-export const getNotificationsAction = () => async (dispatch) => {
+export const getNotificationsCountAction = () => async (dispatch) => {
     try {
         dispatch(showLoader());
-        const response = await getNotifications();
+        const response = await getNotificationsCount();
         const data = _.get(response, 'data');
         if (response.status === 200) {
             return dispatch(_getNotifications(data));
@@ -43,6 +48,24 @@ export const getNotificationsAction = () => async (dispatch) => {
         }
     } finally {
         dispatch(hideLoader());
+    }
+}
+
+
+export const getNotificationsAction = () => async (dispatch) => {
+    try {
+        const response = await getNotifications();
+        const data = _.get(response, 'data');
+        if (response.status === 200) {
+            return dispatch(_getNotificationsCount(data));
+        }
+
+    } catch (err) {
+        if(err.response) {
+            return dispatch(_receiveErrors(err.response.data));
+        } else {
+            return dispatch(_receiveErrors({errors:['something went wrong']}));
+        }
     }
 }
 

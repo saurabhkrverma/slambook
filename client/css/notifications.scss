@@ -6,3 +6,16 @@
   justify-content: center;
   text-align: end;
 }
+
+.notification-alert-count {
+  position: relative;
+  bottom: 0px;
+  top: -5px;
+  border-radius: 15px;
+  background-color: lightgrey;
+  font-size: smaller;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+}

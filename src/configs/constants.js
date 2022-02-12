@@ -42,6 +42,8 @@ export const MESSAGES = {
     // notification related messages
     "NOTIFICATION_FETCH_SUCCESS": "notifications fetched successfully",
     "NOTIFICATION_FETCH_FAILURE": "notifications couldn\'t be fetched",
+    "NOTIFICATION_COUNT_FETCH_SUCCESS": "notifications count fetched successfully",
+    "NOTIFICATION_COUNT_FETCH_FAILURE": "notifications count couldn\'t be fetched",
     "NOTIFICATION_ADDITION_SUCCESS": "notifications added successfully",
     "NOTIFICATION_ADDITION_FAILURE": "notifications couldn\'t be added",
     "NOTIFICATION_DELETE_SUCCESS": "notification deleted successfully",
@@ -79,6 +81,8 @@ export const RESPONSE_TYPES = {
     // notification model
     "NOTIFICATION_FETCH_SUCCESS": "NOTIFICATION_FETCH_SUCCESS",
     "NOTIFICATION_FETCH_FAILURE": "NOTIFICATION_FETCH_FAILURE",
+    "NOTIFICATION_COUNT_FETCH_SUCCESS": "NOTIFICATION_COUNT_FETCH_SUCCESS",
+    "NOTIFICATION_COUNT_FETCH_FAILURE": "NOTIFICATION_COUNT_FETCH_FAILURE",
     "NOTIFICATION_ADDITION_SUCCESS": "NOTIFICATION_ADDITION_SUCCESS",
     "NOTIFICATION_ADDITION_FAILURE": "NOTIFICATION_ADDITION_FAILURE",
     "NOTIFICATION_DELETE_SUCCESS": "NOTIFICATION_DELETE_SUCCESS",

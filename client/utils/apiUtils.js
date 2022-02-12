@@ -53,6 +53,10 @@ export const resetPassword = (userInfo) => {
 }
 
 // api-notifications
+export const getNotificationsCount = () => {
+    return axios.get("/api/notification/count");
+}
+
 export const getNotifications = () => {
     return axios.get("/api/notification");
 }

@@ -1,4 +1,10 @@
-import { readNotifications, createNotification, deleteNotification, deleteAllNotification } from "../../models/services/notificationServices";
+import {
+    readNotifications,
+    createNotification,
+    deleteNotification,
+    deleteAllNotification,
+    countNotifications
+} from "../../models/services/notificationServices";
 import {buildResponse} from "../../utils/responseBuilder";
 import {MESSAGES, RESPONSE_TYPES} from "../../configs/constants";
 
@@ -13,6 +19,20 @@ const registerNotificationRouter = (router) => {
         } catch (error) {
             console.log(error);
             const response = buildResponse(req, RESPONSE_TYPES.NOTIFICATION_FETCH_FAILURE, MESSAGES.NOTIFICATION_FETCH_FAILURE);
+            res.send(response);
+
+        }
+    });
+
+    // get notifications count
+    router.get("/notification/count", async(req, res) => {
+        try {
+            const notificationCount = await countNotifications(req);
+            const response = buildResponse(req, RESPONSE_TYPES.NOTIFICATION_COUNT_FETCH_SUCCESS, notificationCount);
+            res.send(response);
+        } catch (error) {
+            console.log(error);
+            const response = buildResponse(req, RESPONSE_TYPES.NOTIFICATION_COUNT_FETCH_FAILURE, MESSAGES.NOTIFICATION_COUNT_FETCH_FAILURE);
             res.send(response);
         }
     });
