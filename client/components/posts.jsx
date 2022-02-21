@@ -49,11 +49,13 @@ class Posts extends React.Component {
     }
 
     renderPosts() {
-        if(this.state.posts && this.state.posts.length > 0){
+        if(this.copyPosts && this.copyPosts.length > 0){
             return (
                 <>
+                
                 {this.copyPosts && this.copyPosts.length > 0 && this.renderSearch()}
                     {this.state.posts.map(post => Post(post, this.handleSubmit))}
+                    {this.state.posts.length === 0 && this.copyPosts.length > 0 && <div style={{textAlign:'center', padding:'30px'}}><p>No Results</p></div>}
                 </>
             )
         } else {
