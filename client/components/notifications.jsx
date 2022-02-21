@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Row, Col, Alert, Button } from 'react-bootstrap'
+import { Row, Col, Alert, Button, Nav } from 'react-bootstrap'
+import { Link } from "react-router-dom";
 import { getNotificationsAction, clearNotificationAction, clearAllNotificationsAction } from "../actions/notification";
 
 
@@ -37,6 +38,26 @@ class Notifications extends React.Component {
         )
     }
 
+    renderClearAllButton() {
+        return (
+            <Row className={"notification-clear-button"}>
+                <Col className={"col-sm-10 col-md-3"}>
+                    <Button variant="link" onClick={this.clearAllNotification}>Clear all</Button>
+                </Col>
+            </Row>
+        )
+    }
+
+    renderHomepageLink() {
+        return (
+            <Row className={"notification-clear-button"}>
+                <Col className={"col-sm-10 col-md-3"}>
+                    <Nav.Link as={Link} to="/home">home</Nav.Link>
+                </Col>
+            </Row>
+        )
+    }
+
     renderNotifications() {
         const notifications = this.props.notifications.map((notification, index)=> {
             const submitter = notification.submitterName || notification.submitterEmail;
@@ -56,20 +77,10 @@ class Notifications extends React.Component {
         } else {
             const noNotificationsMessage =this.noNotificationMessage()
             notifications.push(noNotificationsMessage);
+            const homePageLink = this.renderHomepageLink();
+            notifications.push(homePageLink);
         }
         return notifications;
-    }
-
-    renderClearAllButton() {
-        return (
-            <Row className={"notification-clear-button"}>
-                <Col className={"col-sm-10 col-md-3"}>
-                    <Button variant="link" onClick={this.clearAllNotification}>Clear all</Button>
-                </Col>
-            </Row>
-
-        )
-
     }
 
     render() {
