@@ -55,10 +55,12 @@ const registerUserRouter = (router) => {
     router.patch("/user", async(req,res)=>{
         try{
             const userUpdated = updateUser(req);
-            const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
+            const response = buildResponse(req, RESPONSE_TYPES.USER_UPDATION_SUCCESS, MESSAGES.USER_UPDATION_SUCCESS);
             res.send(response);
         } catch(error) {
-            res.send(error);
+            console.log(error);
+            const response = buildResponse(req, RESPONSE_TYPES.USER_UPDATION_FAILURE, MESSAGES.USER_UPDATION_FAILURE);
+            res.send(response);
         }
     })
 };
