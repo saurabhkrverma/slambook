@@ -6,7 +6,25 @@ import { readCollection } from "./collectionServices";
 export const readNotifications = async (req) => {
     try {
         const _email = _.get(req, "user.email");
-        const notifications = await Notification.find({email: _email});
+        const notifications = await Notification.aggregate([{
+            $match: { "email": _.get(req, "user.email")}
+        },{
+            $lookup:{
+                "from": "collections",
+                "localField": "collectionId",
+                "foreignField": "collectionId",
+                "as": "collectionDetails"
+            }
+        },{
+            $project: {
+                "_id":0,
+                "__v":0,
+                "collectionDetails._id":0,
+                "collectionDetails.__v":0,
+                "collectionDetails.email": 0,
+                "collectionDetails.questionnaire":0,
+            }
+        }]);
         return notifications;
     } catch (err) {
         throw err;

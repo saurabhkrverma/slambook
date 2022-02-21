@@ -1,0 +1,23 @@
+.notification-alert {
+  justify-content: center;
+}
+
+.notification-clear-button {
+  justify-content: center;
+  text-align: center;
+}
+
+.notification-alert-count {
+  position: relative;
+  bottom: 0px;
+  height: 15px;
+  line-height: 15px;
+  top: -5px;
+  border-radius: 15px;
+  background-color: lightgrey;
+  font-size: smaller;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+}

@@ -8,6 +8,8 @@ const notificationsReducer = (state = [], action) => {
         case ACTIONS.LOAD_NOTIFICATIONS:
         case ACTIONS.INITIALIZE_APP:
             return _.get(action,'data.data.notifications',[]);
+        case ACTIONS.CLEAR_NOTIFICATION:
+            return [];
         default:
             return state;
     }

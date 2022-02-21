@@ -53,6 +53,18 @@ export const resetPassword = (userInfo) => {
 }
 
 // api-notifications
+export const getNotificationsCount = () => {
+    return axios.get("/api/notification/count");
+}
+
 export const getNotifications = () => {
     return axios.get("/api/notification");
+}
+
+export const clearNotification = (notification) => {
+    return axios.delete("/api/notification", { data: notification });
+}
+
+export const clearAllNotifications = () => {
+    return axios.delete("/api/notification/all");
 }

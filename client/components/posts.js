@@ -6,7 +6,7 @@ import {Field, FieldArray, Formik} from "formik";
 const _renderCardHeader = (post) => {
     const user = _.get(post, 'user', {});
     if(_.isEmpty(user)) {
-        let userName = _.get(post,"name", "Anonymous");
+        let userName = _.get(post,"submitterName", "Anonymous");
         return (
             <span> {`${post.collectionName} by ${userName}`} </span>
         )
