@@ -6,7 +6,7 @@ import _ from "lodash";
 
 const _getNotificationsCount = (data) => {
     return {
-        type: ACTIONS.LOAD_NOTIFICATIONS,
+        type: ACTIONS.LOAD_NOTIFICATIONS_COUNT,
         data
     }
 }
@@ -37,7 +37,7 @@ export const getNotificationsCountAction = () => async (dispatch) => {
         const response = await getNotificationsCount();
         const data = _.get(response, 'data');
         if (response.status === 200) {
-            return dispatch(_getNotifications(data));
+            return dispatch(_getNotificationsCount(data));
         }
 
     } catch (err) {
@@ -57,7 +57,7 @@ export const getNotificationsAction = () => async (dispatch) => {
         const response = await getNotifications();
         const data = _.get(response, 'data');
         if (response.status === 200) {
-            return dispatch(_getNotificationsCount(data));
+            return dispatch(_getNotifications(data));
         }
 
     } catch (err) {
@@ -96,7 +96,6 @@ export const clearAllNotificationsAction = () => async(dispatch) => {
         const response = await clearAllNotifications();
         const data = _.get(response, 'data');
         if (response.status === 200) {
-            dispatch(getNotificationsAction());
             return dispatch(_clearNotification(data));
         }
 

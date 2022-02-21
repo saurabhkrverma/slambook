@@ -77,12 +77,6 @@ const _getNotifications = (notifications=[]) => {
     }
 }
 
-const _getNotificationsCount = (count=[]) => {
-    return {
-        count: count
-    }
-}
-
 
 export const buildResponse = (req, responseType, payload) => {
     const response = {
@@ -156,7 +150,7 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.NOTIFICATION_COUNT_FETCH_SUCCESS: {
-            response.data.notifications = _getNotificationsCount(payload);
+            response.data.notificationsCount = payload;
             break;
         }
 
