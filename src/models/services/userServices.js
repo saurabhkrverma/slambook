@@ -67,8 +67,12 @@ export const updateUser = async (req) => {
             return false
         }
 
-        if(req.body.name){
-            user.name = req.body.name;
+        if(req.body.firstName){
+            user.firstName = req.body.firstName;
+        }
+
+        if(req.body.lastName){
+            user.lastName = req.body.lastName;
         }
 
         if(req.body.password) {

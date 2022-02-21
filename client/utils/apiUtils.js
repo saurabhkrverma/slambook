@@ -19,6 +19,14 @@ export const registerUser = (userInfo) => {
     return axios.post("/api/user", userInfo);
 }
 
+// api-users
+export const resetPassword = (userInfo) => {
+    return axios.patch("/public/reset/password", userInfo);
+}
+
+export const updateUser = (userInfo) => {
+    return axios.patch("/api/user", userInfo);
+}
 
 // api-collections
 export const createCollection = (collection) => {
@@ -46,10 +54,6 @@ export const getPosts = () => {
 
 export const submitPost = (post) => {
     return axios.post("/public/post", post);
-}
-
-export const resetPassword = (userInfo) => {
-    return axios.patch("/public/reset/password", userInfo);
 }
 
 // api-notifications

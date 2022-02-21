@@ -44,7 +44,7 @@ export const Post = (post, handleSubmit) => {
         <Card bg={"light"}
               key={`${post.collectionId}-post`}
               text={"dark"}
-              className="collections-card col-sm-10 col-md-3"
+              className="collections-card collections-card-post  col-sm-10 col-md-3"
               border="secondary">
             <Card.Header as="h5">{_renderCardHeader(post)}</Card.Header>
             <Card.Body>

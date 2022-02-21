@@ -1,5 +1,5 @@
 import {hideLoader, showLoader} from "./app";
-import {loginUser, logoutUser, registerUser, resetPassword} from '../utils/apiUtils';
+import {loginUser, logoutUser, updateUser, registerUser, resetPassword} from '../utils/apiUtils';
 import { ACTIONS } from "../config/constants"
 import _ from 'lodash';
 
@@ -82,9 +82,29 @@ export const registerUserAction = (userInfo) => async (dispatch) => {
     }
 }
 
-export const updateUserAction = (userInfo) => async (dispatch) => {
+export const updateUserPasswordAction = (userInfo) => async (dispatch) => {
     try{
         const response = await resetPassword(userInfo);
+        const data = _.get(response, 'data');
+        if (response.status === 200) {
+            return dispatch(updateCurrentUser(data));
+        }
+    } catch (err) {
+        if(err.response) {
+            return dispatch(receiveErrors(err.response.data));
+        } else {
+            return dispatch(receiveErrors({errors:['something went wrong']}));
+        }
+    } finally {
+        dispatch(hideLoader());
+    }
+}
+
+
+export const updateUserAction = (userInfo) => async (dispatch) => {
+    try{
+        dispatch(showLoader());
+        const response = await updateUser(userInfo);
         const data = _.get(response, 'data');
         if (response.status === 200) {
             return dispatch(updateCurrentUser(data));

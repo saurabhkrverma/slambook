@@ -9,10 +9,11 @@ const _nullUser = {
 const userReducer = (state = _nullUser, action) => {
     Object.freeze(state);
     switch (action.type) {
-        case ACTIONS.RECEIVE_CURRENT_USER:
         case ACTIONS.INITIALIZE_APP:
-        case ACTIONS.LOGOUT_CURRENT_USER:
+        case ACTIONS.RECEIVE_CURRENT_USER:
         case ACTIONS.REGISTER_NEW_USER:
+        case ACTIONS.UPDATE_CURRENT_USER:
+        case ACTIONS.LOGOUT_CURRENT_USER:
             return _.get(action,'data.user',state);
         default:
             return state;

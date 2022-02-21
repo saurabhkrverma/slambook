@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik'
-import { updateUserAction } from '../actions/user';
+import { updateUserPasswordAction } from '../actions/user';
 import * as yup from 'yup';
 
 class ResetPassword extends React.Component {
@@ -78,7 +78,7 @@ class ResetPassword extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        resetPassword: (credentials) => dispatch(updateUserAction(credentials))
+        resetPassword: (credentials) => dispatch(updateUserPasswordAction(credentials))
     }
 }
 
