@@ -42,7 +42,8 @@ class Home extends React.Component {
                             <div className="jumbotron jumbotron-fluid">
                                 <div className="container">
                                     <p className="lead">
-                                        {(this.props.user && this.props.user.profilePic) ? <Image className={"profile-pic"} src={this.props.user.profilePic} roundedCircle={true} fluid={true}></Image> : null}
+                                        {(this.props.user && this.props.user.profilePic) ? <Image className={"profile-pic"} src={this.props.user.profilePic} roundedCircle={true} fluid={true}></Image> :
+                                            <i className="bi bi-person-circle profile-pic"></i>}
                                         <br/>
                                         Welcome {this.props.user.firstName} &#128512; !!<br/>
                                         Create your slambook, share it with your friends and see their submissions all at same place.

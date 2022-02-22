@@ -8,7 +8,10 @@ const _renderCardHeader = (post) => {
     if(_.isEmpty(user)) {
         let userName = _.get(post,"submitterName", "Anonymous");
         return (
-            <span> {`${post.collectionName} by ${userName}`} </span>
+            <span>
+                <i className="bi bi-person-circle profile-pic"></i> &nbsp;
+                <span> {`${post.collectionName} by ${userName}`} </span>
+            </span>
         )
     } else {
         return (
