@@ -60,7 +60,7 @@ export const createUser = async (req) => {
 
 export const updateUser = async (req) => {
     try {
-        const email = req.params.email ? req.params.email.toLowerCase() : undefined;
+        const email = _.get(req, "user.email", "params.email");
         const user = await User.findOne({email: email})
 
         if(!user) {

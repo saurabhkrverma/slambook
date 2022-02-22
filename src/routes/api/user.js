@@ -54,7 +54,7 @@ const registerUserRouter = (router) => {
     //update user
     router.patch("/user", async(req,res)=>{
         try{
-            const userUpdated = updateUser(req);
+            const userUpdated = await updateUser(req);
             const response = buildResponse(req, RESPONSE_TYPES.USER_UPDATION_SUCCESS, MESSAGES.USER_UPDATION_SUCCESS);
             res.send(response);
         } catch(error) {
