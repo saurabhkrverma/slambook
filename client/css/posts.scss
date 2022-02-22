@@ -5,15 +5,32 @@
 }
 
 .collections-card-post {
+  margin-top: 35px !important;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .card-header{
-  .profile-pic {
-    height: 25px;
-    width: 25px;
-    font-size: 25px;
+
+  .card-header-post {
+    .profile-pic {
+      position: relative;
+      top: -33px;
+      left: 44%;
+      height: 50px;
+      width: 50px;
+      font-size: 50px;
+    }
+
+    span {
+      margin-top: -29px;
+    }
+
+    display: flex;
+    flex-direction: column;
   }
+
+  border-bottom: none;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   text-align: center;
 }

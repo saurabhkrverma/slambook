@@ -8,17 +8,17 @@ const _renderCardHeader = (post) => {
     if(_.isEmpty(user)) {
         let userName = _.get(post,"submitterName", "Anonymous");
         return (
-            <span>
-                <i className="bi bi-person-circle profile-pic"></i> &nbsp;
+            <div className={"card-header-post"}>
+                <i className="bi bi-person-circle profile-pic"></i>
                 <span> {`${post.collectionName} by ${userName}`} </span>
-            </span>
+            </div>
         )
     } else {
         return (
-            <span>
-                <Image className={"profile-pic"} src={post.user.profilePic} roundedCircle={true} fluid={true}></Image> &nbsp;
+            <div className={"card-header-post"}>
+                <Image className={"profile-pic"} src={post.user.profilePic} roundedCircle={true} fluid={true}></Image>
                 <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
-            </span>
+            </div>
         )
     }
 }
