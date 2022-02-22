@@ -6,11 +6,16 @@
 @import "./login.scss";
 @import "./home.scss";
 @import "./notifications.scss";
+@import "./alert.scss";
 
 body {
   font-family:Montserrat,sans-serif;
   font-size: 14px;
   background-color: white;
+}
+
+.page-body {
+  padding-top: 120px;
 }
 
 .text-align-center {

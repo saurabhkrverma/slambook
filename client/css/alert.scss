@@ -1,0 +1,10 @@
+.fixed-top {
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+.fixed-top.fixed-alert-bar {
+  top: 59px !important;
+  z-index: 2000;
+}

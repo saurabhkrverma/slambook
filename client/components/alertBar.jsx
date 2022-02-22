@@ -44,7 +44,7 @@ class AlertBar extends React.Component {
         }
 
         if(consolidateErrors || consolidateMessages){
-            const closeAlertBox = setTimeout(this.closeAlertBar,5000);
+            // const closeAlertBox = setTimeout(this.closeAlertBar,5000);
         }
 
         return (
@@ -61,7 +61,7 @@ class AlertBar extends React.Component {
     render() {
         return (
             <Row>
-                <Col>
+                <Col className={"fixed-top fixed-alert-bar"}>
                     {this.renderAlertMessages()}
                 </Col>
             </Row>

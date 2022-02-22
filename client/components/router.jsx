@@ -14,7 +14,7 @@ class Router extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={"page-body"}>
                 <Routes>
                     <Route path="/login" element={<Welcome />} />
                     <Route path="/home" element={<Home />} />

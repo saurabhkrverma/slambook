@@ -42,7 +42,7 @@ class Header extends React.Component {
     render() {
         return (
             <Row>
-                <Navbar expand="lg" variant={"light"}  collapseOnSelect expand={"lg"} className={"header"}>
+                <Navbar expand="lg" variant={"light"}  collapseOnSelect expand={"lg"} className={"header"} fixed={"top"}>
                     <Navbar.Brand href="/">slambook</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
