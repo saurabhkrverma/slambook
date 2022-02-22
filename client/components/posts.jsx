@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux"
 import { Row } from "react-bootstrap";
-import { getPostsAction } from "../actions/post";
+import { getPostsAction, deletePostAction  } from "../actions/post";
 import Post from "./posts.js";
 
 class Posts extends React.Component {
@@ -26,7 +26,8 @@ class Posts extends React.Component {
     }
 
     handleSubmit(values, actions) {
-        console.log("check this out, do you get the post ID", values, actions);
+        this.props.deletePost(values);
+
     }
 
     searchResults(e) {
@@ -97,7 +98,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: () => dispatch(getPostsAction())
+        loadPosts: () => dispatch(getPostsAction()),
+        deletePost: (post) => dispatch(deletePostAction(post))
     }
 }
 
