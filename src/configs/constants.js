@@ -41,6 +41,8 @@ export const MESSAGES = {
     "POST_FETCH_FAILURE": "post couldn\'t be fetched",
     "POST_SUBMISSION_SUCCESS": "post submitted successfully",
     "POST_SUBMISSION_FAILURE": "post couldn\'t be submitted",
+    "POST_DELETION_SUCCESS": "post deleted successfully",
+    "POST_DELETION_FAILURE": "collection couldn\'t be deleted",
     // notification related messages
     "NOTIFICATION_FETCH_SUCCESS": "notifications fetched successfully",
     "NOTIFICATION_FETCH_FAILURE": "notifications couldn\'t be fetched",
@@ -82,6 +84,8 @@ export const RESPONSE_TYPES = {
     "POST_FETCH_FAILURE": "POST_FETCH_FAILURE",
     "POST_SUBMISSION_SUCCESS": "POST_SUBMISSION_SUCCESS",
     "POST_SUBMISSION_FAILURE": "POST_SUBMISSION_FAILURE",
+    "POST_DELETION_SUCCESS": "POST_DELETION_SUCCESS",
+    "POST_DELETION_FAILURE": "POST_DELETION_FAILURE",
     // notification model
     "NOTIFICATION_FETCH_SUCCESS": "NOTIFICATION_FETCH_SUCCESS",
     "NOTIFICATION_FETCH_FAILURE": "NOTIFICATION_FETCH_FAILURE",

@@ -99,7 +99,8 @@ export const buildResponse = (req, responseType, payload) => {
         case RESPONSE_TYPES.POST_SUBMISSION_SUCCESS:
         case RESPONSE_TYPES.NOTIFICATION_ADDITION_SUCCESS:
         case RESPONSE_TYPES.NOTIFICATION_DELETE_SUCCESS:
-        case RESPONSE_TYPES.USER_UPDATION_SUCCESS: {
+        case RESPONSE_TYPES.USER_UPDATION_SUCCESS:
+        case RESPONSE_TYPES.POST_DELETION_SUCCESS: {
             response.messages.push(payload);
             break;
         }
@@ -116,7 +117,8 @@ export const buildResponse = (req, responseType, payload) => {
         case RESPONSE_TYPES.NOTIFICATION_FETCH_FAILURE:
         case RESPONSE_TYPES.NOTIFICATION_ADDITION_FAILURE:
         case RESPONSE_TYPES.NOTIFICATION_DELETE_FAILURE:
-        case RESPONSE_TYPES.USER_UPDATION_FAILURE:{
+        case RESPONSE_TYPES.USER_UPDATION_FAILURE:
+        case RESPONSE_TYPES.POST_DELETION_FAILURE: {
             response.errors.push(payload);
             break;
         }

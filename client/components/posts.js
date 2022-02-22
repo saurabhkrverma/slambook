@@ -20,6 +20,14 @@ const _renderCardHeader = (post) => {
     }
 }
 
+const _renderDeleteButton = (post) => {
+    return (
+        <div className="form-group card-action-button" key={`formik-${post.collectionId}-delete`}>
+            <Button type="submit" variant="outline-danger">Delete</Button>
+        </div>
+    )
+}
+
 const  _renderPosts = (post, props) => {
     return (
         <div>
@@ -55,6 +63,8 @@ export const Post = (post, handleSubmit) => {
                             <FieldArray
                                 name="posts"
                                 render={arrayHelpers => _renderPosts(post, props)} />
+
+                            {_renderDeleteButton(post)}
 
                         </Form>
                     )}

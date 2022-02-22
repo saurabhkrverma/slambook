@@ -8,7 +8,8 @@ class Posts extends React.Component {
     constructor(props) {
         super(props);
         this.state = { posts : [], search:'' };
-        this.copyPosts = []
+        this.copyPosts = [];
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -24,8 +25,12 @@ class Posts extends React.Component {
         }
     }
 
+    handleSubmit(values, actions) {
+        console.log("check this out, do you get the post ID", values, actions);
+    }
+
     searchResults(e) {
-        var lowerCase = e.target.value.toLowerCase();        
+        let lowerCase = e.target.value.toLowerCase();
         const filteredData = this.copyPosts.filter((el) => {
             //if no input the return the original
             if (lowerCase === '') {

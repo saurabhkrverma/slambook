@@ -73,3 +73,20 @@ export const createPost = async (req) => {
         throw err
     }
 };
+
+export const deletePost = async (req) => {
+    try {
+        const collectionId = _.get(req, "body.collectionId");
+        const submitterEmail = _.get(req, "body.submitterEmail");
+        if(!collectionId || !submitterEmail) {
+            throw new Error();
+        }
+        const post = await Post.deleteOne({
+            collectionId,
+            submitterEmail
+        });
+        return true;
+    } catch (err) {
+        throw err
+    }
+}
