@@ -33,6 +33,10 @@ const Post = new mongoose.Schema({
             message: props => `${props.value} is not a valid email id!`
         }
     },
+    "createdOn" : {
+        type: Date,
+        default: Date.now
+    }
 });
 
 Post.index({ collectionId: 1, submitterEmail: 1}, { unique: true })
