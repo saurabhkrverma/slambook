@@ -25,6 +25,8 @@ passport.deserializeUser(async (id, done)=>{
     }
 });
 
+
+// configure passport to use the facebook strategy
 passport.use(new FacebookStrategy({
     clientID: APP_KEYS.AUTH.FACEBOOK.CLIENT_ID,
     clientSecret: APP_KEYS.AUTH.FACEBOOK.CLIENT_SECRET,
@@ -61,7 +63,7 @@ passport.use(new FacebookStrategy({
         const currentUser = await readUser({}, user);
 
         if (currentUser && currentUser.source !== "facebook") {
-            //return error
+            //todo : send response
             return done(null, false, { message: `You have previously signed up with a different signin method` });
         }
 

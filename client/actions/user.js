@@ -107,6 +107,9 @@ export const updateUserAction = (userInfo) => async (dispatch) => {
         const response = await updateUser(userInfo);
         const data = _.get(response, 'data');
         if (response.status === 200) {
+            const user = _.get(data, "user", {});
+            const updatedUser = Object.assign({}, user, userInfo);
+            _.set(data, "user", updatedUser);
             return dispatch(updateCurrentUser(data));
         }
     } catch (err) {
