@@ -1,7 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import {Button, Card, Form, Image} from "react-bootstrap";
-import {Field, FieldArray, Formik} from "formik";
+import { FieldArray, Formik} from "formik";
 
 const _renderCardHeader = (post) => {
     const user = _.get(post, 'user', {});

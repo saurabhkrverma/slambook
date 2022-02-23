@@ -4,6 +4,12 @@
   text-align: center;
 }
 
+.post-options {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
 .collections-card-post {
   margin-top: 35px !important;
   border: none;

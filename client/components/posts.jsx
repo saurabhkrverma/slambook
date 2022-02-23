@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux"
-import { Row } from "react-bootstrap";
+import { Row, Dropdown } from "react-bootstrap";
 import { getPostsAction, deletePostAction  } from "../actions/post";
 import Post from "./posts.js";
+import { sortPosts } from "../utils/commonUtils";
+import { CONSTANTS } from "../config/constants"
 
 class Posts extends React.Component {
     constructor(props) {
@@ -10,6 +12,9 @@ class Posts extends React.Component {
         this.state = { posts : [], search:'' };
         this.copyPosts = [];
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.sortPosts = this.sortPosts.bind(this);
+        this.renderSortingDropdown = this.renderSortingDropdown.bind(this);
+        this.renderOptions = this.renderOptions.bind(this);
     }
 
     componentDidMount() {
@@ -19,7 +24,7 @@ class Posts extends React.Component {
     componentDidUpdate(props) {
         if(this.props.posts.length !== props.posts.length) {
             this.setState({
-                posts: this.props.posts
+                posts: sortPosts(this.props.posts)
             })
             this.copyPosts = this.props.posts
         }
@@ -28,6 +33,29 @@ class Posts extends React.Component {
     handleSubmit(values, actions) {
         this.props.deletePost(values);
 
+    }
+
+    sortPosts(order = CONSTANTS.ORDER_MOST_RECENT_FIRST) {
+        if(this.state.posts) {
+            this.setState({
+                posts: sortPosts(this.state.posts, order)
+            });
+        }
+    }
+
+    renderSortingDropdown() {
+        return (
+            <Dropdown>
+                <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                    Select order
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu variant="dark">
+                    <Dropdown.Item href="#/action-1"  onClick={()=>{this.sortPosts(CONSTANTS.ORDER_MOST_RECENT_FIRST)}}>Most recent first</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2" onClick={()=>{this.sortPosts(CONSTANTS.ORDER_OLDEST_FIRST)}}>Oldest first</Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        )
     }
 
     searchResults(e) {
@@ -47,9 +75,21 @@ class Posts extends React.Component {
     }
 
     renderSearch() {
+        if(this.copyPosts && this.copyPosts.length > 0) {
+            return (
+                <input  style={{width: 'auto'}} className="form-control" onChange={this.searchResults.bind(this)} aria-describedby="emailHelp"
+                       placeholder="Search" />
+            )
+        } else {
+            return null;
+        }
+    }
+
+    renderOptions() {
         return (
-            <div>
-                <input style={{width:'auto'}} onChange={this.searchResults.bind(this)} class="form-control mx-auto" type="search" placeholder="Search" aria-label="Search" />
+            <div className={"post-options"}>
+                {this.renderSearch()}
+                {this.renderSortingDropdown()}
             </div>
         )
     }
@@ -58,8 +98,7 @@ class Posts extends React.Component {
         if(this.copyPosts && this.copyPosts.length > 0){
             return (
                 <>
-                
-                {this.copyPosts && this.copyPosts.length > 0 && this.renderSearch()}
+                    {this.renderOptions()}
                     {this.state.posts.map(post => Post(post, this.handleSubmit))}
                     {this.state.posts.length === 0 && this.copyPosts.length > 0 && <div style={{textAlign:'center', padding:'30px'}}><p>No Results</p></div>}
                 </>
