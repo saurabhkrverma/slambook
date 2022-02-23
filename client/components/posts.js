@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import {Button, Card, Form, Image} from "react-bootstrap";
+import {Button, Card, Form, FormControl, Image, InputGroup} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 
 const _renderCardHeader = (post) => {
@@ -21,6 +21,18 @@ const _renderCardHeader = (post) => {
             </div>
         )
     }
+}
+
+const _renderFooter = (post) => {
+    const creationTimestamp = new Date(post.createdOn);
+    const creationDate = creationTimestamp.toLocaleDateString('en-IN');
+    const creationTime = creationTimestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+    debugger;
+    return (
+        <Card.Footer className="text-muted card-collection-footer">
+            <div>submitted on {`${creationDate} @ ${creationTime}`} </div>
+        </Card.Footer>
+    )
 }
 
 const _renderDeleteButton = (post) => {
@@ -73,6 +85,9 @@ export const Post = (post, handleSubmit) => {
                     )}
                 </Formik>
             </Card.Body>
+
+            {_renderFooter(post)}
+
         </Card>
     )
 };

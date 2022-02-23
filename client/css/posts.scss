@@ -19,6 +19,13 @@
 .card-header{
 
   .card-header-post {
+
+    .bi-person-circle.profile-pic {
+      top: -37px !important;
+      background: white;
+      border-radius: 25px;
+    }
+
     .profile-pic {
       position: relative;
       top: -33px;

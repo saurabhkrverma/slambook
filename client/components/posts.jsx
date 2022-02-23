@@ -48,12 +48,12 @@ class Posts extends React.Component {
         return (
             <Dropdown>
                 <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                    Select order
+                    Posts order
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu variant="dark">
-                    <Dropdown.Item href="#/action-1"  onClick={()=>{this.sortPosts(CONSTANTS.ORDER_MOST_RECENT_FIRST)}}>Most recent first</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2" onClick={()=>{this.sortPosts(CONSTANTS.ORDER_OLDEST_FIRST)}}>Oldest first</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1"  onClick={()=>{this.sortPosts(CONSTANTS.ORDER_MOST_RECENT_FIRST)}}>Recent First</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2" onClick={()=>{this.sortPosts(CONSTANTS.ORDER_OLDEST_FIRST)}}>Oldest First</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         )
