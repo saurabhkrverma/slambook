@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux"
-import { Row, Dropdown } from "react-bootstrap";
+import { Row, Dropdown, Pagination } from "react-bootstrap";
 import { getPostsAction, deletePostAction  } from "../actions/post";
 import Post from "./posts.js";
 import { sortPosts } from "../utils/commonUtils";
@@ -14,7 +14,8 @@ class Posts extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sortPosts = this.sortPosts.bind(this);
         this.renderSortingDropdown = this.renderSortingDropdown.bind(this);
-        this.renderOptions = this.renderOptions.bind(this);
+        this.renderSearchSortOptions = this.renderSearchSortOptions.bind(this)
+        this.renderPaginationOptions = this.renderPaginationOptions.bind(this);
     }
 
     componentDidMount() {
@@ -85,7 +86,7 @@ class Posts extends React.Component {
         }
     }
 
-    renderOptions() {
+    renderSearchSortOptions() {
         return (
             <div className={"post-options"}>
                 {this.renderSearch()}
@@ -94,13 +95,30 @@ class Posts extends React.Component {
         )
     }
 
+    renderPaginationOptions() {
+        return (
+            <div className={"post-pagination-tab"}>
+                <Pagination>
+                    <Pagination.First />
+                    <Pagination.Prev />
+                    <Pagination.Item>{1}</Pagination.Item>
+                    <Pagination.Ellipsis disabled/>
+                    <Pagination.Item>{20}</Pagination.Item>
+                    <Pagination.Next />
+                    <Pagination.Last />
+                </Pagination>
+            </div>
+        )
+    }
+
     renderPosts() {
         if(this.copyPosts && this.copyPosts.length > 0){
             return (
                 <>
-                    {this.renderOptions()}
+                    {this.renderSearchSortOptions()}
                     {this.state.posts.map(post => Post(post, this.handleSubmit))}
                     {this.state.posts.length === 0 && this.copyPosts.length > 0 && <div style={{textAlign:'center', padding:'30px'}}><p>No Results</p></div>}
+                    {this.renderPaginationOptions()}
                 </>
             )
         } else {
