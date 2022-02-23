@@ -11,6 +11,13 @@
 }
 
 .collections-card-post {
+
+  .card-body {
+    div {
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+  }
   margin-top: 35px !important;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
