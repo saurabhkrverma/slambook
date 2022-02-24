@@ -24,7 +24,7 @@ class Collections extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.collections && this.props.collections.length>0) {
+        if(this.props.collections && this.props.collections.length>1) {
             // collections are already in state and no need to call the API again
             return
         }
