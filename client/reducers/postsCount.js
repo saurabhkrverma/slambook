@@ -8,6 +8,8 @@ const postsCountReducer = (state = 0, action) => {
         case ACTIONS.LOAD_POSTS:
         case ACTIONS.INITIALIZE_APP:
             return _.get(action,'data.data.postsCount',0);
+        case ACTIONS.DELETE_POST:
+            return state-1;
         default:
             return state;
     }

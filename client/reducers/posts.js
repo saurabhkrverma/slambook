@@ -11,7 +11,7 @@ const postsReducer = (state = [], action) => {
         case ACTIONS.LOAD_POSTS:
             const newPosts = _.get(action,'data.data.posts',[]);
             return [...state, ...newPosts];
-        case ACTIONS.DELETE_POSTS:
+        case ACTIONS.DELETE_POST:
             const newState = [...state];
             const deletedPost = _.get(action,'data.data.posts',[]);
             if(deletedPost && deletedPost.length>0) {

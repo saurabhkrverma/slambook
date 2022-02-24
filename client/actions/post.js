@@ -3,7 +3,6 @@ import { getPosts, submitPost, deletePost } from "../utils/apiUtils"
 import { ACTIONS } from "../config/constants"
 import _ from "lodash";
 
-
 const _updateCurrentPage = (data) => {
     return {
         type: ACTIONS.UPDATE_CURRENT_PAGE_NUMBER,
@@ -27,7 +26,7 @@ const _submitPosts = (data) => {
 
 const _deletePosts = (data) => {
     return {
-        type: ACTIONS.DELETE_POSTS,
+        type: ACTIONS.DELETE_POST,
         data
     }
 }

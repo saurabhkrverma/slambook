@@ -48,7 +48,8 @@ export const deleteCollection = (collection) => {
 
 // api-posts
 export const getPosts = (pageNumber=1) => {
-    return axios.get(`/api/post?pageNumber=${pageNumber}`);
+    return axios.get(`/api/post?pageNumber=${pageNumber}&pageEntries=2`);
+    // return axios.get(`/api/post?pageNumber=${pageNumber}`);
 }
 
 export const submitPost = (post) => {
