@@ -20,6 +20,14 @@ class Posts extends React.Component {
     }
 
     componentDidMount() {
+        if(this.props.posts && this.props.posts.length>0) {
+            // posts are already in state and no need to call the API again
+            this.setState({
+                posts: this.props.posts
+            })
+            this.copyPosts = this.props.posts
+            return
+        }
         this.props.loadPosts(this.props.app.currentPage);
     }
 
@@ -123,7 +131,7 @@ class Posts extends React.Component {
                     {this.renderSearchSortOptions()}
                     {this.state.posts.map((post,postIndex) => {
                         post.index = postIndex;
-                        return Post(post, this.handleSubmit, postIndex)
+                        return Post(post, this.handleSubmit)
                     })}
                     {this.state.posts.length === 0 && this.copyPosts.length > 0 && <div style={{textAlign:'center', padding:'30px'}}><p>No Results</p></div>}
                     {this.renderPaginationOptions()}
