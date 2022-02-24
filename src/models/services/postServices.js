@@ -3,6 +3,8 @@ import Collection from "../collection";
 import Post from "../post";
 
 export const readPosts = async (req) => {
+    const pageNumber = Number(_.get(req, "query.pageNumber", 1));
+    const pageEntries =  Number(_.get(req, "query.pageEntries", 20));
     try {
         const posts = await Collection.aggregate([{
             $match: { "email": _.get(req, "user.email")}
@@ -23,6 +25,10 @@ export const readPosts = async (req) => {
         }, {
             $sort: { "posts.createdOn": -1 }
         }, {
+            $skip: (( pageNumber - 1 ) * pageEntries )
+        },{
+            $limit: pageEntries
+        },{
             $lookup:{
                 "from": "users",
                 "localField": "posts.submitterEmail",
