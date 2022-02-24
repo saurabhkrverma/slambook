@@ -1,6 +1,6 @@
 import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
-import  { readPosts, createPost, deletePost } from "../../models/services/postServices"
+import  { countPosts, readPosts, createPost, deletePost } from "../../models/services/postServices"
 
 
 const registerPostRouter = (router) => {
@@ -8,8 +8,8 @@ const registerPostRouter = (router) => {
     // get all write-ups
     router.get("/post/", async(req, res) => {
         try {
-            const posts = await readPosts(req);
-            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, posts);
+            const result = await Promise.all([readPosts(req), countPosts(req)]);
+            const response = buildResponse(req, RESPONSE_TYPES.POST_FETCH_SUCCESS, result);
             res.send(response);
         } catch (err) {
             console.log(err);
@@ -19,10 +19,10 @@ const registerPostRouter = (router) => {
         }
     });
 
-    // delete post
+    // create post
     router.post("/post", async(req,res) => {
         try {
-           const postSaved = await createPost(req);
+            const postSaved = await createPost(req);
             const response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_SUCCESS, MESSAGES.POST_SUBMISSION_SUCCESS);
             return res.send(response);
         } catch (error) {

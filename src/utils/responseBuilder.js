@@ -144,7 +144,8 @@ export const buildResponse = (req, responseType, payload) => {
         }
         //data - posts
         case RESPONSE_TYPES.POST_FETCH_SUCCESS: {
-            response.data.posts = _getPosts(payload);
+            response.data.posts = _getPosts(payload[0]);
+            response.data.postsCount = payload[1];
             break;
         }
 

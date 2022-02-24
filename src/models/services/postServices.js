@@ -2,6 +2,17 @@ import _ from "lodash";
 import Collection from "../collection";
 import Post from "../post";
 
+export const countPosts = async (req) => {
+    try {
+        const _email = _.get(req, "user.email");
+        const postsCount = await Post.countDocuments({email: _email});
+        return postsCount;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 export const readPosts = async (req) => {
     const pageNumber = Number(_.get(req, "query.pageNumber", 1));
     const pageEntries =  Number(_.get(req, "query.pageEntries", 20));
@@ -65,10 +76,10 @@ export const readPosts = async (req) => {
 
 export const createPost = async (req) => {
     try {
-        const collectionId = (req.body.collectionId);
-        const questionnaire = (req.body.questionnaire);
-        const submitterName = (req.body.submitterName);
-        const submitterEmail = (req.body.submitterEmail);
+        const collectionId = _.get(req, "body.collectionId");
+        const questionnaire = _.get(req, "body.questionnaire");
+        const submitterName = _.get(req, "body.submitterName");
+        const submitterEmail = _.get(req, "body.submitterEmail");
         const post = new Post({
             collectionId,
             questionnaire,
