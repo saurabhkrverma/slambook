@@ -27,7 +27,6 @@ const _renderFooter = (post) => {
     const creationTimestamp = new Date(post.createdOn);
     const creationDate = creationTimestamp.toLocaleDateString('en-IN');
     const creationTime = creationTimestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    debugger;
     return (
         <Card.Footer className="text-muted card-collection-footer">
             <div>submitted on {`${creationDate} @ ${creationTime}`} </div>

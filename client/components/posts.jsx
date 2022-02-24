@@ -25,7 +25,7 @@ class Posts extends React.Component {
     componentDidUpdate(props) {
         if(this.props.posts.length !== props.posts.length) {
             this.setState({
-                posts: sortPosts(this.props.posts)
+                posts: this.props.posts
             })
             this.copyPosts = this.props.posts
         }

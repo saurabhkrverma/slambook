@@ -15,12 +15,14 @@ export const readPosts = async (req) => {
             }
         },{
             $unwind: "$posts"
-        },{
+        }, {
             $project: {
                 "posts._id": 0,
                 "posts.__v":0
             }
-        },{
+        }, {
+            $sort: { "posts.createdOn": -1 }
+        }, {
             $lookup:{
                 "from": "users",
                 "localField": "posts.submitterEmail",
