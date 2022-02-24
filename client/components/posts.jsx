@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux"
-import { Row, Dropdown, Pagination } from "react-bootstrap";
+import { Row, Dropdown, Button } from "react-bootstrap";
 import { getPostsAction, deletePostAction  } from "../actions/post";
 import Post from "./posts.js";
 import { sortPosts } from "../utils/commonUtils";
@@ -13,13 +13,14 @@ class Posts extends React.Component {
         this.copyPosts = [];
         this.handleSubmit = this.handleSubmit.bind(this);
         this.sortPosts = this.sortPosts.bind(this);
+        this.loadMorePosts = this.loadMorePosts.bind(this);
         this.renderSortingDropdown = this.renderSortingDropdown.bind(this);
         this.renderSearchSortOptions = this.renderSearchSortOptions.bind(this)
         this.renderPaginationOptions = this.renderPaginationOptions.bind(this);
     }
 
     componentDidMount() {
-        this.props.loadPosts();
+        this.props.loadPosts(this.props.app.currentPage);
     }
 
     componentDidUpdate(props) {
@@ -33,7 +34,6 @@ class Posts extends React.Component {
 
     handleSubmit(values, actions) {
         this.props.deletePost(values);
-
     }
 
     sortPosts(order = CONSTANTS.ORDER_MOST_RECENT_FIRST) {
@@ -95,20 +95,25 @@ class Posts extends React.Component {
         )
     }
 
+    loadMorePosts() {
+        const nextPage = _.get(this, "props.app.currentPage", 1) + 1;
+        this.props.loadPosts(nextPage);
+    }
+
     renderPaginationOptions() {
-        return (
-            <div className={"post-pagination-tab"}>
-                <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis disabled/>
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>
-            </div>
-        )
+        if(this.props.posts.length < this.props.postsCount) {
+            return (
+                <div className={"post-pagination-tab"}>
+                    <Button variant="outline-secondary" onClick={this.loadMorePosts}>Load More</Button>
+                </div>
+            )
+        } else {
+            return (
+                <div className={"post-pagination-tab"}>
+                    That's all !!
+                </div>
+            )
+        }
     }
 
     renderPosts() {
@@ -116,7 +121,10 @@ class Posts extends React.Component {
             return (
                 <>
                     {this.renderSearchSortOptions()}
-                    {this.state.posts.map(post => Post(post, this.handleSubmit))}
+                    {this.state.posts.map((post,postIndex) => {
+                        post.index = postIndex;
+                        return Post(post, this.handleSubmit, postIndex)
+                    })}
                     {this.state.posts.length === 0 && this.copyPosts.length > 0 && <div style={{textAlign:'center', padding:'30px'}}><p>No Results</p></div>}
                     {this.renderPaginationOptions()}
                 </>
@@ -149,13 +157,15 @@ class Posts extends React.Component {
 const mapStateToProps = (state) => {
     return {
         posts: state.data.posts,
-        user: state.user
+        postsCount: state.data.postsCount,
+        user: state.user,
+        app: state.app
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadPosts: () => dispatch(getPostsAction()),
+        loadPosts: (pageNumber) => dispatch(getPostsAction(pageNumber)),
         deletePost: (post) => dispatch(deletePostAction(post))
     }
 }

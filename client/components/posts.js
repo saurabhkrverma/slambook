@@ -61,7 +61,8 @@ const  _renderPosts = (post, props) => {
     );
 }
 
-export const Post = (post, handleSubmit) => {
+export const Post = (post, handleSubmit, postIndex) => {
+    console.log("postIndex: ", postIndex)
     return (
         <Card bg={"light"}
               key={`${post.collectionId}-post`}

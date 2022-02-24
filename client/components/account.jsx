@@ -18,7 +18,6 @@ class Account extends React.Component {
     }
 
     handleSubmit(values, props) {
-        console.log("submit triggered : ", values);
         this.props.updateUserInfo(values);
     }
 

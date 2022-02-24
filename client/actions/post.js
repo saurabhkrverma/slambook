@@ -4,6 +4,13 @@ import { ACTIONS } from "../config/constants"
 import _ from "lodash";
 
 
+const _updateCurrentPage = (data) => {
+    return {
+        type: ACTIONS.UPDATE_CURRENT_PAGE_NUMBER,
+        data
+    }
+}
+
 const _getPosts = (data) => {
     return {
         type: ACTIONS.LOAD_POSTS,
@@ -31,12 +38,15 @@ const _receiveErrors = data => ({
 })
 
 
-export const getPostsAction = () => async (dispatch) => {
+export const getPostsAction = (pageNumber) => async (dispatch) => {
     try {
         dispatch(showLoader());
-        const response = await getPosts();
+        const response = await getPosts(pageNumber);
         const data = _.get(response, 'data');
         if (response.status === 200) {
+            if(pageNumber) {
+                dispatch(_updateCurrentPage({"currentPage": pageNumber}))
+            }
             return dispatch(_getPosts(data));
         }
 
@@ -75,7 +85,8 @@ export const deletePostAction = (post) => async (dispatch) => {
         const response = await deletePost(post);
         const data = _.get(response, 'data');
         if (response.status === 200) {
-            dispatch(getPostsAction());
+            data.data.posts = [];
+            data.data.posts.push(post);
             return dispatch(_deletePosts(data));
         }
 
