@@ -4,9 +4,22 @@ import Post from "../post";
 
 export const countPosts = async (req) => {
     try {
-        const _email = _.get(req, "user.email");
-        const postsCount = await Post.countDocuments({email: _email});
-        return postsCount;
+        const result = await Collection.aggregate([{
+            $match: { "email": _.get(req, "user.email")}
+        },{
+            $lookup:{
+                "from": "posts",
+                "localField": "collectionId",
+                "foreignField": "collectionId",
+                "as": "posts"
+            }
+        },{
+            $unwind: "$posts"
+        },{
+            $count: "totalCount"
+        }]);
+        const postsCount = result[0] || {};
+        return postsCount.totalCount;
     } catch (error) {
         console.log(error);
         throw error;
