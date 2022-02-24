@@ -18,6 +18,13 @@ const _getNotifications = (data) => {
     }
 }
 
+const _clearAllNotifications = (data) => {
+    return {
+        type: ACTIONS.CLEAR_ALL_NOTIFICATIONS,
+        data
+    }
+}
+
 const _clearNotification = (data) => {
     return {
         type: ACTIONS.CLEAR_NOTIFICATION,
@@ -71,13 +78,9 @@ export const getNotificationsAction = () => async (dispatch) => {
 
 export const clearNotificationAction = (notification) => async (dispatch) => {
     try {
-        dispatch(showLoader());
-        const response = await clearNotification(notification);
-        const data = _.get(response, 'data');
-        if (response.status === 200) {
-            dispatch(getNotificationsAction());
-            return dispatch(_clearNotification(data));
-        }
+        dispatch(_clearNotification(notification));
+        await clearNotification(notification);
+        return;
 
     } catch (err) {
         if(err.response) {
@@ -92,13 +95,9 @@ export const clearNotificationAction = (notification) => async (dispatch) => {
 
 export const clearAllNotificationsAction = () => async(dispatch) => {
     try {
-        dispatch(showLoader());
-        const response = await clearAllNotifications();
-        const data = _.get(response, 'data');
-        if (response.status === 200) {
-            return dispatch(_clearNotification(data));
-        }
-
+        dispatch(_clearAllNotifications(data));
+        await clearAllNotifications();
+        return;
     } catch (err) {
         if(err.response) {
             return dispatch(_receiveErrors(err.response.data));

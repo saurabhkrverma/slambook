@@ -60,6 +60,7 @@ class Notifications extends React.Component {
 
     renderNotifications() {
         const notifications = this.props.notifications.map((notification, index)=> {
+            notification.index = index;
             const submitter = notification.submitterName || notification.submitterEmail;
             return (
                 <Row className={"notification-alert"}>

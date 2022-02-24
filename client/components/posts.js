@@ -34,10 +34,10 @@ const _renderFooter = (post) => {
     )
 }
 
-const _renderDeleteButton = (post) => {
+const _renderDeleteButton = (post, handleSubmit) => {
     return (
         <div className="form-group card-action-button" key={`formik-${post.collectionId}-delete`}>
-            <Button type="submit" variant="outline-danger">Delete</Button>
+            <Button variant="outline-danger" onClick={()=>{handleSubmit(post)}}>Delete</Button>
         </div>
     )
 }
@@ -70,7 +70,7 @@ export const Post = (post, handleSubmit) => {
               border="secondary">
             <Card.Header as="h5">{_renderCardHeader(post)}</Card.Header>
             <Card.Body>
-                <Formik initialValues={post} onSubmit={handleSubmit} key={`formik-${post.collectionId}-post`}>
+                <Formik initialValues={post} onSubmit={handleSubmit.apply} key={`formik-${post.collectionId}-post`}>
                     {(props)=>(
                         <Form noValidate onSubmit={props.handleSubmit} key={`form-${post.collectionId}-post`}>
 
@@ -78,7 +78,7 @@ export const Post = (post, handleSubmit) => {
                                 name="posts"
                                 render={arrayHelpers => _renderPosts(post, props)} />
 
-                            {_renderDeleteButton(post)}
+                            {_renderDeleteButton(post, handleSubmit)}
 
                         </Form>
                     )}

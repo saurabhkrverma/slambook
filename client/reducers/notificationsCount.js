@@ -9,6 +9,8 @@ const notificationsCountReducer = (state = 0, action) => {
         case ACTIONS.INITIALIZE_APP:
             return _.get(action,'data.data.notificationsCount',0);
         case ACTIONS.CLEAR_NOTIFICATION:
+            return state-1;
+        case ACTIONS.CLEAR_ALL_NOTIFICATIONS:
             return 0;
         case ACTIONS.LOAD_NOTIFICATIONS:
             return  _.get(action,'data.data.notifications',[]).length;
