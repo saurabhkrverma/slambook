@@ -57,6 +57,8 @@ export const readCollections = async (req) => {
     try {
         const collections = await Collection.find({
             "email": _.get(req,"user.email")
+        }).sort({
+            "createdOn": -1
         });
         return collections
     } catch (err) {
