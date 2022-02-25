@@ -34,6 +34,10 @@ const Collection = new mongoose.Schema( {
         type: [CollectionForm],
         required: [true, 'This is a mandatory field']
     },
+    "createdOn" : {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model("Collection", Collection);

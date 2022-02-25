@@ -8,7 +8,8 @@ const _createUserObject = (user={}) => {
         email: _.get(user,'email'),
         firstName: _.get(user, 'firstName'),
         lastName: _.get(user, 'lastName'),
-        profilePic: _.get(user, 'profilePic')
+        profilePic: _.get(user, 'profilePic'),
+        createdOn: _.get(user, 'createdOn')
     }
 
     return filteredUser;
@@ -37,9 +38,10 @@ const _getPosts = (slambooks= []) => {
 const _createCollectionObject = (collection={}) => {
     const filteredCollection = {
         email: _.get(collection,'email'),
-        collectionName: _.get(collection,'collectionName'),
         collectionId: _.get(collection,'collectionId'),
-        questionnaire: _.get(collection,'questionnaire'),
+        collectionName: _.get(collection,'collectionName'),
+        createdOn: _.get(collection, 'createdOn'),
+        questionnaire: _.get(collection,'questionnaire')
     }
     return filteredCollection;
 };

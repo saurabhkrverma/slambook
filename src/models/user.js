@@ -17,7 +17,11 @@ const User = mongoose.Schema({
     "firstName": {type: String},
     "lastName": {type: String},
     "profilePic": {type: String},
-    "source": {type: String}
+    "source": {type: String},
+    "createdOn" : {
+        type: Date,
+        default: Date.now
+    }
 });
 
 User.methods.hashPassword = (password) => {
