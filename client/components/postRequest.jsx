@@ -3,7 +3,7 @@ import {Col, Row} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {Navigate} from "react-router-dom";
 import _ from "lodash";
-import Post from "./postRequest";
+import Post from "./functionalComponents/postRequest";
 import { submitPostAction }  from "../actions/post"
 import * as yup from "yup";
 

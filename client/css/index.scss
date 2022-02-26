@@ -2,6 +2,7 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import "./header.scss";
 @import "./collections.scss";
+@import "./collectionsWidget.scss";
 @import "./posts.scss";
 @import "./login.scss";
 @import "./home.scss";
@@ -10,7 +11,8 @@
 
 body {
   font-family:Montserrat,sans-serif;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 300;
   background-color: white;
 }
 

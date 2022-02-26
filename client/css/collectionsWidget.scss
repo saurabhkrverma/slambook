@@ -1,0 +1,32 @@
+.collections-card-widget {
+
+  .card {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    .card-body {
+
+      .add-slambook-icon {
+        .bi.bi-plus-circle {
+          font-size: xxx-large;
+        }
+
+        display: grid;
+        place-content: center;
+      }
+
+      .add-slambook-options {
+        display: grid;
+        place-content: center;
+      }
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      text-align: center;
+
+    }
+
+  }
+
+}

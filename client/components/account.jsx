@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row } from "react-bootstrap";
 import * as yup from "yup";
-import { UserDetails } from "./account.js";
+import { UserDetails } from "./functionalComponents/account.js";
 import { updateUserAction } from "../actions/user";
 
 

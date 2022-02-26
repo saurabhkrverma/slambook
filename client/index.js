@@ -8,6 +8,7 @@ import Header from './components/header.jsx'
 import AlertBar from './components/alertBar.jsx'
 import Loader from "./components/loader.jsx";
 import Router from "./components/router.jsx";
+import  { BreakpointProvider } from 'react-socks';
 import './css/index.scss';
 import { initializeAppAction }  from "./actions/app";
 
@@ -18,10 +19,12 @@ const Init =  async () => {
         <Provider store={slamBookStore}>
             <Container fluid>
                 <BrowserRouter>
-                    <Header/>
-                    <AlertBar />
-                    <Loader/>
-                    <Router/>
+                    <BreakpointProvider>
+                        <Header/>
+                        <AlertBar />
+                        <Loader/>
+                        <Router/>
+                    </BreakpointProvider>
                 </BrowserRouter>
             </Container>
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom"
-import {Col, Row, Image} from 'react-bootstrap'
-import Collections from "./collections.jsx"
+import { Col, Row, Image } from 'react-bootstrap'
+import renderCollectionsLinkWidget from "./functionalComponents/collectionsLinkWidget.js"
 import Posts from "./posts.jsx"
 import { getNotificationsCountAction } from "../actions/notification"
 
@@ -16,11 +16,7 @@ class Home extends React.Component {
     }
 
     renderCollections () {
-        return (
-            <Row>
-                {<Collections {...this.props}/>}
-            </Row>
-        );
+        return renderCollectionsLinkWidget();
     }
 
     renderPosts () {
@@ -56,12 +52,12 @@ class Home extends React.Component {
                         <div>
                             {this.renderCollections()}
                         </div>
-                        <br/>
-                        <h5 className={"posts-section-header"}>Posts</h5>
-                        <hr></hr>
-                        <div>
-                            {this.renderPosts()}
-                        </div>
+                        {/*<br/>*/}
+                        {/*<h5 className={"posts-section-header"}>Posts</h5>*/}
+                        {/*<hr></hr>*/}
+                        {/*<div>*/}
+                        {/*    {this.renderPosts()}*/}
+                        {/*</div>*/}
                     </Row>
                 </div>
             )

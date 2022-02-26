@@ -24,6 +24,9 @@ class Header extends React.Component {
                         <Nav.Link as={Link} to="/home">home</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
+                        <Nav.Link as={Link} to="/collections">slambooks</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
                         <Nav.Link as={Link} to="/notifications">notifications<span className={"notification-alert-count"}>{this.props.notificationsCount}</span></Nav.Link>
                     </Nav.Item>
                     <Nav.Item>

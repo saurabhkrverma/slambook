@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux"
 import { Row, Dropdown, Button } from "react-bootstrap";
 import { getPostsAction, deletePostAction  } from "../actions/post";
-import Post from "./posts.js";
+import Post from "./functionalComponents/posts.js";
 import { sortPosts } from "../utils/commonUtils";
 import { CONSTANTS } from "../config/constants"
 
