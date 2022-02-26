@@ -42,36 +42,13 @@ class Collections extends React.Component {
 
     renderCollections(){
         const collections = this.props.collections;
-        if(collections){
-            return collections.map(collection => Collection(collection, this.handleSubmit, this.validationSchema));
-        } else {
-            return (
-                <Carousel.Item>
-                    <Card bg={"light"}
-                          key={"collections_loading"}
-                          text={"dark"}
-                          className="collections-card"
-                          border="secondary">
-                        <Card.Header as="h5">
-                            <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>
-                            &nbsp; Loading...
-                        </Card.Header>
-                        <Card.Body className={"collections-card-body-loading"}>
-                            <Spinner animation="border" variant="secondary" />
-                        </Card.Body>
-                    </Card>
-                </Carousel.Item>
-            )
-        }
-
+        return collections.map(collection => Collection(collection, this.handleSubmit, this.validationSchema));
     }
 
     render(){
         return (
          <Row className={"collections-cards"}>
-             <Carousel variant="dark" className={"col-sm-10, col-md-3"} hover={true} interval={10000}>
-                {this.renderCollections()}
-             </Carousel>
+            {this.renderCollections()}
          </Row>
         )
     }

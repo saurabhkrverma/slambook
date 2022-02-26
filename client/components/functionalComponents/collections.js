@@ -102,7 +102,7 @@ const  _renderSubmitButton = (collection, props) => {
     if(collection.sampleCollection){
         return (
             <div className="form-group card-action-button" key={`formik-${collection.collectionId}-submit`}>
-                <Button type="submit" disabled={!(props.isValid && props.dirty)} variant="outline-success">Save</Button>
+                <Button type="submit" disabled={!(props.isValid && props.dirty)} variant="outline-success">Create</Button>
             </div>
         )
     } else {
@@ -116,11 +116,10 @@ const  _renderSubmitButton = (collection, props) => {
 
 export const Collection = (collection, handleSubmit, validationSchema={}) => {
     return (
-        <Carousel.Item>
             <Card bg={"light"}
                   key={`${collection.collectionId}-collection`}
                   text={"dark"}
-                  className="collections-card"
+                  className="collections-card col-sm-10 col-md-3"
                   border="secondary">
                 <Card.Header as="h5">{(collection.sampleCollection) ? collection.name : `${collection.collectionName}`}</Card.Header>
                 <Card.Body>
@@ -144,7 +143,6 @@ export const Collection = (collection, handleSubmit, validationSchema={}) => {
                 </Card.Body>
                 {_renderFooter(collection)}
             </Card>
-        </Carousel.Item>
     )
 };
 
