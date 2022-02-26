@@ -128,7 +128,7 @@ class Posts extends React.Component {
         if(this.copyPosts && this.copyPosts.length > 0){
             return (
                 <>
-                    {this.renderSearchSortOptions()}
+                    {/*{this.renderSearchSortOptions()}*/}
                     {this.state.posts.map((post,postIndex) => {
                         post.index = postIndex;
                         return Post(post, this.handleSubmit)

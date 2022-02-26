@@ -52,12 +52,10 @@ class Home extends React.Component {
                         <div>
                             {this.renderCollections()}
                         </div>
-                        {/*<br/>*/}
-                        {/*<h5 className={"posts-section-header"}>Posts</h5>*/}
-                        {/*<hr></hr>*/}
-                        {/*<div>*/}
-                        {/*    {this.renderPosts()}*/}
-                        {/*</div>*/}
+                        &nbsp;
+                        <div>
+                            {this.renderPosts()}
+                        </div>
                     </Row>
                 </div>
             )
