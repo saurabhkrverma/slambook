@@ -34,9 +34,14 @@ class PostRequest extends React.Component {
 
     renderPosts(){
         const posts = this.props.requests;
-
+        const user = this.props.user;
+        const defaultValues = {};
+        if(user && user.email) {
+            defaultValues.submitterName= user.firstName;
+            defaultValues.submitterEmail = user.email;
+        }
         if(posts && posts.length>0){
-            return posts.map(post => Post(post, this.handleSubmit, this.validationSchema));
+            return posts.map(post => Post({...post,...defaultValues}, this.handleSubmit, this.validationSchema, user));
         } else {
             return null;
         }
@@ -69,7 +74,8 @@ class PostRequest extends React.Component {
 
 const mapStateToProps = (state)=> {
     return {
-        requests: state.data.requests
+        requests: state.data.requests,
+        user: state.user
     }
 }
 
