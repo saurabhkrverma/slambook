@@ -23,14 +23,16 @@ const registerPostRouter = (router) => {
     router.post("/post", async(req,res) => {
         try {
             const test = shouldSavePost(req);
+            let response = {};
             if(test) {
                 const postSaved = await createPost(req);
                 // No need to wait for notification to be created
                 const notificationCreated = createNotification(req);
+                response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_SUCCESS, MESSAGES.POST_SUBMISSION_SUCCESS);
             } else {
                 console.log("send otp or ask for password");
+                response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_OTP_REQUEST, MESSAGES.POST_SUBMISSION_OTP_REQUEST);
             }
-            const response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_SUCCESS, MESSAGES.POST_SUBMISSION_SUCCESS);
             return res.send(response);
         } catch (error) {
             console.log(error);

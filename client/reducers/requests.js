@@ -9,9 +9,18 @@ const requestsReducer = (state = [], action) => {
             return _.get(action,'data.data.requests',[]);
         case ACTIONS.SUBMIT_POSTS:
             const err = _.get(action,'data.errors',[]);
+            const otpCollection = _.get(action,'data.data.collectOTP',false);
             if(err && err.length >0) {
                 // if there's an error in submitting the post, keep user on the same page
                 return state;
+            }
+            else if(otpCollection === true) {
+                const newState = _.cloneDeep(state);
+                const post = newState[0];
+                if(post) {
+                    post.collectOTP = true;
+                }
+                return newState;
             }
             return _.get(action,'data.data.requests',[]);
         default:

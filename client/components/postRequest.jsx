@@ -5,25 +5,14 @@ import {Navigate} from "react-router-dom";
 import _ from "lodash";
 import Post from "./functionalComponents/postRequest";
 import { submitPostAction }  from "../actions/post"
-import * as yup from "yup";
+import { postRequestValidationSchema, postRequestWithOTPValidationSchema } from "../config/validationSchemas"
 
 class PostRequest extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.validationSchema = yup.object().shape({
-            submitterName: yup.string().required("your name is required"),
-            submitterEmail: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
-            questionnaire: yup.array()
-                .of(
-                    yup.object().shape({
-                        question: yup.string(),
-                        answer: yup.string().required("Required")
-                    })
-                )
-        });
-
+        this.validationSchema = postRequestValidationSchema;
         this.renderPosts = this.renderPosts.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,7 +30,13 @@ class PostRequest extends React.Component {
             defaultValues.submitterEmail = user.email;
         }
         if(posts && posts.length>0){
-            return posts.map(post => Post({...post,...defaultValues}, this.handleSubmit, this.validationSchema, user));
+            return posts.map(post => {
+                let validationSchema = this.validationSchema;
+                if(post.collectOTP) {
+                    validationSchema =  postRequestWithOTPValidationSchema;
+                }
+                return Post({...post,...defaultValues}, this.handleSubmit, validationSchema)
+            });
         } else {
             return null;
         }

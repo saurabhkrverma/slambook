@@ -32,7 +32,21 @@ const _renderEmailField = (post, props) => {
     )
 }
 
-const  _renderSubmitButton = (post, props) => {
+const _renderOTPField = (post, props) => {
+    return (
+        <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={!post.collectOTP}>
+            <Form.Label><i>{"Enter OTP sen to your email"}</i></Form.Label>
+            <Form.Control className="form-control" name={`otpValue`} placeholder={"enter OTP"}
+                          onChange={props.handleChange}
+                          value={props.values.otpValue}
+                          isValid={!props.errors.otpValue}
+                          isInvalid={!!props.errors.otpValue}/>
+            <Form.Control.Feedback type="invalid">{props.errors.otpValue}</Form.Control.Feedback>
+        </Form.Group>
+    )
+}
+
+const _renderSubmitButton = (post, props) => {
     return (
         <div className="form-group card-action-button" key={`formik-${post.collectionId}-submit`}>
             <Button type="submit" variant="outline-primary" disabled={!(props.isValid && props.dirty)}>Submit</Button>
@@ -60,6 +74,10 @@ const  _renderPosts = (post, props) => {
 }
 
 export const Post = (post, handleSubmit, validationSchema) => {
+    console.log("validationSchema", validationSchema);
+    // if(post.collectOTP) {
+    //     console
+    // }
     return (
         <Card bg={"light"}
               key={`${post.collectionId}-post`}
@@ -79,6 +97,8 @@ export const Post = (post, handleSubmit, validationSchema) => {
                             <FieldArray
                                 name="posts"
                                 render={arrayHelpers => _renderPosts(post, props)} />
+
+                            {_renderOTPField(post, props)}
 
                             {_renderSubmitButton(post, props)}
 

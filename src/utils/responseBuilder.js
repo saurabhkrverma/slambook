@@ -151,6 +151,12 @@ export const buildResponse = (req, responseType, payload) => {
             break;
         }
 
+        case RESPONSE_TYPES.POST_SUBMISSION_OTP_REQUEST: {
+            response.data.collectOTP = true;
+            response.messages.push(payload);
+            break;
+        }
+
         case RESPONSE_TYPES.NOTIFICATION_FETCH_SUCCESS: {
             response.data.notifications = _getNotifications(payload);
             break;
