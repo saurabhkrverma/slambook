@@ -4,7 +4,7 @@ import React from "react";
 
 const _renderNameField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"submitterName"} hidden={post.submitterName}>
+        <Form.Group className="mb-3 form-inline"  key={"submitterName"} hidden={post.submitterName || post.collectOTP}>
             <Form.Label><i>{"Your name"}</i></Form.Label>
             <Form.Control className="form-control" name={`submitterName`} placeholder={"your name"}
                         onChange={props.handleChange}
@@ -19,7 +19,7 @@ const _renderNameField = (post, props) => {
 
 const _renderEmailField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"submitterEmail"} hidden={post.submitterEmail}>
+        <Form.Group className="mb-3 form-inline"  key={"submitterEmail"} hidden={post.submitterEmail || post.collectOTP}>
             <Form.Label><i>{"Your email"}</i></Form.Label>
             <Form.Control className="form-control" name={`submitterEmail`} placeholder={"your email"}
                           onChange={props.handleChange}
@@ -58,7 +58,7 @@ const  _renderPosts = (post, props) => {
     const posts = props.values.questionnaire.map((obj, index) => {
         const fieldError = _.get(props, `errors.questionnaire.${index}.answer`);
         return (
-            <Form.Group className="mb-3" key={`${index}-answer`}>
+            <Form.Group className="mb-3" key={`${index}-answer`} hidden={post.collectOTP}>
                 <Form.Label><i>{obj.question}</i></Form.Label>
                 <Form.Control className="form-control" name={`questionnaire.${index}.answer`}
                         placeholder={"your answer"}
@@ -74,10 +74,6 @@ const  _renderPosts = (post, props) => {
 }
 
 export const Post = (post, handleSubmit, validationSchema) => {
-    console.log("validationSchema", validationSchema);
-    // if(post.collectOTP) {
-    //     console
-    // }
     return (
         <Card bg={"light"}
               key={`${post.collectionId}-post`}
@@ -90,9 +86,9 @@ export const Post = (post, handleSubmit, validationSchema) => {
                     {(props)=>(
                         <Form noValidate onSubmit={props.handleSubmit} key={`form-${post.collectionId}-post`}>
 
-                            {_renderNameField(post,props)}
+                            { _renderNameField(post,props)}
 
-                            {_renderEmailField(post, props)}
+                            { _renderEmailField(post, props)}
 
                             <FieldArray
                                 name="posts"
