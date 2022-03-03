@@ -152,7 +152,14 @@ export const buildResponse = (req, responseType, payload) => {
         }
 
         case RESPONSE_TYPES.POST_SUBMISSION_OTP_REQUEST: {
+            // todo: make the payload coming to response handler standard
+            response.data = payload.data;
             response.data.collectOTP = true;
+            response.messages.push(payload.message);
+            break;
+        }
+
+        case RESPONSE_TYPES.POST_SUBMISSION_INVALID_OTP: {
             response.messages.push(payload);
             break;
         }

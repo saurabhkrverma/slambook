@@ -42,6 +42,7 @@ export const MESSAGES = {
     "POST_SUBMISSION_SUCCESS": "post submitted successfully",
     "POST_SUBMISSION_FAILURE": "post couldn\'t be submitted",
     "POST_SUBMISSION_OTP_REQUEST": "please enter the otp sent to your email address",
+    "POST_SUBMISSION_INVALID_OTP": "invalid or expired OTP submitted",
     "POST_DELETION_SUCCESS": "post deleted successfully",
     "POST_DELETION_FAILURE": "collection couldn\'t be deleted",
     // notification related messages
@@ -86,6 +87,7 @@ export const RESPONSE_TYPES = {
     "POST_SUBMISSION_SUCCESS": "POST_SUBMISSION_SUCCESS",
     "POST_SUBMISSION_FAILURE": "POST_SUBMISSION_FAILURE",
     "POST_SUBMISSION_OTP_REQUEST": "POST_SUBMISSION_OTP_REQUEST",
+    "POST_SUBMISSION_INVALID_OTP": "POST_SUBMISSION_INVALID_OTP",
     "POST_DELETION_SUCCESS": "POST_DELETION_SUCCESS",
     "POST_DELETION_FAILURE": "POST_DELETION_FAILURE",
     // notification model
@@ -99,3 +101,12 @@ export const RESPONSE_TYPES = {
     "NOTIFICATION_DELETE_FAILURE": "NOTIFICATION_DELETE_FAILURE"
 }
 
+export const RESPONSE_CODES = {
+    POST : {
+        SUBMISSION: {
+            "VALIDATED": "VALIDATED",
+            "INVALID_OTP": "INVALID_OTP",
+            "REQUEST_OTP": "REQUEST_OTP"
+        }
+    }
+}
