@@ -20,8 +20,7 @@ const _getNotifications = (data) => {
 
 const _clearAllNotifications = (data) => {
     return {
-        type: ACTIONS.CLEAR_ALL_NOTIFICATIONS,
-        data
+        type: ACTIONS.CLEAR_ALL_NOTIFICATIONS
     }
 }
 
@@ -95,7 +94,7 @@ export const clearNotificationAction = (notification) => async (dispatch) => {
 
 export const clearAllNotificationsAction = () => async(dispatch) => {
     try {
-        dispatch(_clearAllNotifications(data));
+        dispatch(_clearAllNotifications());
         await clearAllNotifications();
         return;
     } catch (err) {
