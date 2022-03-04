@@ -32,7 +32,7 @@ class PostRequest extends React.Component {
         if(posts && posts.length>0){
             return posts.map(post => {
                 let validationSchema = this.validationSchema;
-                if(post.collectOTP) {
+                if(post.otpHash) {
                     validationSchema =  postRequestWithOTPValidationSchema;
                 }
                 return Post({...post,...defaultValues}, this.handleSubmit, validationSchema)

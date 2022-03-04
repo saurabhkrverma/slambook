@@ -4,7 +4,7 @@ import React from "react";
 
 const _renderNameField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"submitterName"} hidden={post.submitterName || post.collectOTP}>
+        <Form.Group className="mb-3 form-inline"  key={"submitterName"} hidden={post.submitterName || post.otpHash}>
             <Form.Label><i>{"Your name"}</i></Form.Label>
             <Form.Control className="form-control" name={`submitterName`} placeholder={"your name"}
                         onChange={props.handleChange}
@@ -19,7 +19,7 @@ const _renderNameField = (post, props) => {
 
 const _renderEmailField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"submitterEmail"} hidden={post.submitterEmail || post.collectOTP}>
+        <Form.Group className="mb-3 form-inline"  key={"submitterEmail"} hidden={post.submitterEmail || post.otpHash}>
             <Form.Label><i>{"Your email"}</i></Form.Label>
             <Form.Control className="form-control" name={`submitterEmail`} placeholder={"your email"}
                           onChange={props.handleChange}
@@ -34,10 +34,16 @@ const _renderEmailField = (post, props) => {
 
 const _renderOTPField = (post, props) => {
     return (
-        <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={!post.collectOTP}>
+        <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={!post.otpHash}>
             <Form.Label><i>{"Enter OTP sen to your email"}</i></Form.Label>
             <Form.Control className="form-control" name={`otpValue`} placeholder={"enter OTP"}
-                          onChange={props.handleChange}
+                          onChange={(e)=>{
+                              // find a better way to pass otp hash values to submit handler
+                              if(props.values && !props.values.otpHash){
+                                  props.values.otpHash = post.otpHash
+                              }
+                              props.handleChange(e);
+                          }}
                           value={props.values.otpValue}
                           isValid={!props.errors.otpValue}
                           isInvalid={!!props.errors.otpValue}/>
@@ -58,7 +64,7 @@ const  _renderPosts = (post, props) => {
     const posts = props.values.questionnaire.map((obj, index) => {
         const fieldError = _.get(props, `errors.questionnaire.${index}.answer`);
         return (
-            <Form.Group className="mb-3" key={`${index}-answer`} hidden={post.collectOTP}>
+            <Form.Group className="mb-3" key={`${index}-answer`} hidden={post.otpHash}>
                 <Form.Label><i>{obj.question}</i></Form.Label>
                 <Form.Control className="form-control" name={`questionnaire.${index}.answer`}
                         placeholder={"your answer"}
