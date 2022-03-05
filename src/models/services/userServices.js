@@ -24,7 +24,7 @@ export const readUser = async (req, _user) => {
 
 export const createGoogleUser = async (_user) => {
     try {
-        console.log("this is the user passed to create new : ", _user);
+        // todo: send a welcome mail
         const user = new User(_user);
 
         await user.save();

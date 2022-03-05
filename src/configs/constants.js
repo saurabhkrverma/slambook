@@ -1,8 +1,8 @@
 export const APP_KEYS = {
     AUTH: {
         GOOGLE: {
-            CLIENT_ID: "321752025604-gi95un4smok3ej6ompcsjbnhavtumnlj.apps.googleusercontent.com",
-            CLIENT_SECRET: "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",
+            CLIENT_ID: "693905447925-j7elfeserqv3ad663c8bb8245v208si3.apps.googleusercontent.com",
+            CLIENT_SECRET: "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",
             CALLBACK_URL: "/auth/google/callback"
         },
         FACEBOOK: {
