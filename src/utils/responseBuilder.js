@@ -9,7 +9,8 @@ const _createUserObject = (user={}) => {
         firstName: _.get(user, 'firstName'),
         lastName: _.get(user, 'lastName'),
         profilePic: _.get(user, 'profilePic'),
-        createdOn: _.get(user, 'createdOn')
+        createdOn: _.get(user, 'createdOn'),
+        active: _.get(user, 'active'),
     }
 
     return filteredUser;

@@ -1,22 +1,9 @@
-export const APP_KEYS = {
-    AUTH: {
-        GOOGLE: {
-            CLIENT_ID: "693905447925-j7elfeserqv3ad663c8bb8245v208si3.apps.googleusercontent.com",
-            CLIENT_SECRET: "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",
-            CALLBACK_URL: "/auth/google/callback"
-        },
-        FACEBOOK: {
-            CLIENT_ID: "490389222449400",
-            CLIENT_SECRET: "23165b521f4135a15a1528a1a747b6a3",
-            CALLBACK_URL: "/auth/facebook/callback"
-        }
-    }
-};
 
 export const MESSAGES = {
     // user related messages
     'USER_LOGIN_SUCCESS': 'user have been logged in successfully',
     'USER_LOGIN_FAILURE_INCORRECT_PASSWORD': 'incorrect password',
+    'USER_LOGIN_FAILURE_UNVERIFIED_EMAIL': 'please verify your email before login in',
     'USER_LOGIN_FAILURE_INCORRECT_EMAIL': 'provided email doesn\'t exists',
     'USER_LOGOUT_SUCCESS': 'user logged out successfully',
     'USER_LOGOUT_FAILURE': 'user couldn\'t be logged out',
