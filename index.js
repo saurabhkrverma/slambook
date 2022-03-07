@@ -4,7 +4,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import {v4 as uuid} from 'uuid';
-import { authentication, referralRequest } from './src/middlewares';
+import { authentication, passportStrategies } from './src/middlewares';
 import routes from './src/routes';
 const app = express();
 import path from "path";
@@ -13,9 +13,9 @@ export const DIST_DIR = path.join(__dirname, "./dist");
 
 // const mongoConnectionURI = `mongodb://localhost:27017/slambook`
 
-const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+//const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
-// const mongoConnectionURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+const mongoConnectionURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
 app.use(express.json());
@@ -44,6 +44,8 @@ app.set('trust proxy', 1);
 app.use(passport.initialize());
 // ask passport to use the session object
 app.use(passport.session());
+// setup passport strategies
+app.use(passportStrategies.initialisePassportStrategies);
 // authenticate incoming requests
 app.use(authentication.authenticateRequest);
 // middleware to register routes
