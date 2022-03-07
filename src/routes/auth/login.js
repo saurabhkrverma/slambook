@@ -1,4 +1,3 @@
-require("../../configs/passport");
 import passport from "passport";
 import buildResponse from '../../utils/responseBuilder';
 import {  MESSAGES, RESPONSE_TYPES } from '../../configs/constants';
