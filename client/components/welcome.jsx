@@ -35,7 +35,7 @@ class Welcome extends React.Component {
     }
 
     renderForm(){
-        if(this.state.registerUser) {
+        if(this.state.registerUser || this.props.app.defaultUser.email) {
             return (
                 <div>
                     <UserRegistration {...this.props} />
@@ -119,6 +119,7 @@ class Welcome extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        app: state.app,
         user: state.user,
         requests: state.data.requests
     };

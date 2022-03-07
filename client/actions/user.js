@@ -69,6 +69,7 @@ export const registerUserAction = (userInfo) => async (dispatch) => {
         const response = await registerUser(userInfo);
         const data = _.get(response, 'data');
         if (response.status === 200) {
+            data.userInfo = userInfo;
             return dispatch(registerNewUser(data));
         }
     } catch (err) {

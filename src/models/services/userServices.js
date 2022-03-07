@@ -25,7 +25,6 @@ export const readUser = async (req, _user) => {
 export const createGoogleUser = async (_user) => {
     try {
         // todo: send a welcome mail
-        _user.verified = true;
         const user = new User(_user);
 
         await user.save();

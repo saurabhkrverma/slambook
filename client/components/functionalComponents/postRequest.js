@@ -35,7 +35,7 @@ const _renderEmailField = (post, props) => {
 const _renderOTPField = (post, props) => {
     return (
         <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={!post.otpHash}>
-            <Form.Label><i>{"Enter OTP sen to your email"}</i></Form.Label>
+            <Form.Label><i>{"Enter OTP sent to your email"}</i></Form.Label>
             <Form.Control className="form-control" name={`otpValue`} placeholder={"enter OTP"}
                           onChange={(e)=>{
                               // find a better way to pass otp hash values to submit handler

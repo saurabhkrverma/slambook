@@ -18,7 +18,7 @@ const User = mongoose.Schema({
     "lastName": {type: String},
     "profilePic": {type: String},
     "source": {type: String},
-    "verified": {type: Boolean, default: false},
+    "verified": {type: Boolean, default: true},
     "createdOn" : {
         type: Date,
         default: Date.now

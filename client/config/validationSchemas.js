@@ -30,3 +30,24 @@ export const  postRequestWithOTPValidationSchema = yup.object().shape({
         .min(6, 'Must be exactly 6 digits')
         .max(6, 'Must be exactly 6 digits')
 });
+
+export const userRegistrationValidationSchema = yup.object().shape({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
+    password: yup.string().required().min(6),
+    confirmPassword: yup.string().required().oneOf([yup.ref('password'), null], 'Passwords must match')
+});
+
+export const userRegistrationWithOTPValidationSchema = yup.object().shape({
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
+    password: yup.string().required().min(6),
+    confirmPassword: yup.string().required().oneOf([yup.ref('password'), null], 'Passwords must match'),
+    otpValue: yup.string()
+        .required()
+        .matches(/^[0-9]+$/, "Must be only digits")
+        .min(6, 'Must be exactly 6 digits')
+        .max(6, 'Must be exactly 6 digits')
+});

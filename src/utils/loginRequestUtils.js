@@ -11,12 +11,6 @@ export const localStrategyCallback = async (username, password, done) => {
             const loginError = new Error(MESSAGES.USER_LOGIN_FAILURE_INCORRECT_EMAIL, {cause: RESPONSE_TYPES.USER_LOGIN_FAILURE});
             done(loginError);
         }
-        const isVerified = user.verified;
-        const isOrganic = (user.source === "organic");
-        if(isOrganic && !isVerified) {
-            const loginError = new Error(MESSAGES.USER_LOGIN_FAILURE_UNVERIFIED_EMAIL, {cause: RESPONSE_TYPES.USER_LOGIN_FAILURE});
-            done(loginError);
-        }
         const validPassword = await bcrypt.compare(password, user.password);
         if (validPassword) {
             done(null, user)
