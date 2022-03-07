@@ -4,6 +4,7 @@ import { Row } from "react-bootstrap";
 import * as yup from "yup";
 import { UserDetails } from "./functionalComponents/account.js";
 import { updateUserAction } from "../actions/user";
+import {Navigate} from "react-router-dom";
 
 
 class Account extends React.Component {
@@ -22,6 +23,15 @@ class Account extends React.Component {
     }
 
     render() {
+
+        if(this.props.requests && this.props.requests.length > 0) {
+            return (<Navigate to={"/request"}></Navigate>);
+        }
+
+        if(this.props.user && this.props.user.firstName){
+            return (<Navigate to={"/home"}></Navigate>);
+        }
+
         return (
             <Row className={"collections-cards"}>
                 {UserDetails(this.props.user, this.handleSubmit, this.userSchema)}

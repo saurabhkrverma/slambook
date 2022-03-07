@@ -15,7 +15,8 @@ class UserRegistration extends React.Component {
             firstName: yup.string().required(),
             lastName: yup.string().required(),
             email: yup.string().required().matches(/^\S+@\S+\.\S+$/, 'not a valid email'),
-            password: yup.string().required()
+            password: yup.string().required(),
+            confirmPassword: yup.string().required().oneOf([yup.ref('password'), null], 'Passwords must match')
         });
         this.onRegisterUserFormSubmit = this.onRegisterUserFormSubmit.bind(this);
         this.renderUserRegistrationForm = this.renderUserRegistrationForm.bind(this);
@@ -61,6 +62,12 @@ class UserRegistration extends React.Component {
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control name={"password"} type="password" placeholder="Password" value={props.values.password}  onChange={props.handleChange} isValid={!props.errors.password} isInvalid={!!props.errors.password}/>
                                 <Form.Control.Feedback type="invalid">{props.errors.password}</Form.Control.Feedback>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="user-registration-form-password-confirm">
+                                <Form.Label>Confirm password</Form.Label>
+                                <Form.Control name={"confirmPassword"} type="confirmPassword" placeholder="Password" value={props.values.confirmPassword}  onChange={props.handleChange} isValid={!props.errors.confirmPassword} isInvalid={!!props.errors.confirmPassword}/>
+                                <Form.Control.Feedback type="invalid">{props.errors.confirmPassword}</Form.Control.Feedback>
                             </Form.Group>
 
                             <Form.Group className="mb-3 text-align-center" controlId="user-registration-form-submit">
