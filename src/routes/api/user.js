@@ -2,7 +2,7 @@ import User from "../../models/user";
 import {MESSAGES, RESPONSE_CODES, RESPONSE_TYPES} from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 import { readUser, readUsers, createUser, deleteUser, updateUser } from "../../models/services/userServices"
-import { getUserStatus, generateOTPAndSendMail } from "../../utils/userRequestUtils";
+import { getUserStatus, generateOTPAndSendMail, sendWelcomeEmail } from "../../utils/userRequestUtils";
 
 const registerUserRouter = (router) => {
     // get all users
@@ -30,6 +30,7 @@ const registerUserRouter = (router) => {
             const userStatus = getUserStatus(req);
             if(userStatus === RESPONSE_CODES.USER.REGISTRATION.VALIDATED) {
                 const userCreated = await createUser(req);
+                sendWelcomeEmail(userCreated);
                 response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
             }  else if (userStatus === RESPONSE_CODES.USER.REGISTRATION.REQUEST_OTP) {
                 const otpHash = generateOTPAndSendMail(req);

@@ -3,6 +3,7 @@ import {MESSAGES, RESPONSE_TYPES} from "../configs/constants";
 import bcrypt from "bcrypt";
 import _ from "lodash";
 import {createGoogleUser, readUser} from "../models/services/userServices";
+import {sendWelcomeEmail} from "./userRequestUtils";
 
 export const localStrategyCallback = async (username, password, done) => {
     try {
@@ -44,6 +45,7 @@ export const localStrategyCallback = async (username, password, done) => {
 
          if (!currentUser) {
              const newUser = await createGoogleUser(user);
+             sendWelcomeEmail(user);
              return done(null, newUser);
          } else {
              return done(null, currentUser);
@@ -91,6 +93,7 @@ export const localStrategyCallback = async (username, password, done) => {
 
          if (!currentUser) {
              const newUser = await createGoogleUser(user);
+             sendWelcomeEmail(user);
              return done(null, newUser);
          } else {
              return done(null, currentUser);
