@@ -27,3 +27,8 @@ export const generateOTPAndSendMail = (req) => {
     sendOTPViaEmail(email, firstName, otp);
     return otpHash;
 }
+
+export const sendWelcomeEmail = (req) => {
+    const email = _.get(req, "body.email", "").toLowerCase();
+    const firstName = _.get(req, "body.firstName", "guest").toLowerCase();
+};
