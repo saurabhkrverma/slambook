@@ -1,7 +1,8 @@
 import User from "../../models/user";
-import { MESSAGES, RESPONSE_TYPES } from "../../configs/constants"
+import {MESSAGES, RESPONSE_CODES, RESPONSE_TYPES} from "../../configs/constants"
 import { buildResponse } from "../../utils/responseBuilder"
 import { readUser, readUsers, createUser, deleteUser, updateUser } from "../../models/services/userServices"
+import { getUserStatus, generateOTPAndSendMail } from "../../utils/userRequestUtils";
 
 const registerUserRouter = (router) => {
     // get all users
@@ -25,15 +26,30 @@ const registerUserRouter = (router) => {
     // add user
     router.post("/user", async(req,res) => {
         try {
-            const userCreated = await createUser(req);
-            const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
+            let response;
+            const userStatus = getUserStatus(req);
+            if(userStatus === RESPONSE_CODES.USER.REGISTRATION.VALIDATED) {
+                const userCreated = await createUser(req);
+                response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_SUCCESS, MESSAGES.USER_REGISTRATION_SUCCESS);
+            }  else if (userStatus === RESPONSE_CODES.USER.REGISTRATION.REQUEST_OTP) {
+                const otpHash = generateOTPAndSendMail(req);
+                response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_OTP_REQUEST, {
+                    "message": MESSAGES.USER_REGISTRATION_OTP_REQUEST,
+                    "data": {
+                        otpHash
+                    }
+                });
+            } else {
+                response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_INVALID_OTP, MESSAGES.USER_REGISTRATION_INVALID_OTP);
+            }
             res.send(response);
         } catch (error) {
+            console.log("check this error:", error);
             if(error.code === 11000) {
                 const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_FAILURE, MESSAGES.USER_REGISTRATION_FAILURE_EMAIL_EXISTS);
-               res.status(409).send(response);
+                res.status(409).send(response);
             } else {
-                const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_FAILURE, MESSAGES.USER_REGISTRATION_FAILURE_EMAIL_EXISTS);
+                const response = buildResponse(req, RESPONSE_TYPES.USER_REGISTRATION_FAILURE, MESSAGES.USER_REGISTRATION_FAILURE);
                 res.send(response);
             }
         }

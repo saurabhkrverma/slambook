@@ -13,6 +13,8 @@ export const MESSAGES = {
     "USER_PASSWORD_RESET_FAILURE": "password couldn\'t be updated",
     'USER_REGISTRATION_SUCCESS': 'user have been registered successfully, please login to continue',
     'USER_REGISTRATION_FAILURE_EMAIL_EXISTS': 'user registration failed, email already exists',
+    "USER_REGISTRATION_OTP_REQUEST": "please enter the otp sent to your email address",
+    "USER_REGISTRATION_INVALID_OTP": "invalid or expired OTP submitted",
     'USER_REGISTRATION_FAILURE': 'user registration failed',
     "USER_LOGIN_GOOGLE_SUCCESS": "user have been logged in successfully",
     "USER_LOGIN_GOOGLE_FAILURE": "something went wrong, please try another method",
@@ -57,6 +59,8 @@ export const RESPONSE_TYPES = {
     "USER_PASSWORD_RESET_FAILURE": "USER_PASSWORD_RESET_FAILURE",
     "USER_REGISTRATION_SUCCESS": "USER_REGISTRATION_SUCCESS",
     "USER_REGISTRATION_FAILURE": "USER_REGISTRATION_FAILURE",
+    "USER_REGISTRATION_INVALID_OTP": "USER_REGISTRATION_INVALID_OTP",
+    "USER_REGISTRATION_OTP_REQUEST": "USER_REGISTRATION_OTP_REQUEST",
     "USER_LOGIN_GOOGLE_SUCCESS": "USER_LOGIN_GOOGLE_SUCCESS",
     "USER_LOGIN_GOOGLE_FAILURE": "USER_LOGIN_GOOGLE_FAILURE",
     //collection model
@@ -89,6 +93,13 @@ export const RESPONSE_TYPES = {
 }
 
 export const RESPONSE_CODES = {
+    USER : {
+        REGISTRATION: {
+            "VALIDATED": "VALIDATED",
+            "INVALID_OTP": "INVALID_OTP",
+            "REQUEST_OTP": "REQUEST_OTP"
+        }
+    },
     POST : {
         SUBMISSION: {
             "VALIDATED": "VALIDATED",

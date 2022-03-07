@@ -122,7 +122,8 @@ export const buildResponse = (req, responseType, payload) => {
         case RESPONSE_TYPES.NOTIFICATION_DELETE_FAILURE:
         case RESPONSE_TYPES.USER_UPDATION_FAILURE:
         case RESPONSE_TYPES.POST_DELETION_FAILURE:
-        case RESPONSE_TYPES.POST_SUBMISSION_INVALID_OTP: {
+        case RESPONSE_TYPES.POST_SUBMISSION_INVALID_OTP:
+        case RESPONSE_TYPES.USER_REGISTRATION_INVALID_OTP: {
             response.errors.push(payload);
             break;
         }
@@ -153,6 +154,7 @@ export const buildResponse = (req, responseType, payload) => {
             break;
         }
 
+        case RESPONSE_TYPES.USER_REGISTRATION_OTP_REQUEST:
         case RESPONSE_TYPES.POST_SUBMISSION_OTP_REQUEST: {
             // todo: make the payload coming to response handler standard
             response.data = payload.data;
