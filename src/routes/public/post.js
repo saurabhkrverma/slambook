@@ -3,7 +3,7 @@ import { buildResponse } from "../../utils/responseBuilder";
 import  { createPost } from "../../models/services/postServices";
 import { readCollectionWithUserDetails } from "../../models/services/collectionServices";
 import { createNotification } from "../../models/services/notificationServices";
-import { shouldSavePost, generateOTPHash } from "../../utils/postRequestUtils";
+import { shouldSavePost, generateOTPAndSendMail } from "../../utils/postRequestUtils";
 
 const registerPostRouter = (router) => {
 
@@ -29,7 +29,7 @@ const registerPostRouter = (router) => {
                 const notificationCreated = createNotification(req);
                 response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_SUCCESS, MESSAGES.POST_SUBMISSION_SUCCESS);
             } else if (postStatus === RESPONSE_CODES.POST.SUBMISSION.REQUEST_OTP) {
-                const otpHash = generateOTPHash(req);
+                const otpHash = generateOTPAndSendMail(req);
                 response = buildResponse(req, RESPONSE_TYPES.POST_SUBMISSION_OTP_REQUEST, {
                     "message": MESSAGES.POST_SUBMISSION_OTP_REQUEST,
                     "data": {
