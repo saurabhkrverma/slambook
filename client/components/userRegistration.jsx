@@ -42,16 +42,20 @@ class UserRegistration extends React.Component {
         const handler = setInterval( () => {
             seconds = parseInt(timer % 60, 10);
             seconds = seconds < 10 ? "0" + seconds : seconds;
-            display.current.innerText =  `, resend in ${seconds}`;
+            if(display && display.current) {
+                display.current.innerText =  `, resend in ${seconds}`;
+            }
             if (--timer < 0) {
                 const resendLinkHTML = "<a href=\'#\'>Resend</a>";
-                display.current.innerHTML = resendLinkHTML;
-                display.current.addEventListener("click", (e)=>{
-                    if(e.target) {
-                        e.target.hidden = true;
-                    }
-                    this.onRegisterUserFormSubmit();
-                });
+                if(display && display.current) {
+                    display.current.innerHTML = resendLinkHTML;
+                    display.current.addEventListener("click", (e)=>{
+                        if(e.target) {
+                            e.target.hidden = true;
+                        }
+                        this.onRegisterUserFormSubmit();
+                    });
+                }
                 clearInterval(handler);
             }
         }, 1000);
