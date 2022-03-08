@@ -11,14 +11,50 @@ class UserRegistration extends React.Component {
 
     constructor(props) {
         super(props);
+        this.componentRefs = {
+            otpTimerRef: React.createRef()
+        }
 
         this.validationSchema = userRegistrationValidationSchema;
         this.onRegisterUserFormSubmit = this.onRegisterUserFormSubmit.bind(this);
         this.renderUserRegistrationForm = this.renderUserRegistrationForm.bind(this);
+        this.startOTPTimer = this.startOTPTimer.bind(this);
+    }
+
+    componentDidMount() {
+        this.startOTPTimer();
     }
 
     onRegisterUserFormSubmit(values, actions) {
-        this.props.registerUser(values);
+        if(values && values.preventDefault) {
+            // otp resend case
+            const user = _.get(this, 'props.app.defaultUser', {});
+            this.props.registerUser(user);
+        } else {
+            this.props.registerUser(values);
+        }
+    }
+
+    startOTPTimer(duration=60) {
+        let timer = duration, seconds;
+        let display = this.componentRefs.otpTimerRef;
+
+        const handler = setInterval( () => {
+            seconds = parseInt(timer % 60, 10);
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.current.innerText =  `, resend in ${seconds}`;
+            if (--timer < 0) {
+                const resendLinkHTML = "<a href=\'#\'>Resend</a>";
+                display.current.innerHTML = resendLinkHTML;
+                display.current.addEventListener("click", (e)=>{
+                    if(e.target) {
+                        e.target.hidden = true;
+                    }
+                    this.onRegisterUserFormSubmit();
+                });
+                clearInterval(handler);
+            }
+        }, 1000);
     }
 
     renderUserRegistrationForm(){
@@ -63,12 +99,12 @@ class UserRegistration extends React.Component {
                                 <Form.Control.Feedback type="invalid">{props.errors.confirmPassword}</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={!otpHash}>
-                                <Form.Label><i>{"Enter OTP sent to your email"}</i></Form.Label>
+                            <Form.Group className="mb-3 form-inline"  key={"otpValue"} hidden={otpHash}>
+                                <Form.Label><i>{"Enter OTP sent to your email"}</i> <b ref={this.componentRefs.otpTimerRef}></b></Form.Label>
                                 <Form.Control className="form-control" name={`otpValue`} placeholder={"enter OTP"}
                                               onChange={(e)=>{
                                                   // find a better way to pass otp hash values to submit handler
-                                                  if(props.values && !props.values.otpHash){
+                                                  if((props.values && !props.values.otpHash) || (otpHash && (props.values.otpHash !== otpHash))){
                                                       props.values.otpHash = otpHash
                                                   }
                                                   props.handleChange(e);

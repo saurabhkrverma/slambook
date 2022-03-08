@@ -22,10 +22,10 @@ const appReducer = (state = defaultState, action) => {
             }
             else if(otpHash) {
                 const defaultUser = action.data && action.data.userInfo;
-                if(defaultUser) {
-                    defaultUser.otpHash = otpHash;
+                if(defaultUser && defaultUser.email) {
                     newState.defaultUser = defaultUser
                 }
+                newState.defaultUser.otpHash = otpHash;
                 return newState;
             }
             newState.defaultUser = {};

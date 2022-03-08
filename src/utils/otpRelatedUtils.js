@@ -17,7 +17,6 @@ export const generateOTPAndHash = (email, name) => {
     const otpHashKey = "slambook";
     const otp = otpGenerator(6, { upperCaseAlphabets: false, lowerCaseAlphabets: false, specialChars: false, alphabets: false });
     const otpHash = otpHashGenerator(email, otp, otpHashKey, 5, "sha256");
-    console.log("hash created:", otpHash)
     return {
         otp,
         otpHash
@@ -42,7 +41,6 @@ export const sendOTPViaEmail = async (email, name, otp) => {
             html: htmlToSend
         };
         const transporter = await constructEmailTransporter();
-        console.log("transporter", transporter);
         const result = await transporter.sendMail(mailOptions);
         console.log(result);
     } catch (err) {
