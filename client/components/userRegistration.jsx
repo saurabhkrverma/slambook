@@ -93,7 +93,7 @@ class UserRegistration extends React.Component {
                                 <Form.Control.Feedback type="invalid">{props.errors.password}</Form.Control.Feedback>
                             </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="user-registration-form-password-confirm" hidden={ otpHash }>
+                            <Form.Group className="mb-3" controlId="user-registration-form-password-confirm" hidden={ !otpHash }>
                                 <Form.Label>Confirm password</Form.Label>
                                 <Form.Control name={"confirmPassword"} type="confirmPassword" placeholder="Password" value={props.values.confirmPassword}  onChange={props.handleChange} isValid={!props.errors.confirmPassword} isInvalid={!!props.errors.confirmPassword}/>
                                 <Form.Control.Feedback type="invalid">{props.errors.confirmPassword}</Form.Control.Feedback>
