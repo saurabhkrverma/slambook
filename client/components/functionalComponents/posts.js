@@ -9,7 +9,7 @@ const _renderCardHeader = (post) => {
         let userName = _.get(post,"submitterName", "Anonymous");
         return (
             <div className={"card-header-post"}>
-                <i className="profile-pic" src={"/icons/default-user-icon.png"}></i>
+                <Image className="profile-pic" src={"/icons/default-user-icon-1.png"} roundedCircle={true} fluid={true}></Image>
                 <span> {`${post.collectionName} by ${userName}`} </span>
             </div>
         )
@@ -28,7 +28,7 @@ const _renderFooter = (post) => {
     const creationDate = creationTimestamp.toLocaleDateString('en-IN');
     const creationTime = creationTimestamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
     return (
-        <Card.Footer className="text-muted card-collection-footer">
+        <Card.Footer className="text-muted card-collection-footer card-collection-footer-post">
             <div>submitted on {`${creationDate} @ ${creationTime}`} </div>
         </Card.Footer>
     )
@@ -68,7 +68,7 @@ export const Post = (post, handleSubmit) => {
               text={"white"}
               className="collections-card collections-card-post  col-sm-10 col-md-3"
               border="secondary">
-            <Card.Header as="h5">{_renderCardHeader(post)}</Card.Header>
+            <Card.Header as="h5" className={"card-header-post-container"}>{_renderCardHeader(post)}</Card.Header>
             <Card.Body>
                 <Formik initialValues={post} onSubmit={handleSubmit.apply} key={`formik-${post.collectionId}-post`}>
                     {(props)=>(
