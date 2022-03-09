@@ -40,12 +40,12 @@ app.use(session({
 }));
 // enabling secure cookie for heroku
 app.set('trust proxy', 1);
+// setup passport strategies
+app.use(passportStrategies.initialisePassportStrategies);
 // initialise passport
 app.use(passport.initialize());
 // ask passport to use the session object
 app.use(passport.session());
-// setup passport strategies
-app.use(passportStrategies.initialisePassportStrategies);
 // authenticate incoming requests
 app.use(authentication.authenticateRequest);
 // middleware to register routes
