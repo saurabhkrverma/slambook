@@ -28,8 +28,8 @@ class Account extends React.Component {
             return (<Navigate to={"/request"}></Navigate>);
         }
 
-        if(this.props.user && this.props.user.firstName){
-            return (<Navigate to={"/home"}></Navigate>);
+        if(this.props.user && !this.props.user.firstName){
+            return (<Navigate to={"/welcome"}></Navigate>);
         }
 
         return (

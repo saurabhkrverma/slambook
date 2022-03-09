@@ -9,7 +9,7 @@ const _renderCardHeader = (post) => {
         let userName = _.get(post,"submitterName", "Anonymous");
         return (
             <div className={"card-header-post"}>
-                <i className="bi bi-person-circle profile-pic"></i>
+                <i className="profile-pic" src={"/icons/default-user-icon.png"}></i>
                 <span> {`${post.collectionName} by ${userName}`} </span>
             </div>
         )

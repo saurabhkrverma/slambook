@@ -1,6 +1,7 @@
 // webpack config
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const htmlPlugin = new HtmlWebPackPlugin({
@@ -12,6 +13,12 @@ const cssPlugin = new MiniCssExtractPlugin({
     filename: "./index.css"
 });
 
+const copyPlugin = new CopyWebpackPlugin({
+    patterns: [
+        { from: './src/static' }
+    ]
+})
+
 module.exports = {
     mode: "development",
     devtool: 'source-map',
@@ -20,7 +27,7 @@ module.exports = {
         path: path.join(__dirname, "dist"),
         filename: "index.js"
     },
-    plugins: [htmlPlugin, cssPlugin],
+    plugins: [htmlPlugin, cssPlugin,copyPlugin],
     module: {
       rules: [{
           test: /\.(js|jsx)$/,

@@ -4,6 +4,7 @@ import {Row, Carousel, Card, Spinner} from "react-bootstrap";
 import { addCollectionAction, loadCollectionsAction, deleteCollectionAction }  from "../actions/collection";
 import Collection from './functionalComponents/collections.js';
 import * as yup from "yup";
+import {Navigate} from "react-router-dom";
 
 class Collections extends React.Component {
     constructor(props) {
@@ -46,6 +47,15 @@ class Collections extends React.Component {
     }
 
     render(){
+
+        if(this.props.requests && this.props.requests.length > 0) {
+            return (<Navigate to={"/request"}></Navigate>);
+        }
+
+        if(this.props.user && !this.props.user.firstName){
+            return (<Navigate to={"/welcome"}></Navigate>);
+        }
+
         return (
          <Row className={"collections-cards"}>
             {this.renderCollections()}
