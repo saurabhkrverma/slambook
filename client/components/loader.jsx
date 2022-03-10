@@ -11,7 +11,7 @@ class Loader extends React.Component {
     render() {
         return (
             <Modal
-                show={this.props.showLoader || true}
+                show={this.props.showLoader}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
