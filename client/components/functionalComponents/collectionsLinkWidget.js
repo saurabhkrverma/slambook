@@ -2,19 +2,13 @@ import React from "react";
 import { Row, Card, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const _transitionToCollections = (event) => {
-    event.preventDefault();
-    const urlHistory = useNavigate();
-    navigate("../collections", { replace: true });
-}
-
 const renderCollectionsLinkWidget = () => {
     return (
         <Row className={"collections-cards collections-card-widget"}>
             <Card className={"col-sm-10, col-md-3"}>
                 <Card.Body>
-                    <div className={"add-slambook-icon"}>
-                        <i className="bi bi-plus-circle"></i>
+                    <div className={"add-slambook-icon add-slambook-icon-pulse"}>
+                        <button className="pulse-button"></button>
                     </div>
                     <div className={"add-slambook-options"}>
                         <Nav.Link as={Link} to="/collections">Create new slambook</Nav.Link>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Row } from 'react-bootstrap';
+import {Navbar, Nav, Row, Image} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { logoutUserAction} from '../actions/user';
@@ -46,7 +46,10 @@ class Header extends React.Component {
         return (
             <Row>
                 <Navbar expand="lg" bg="dark" variant="dark"  collapseOnSelect className={"header"} fixed={"top"}>
-                    <Navbar.Brand href="/">slambook</Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        <Image className={"header-app-icon"} src={"/icons/slambook-4.png"} roundedCircle={true} fluid={true}></Image>
+                        slambook
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                         {this.renderRightPanel()}

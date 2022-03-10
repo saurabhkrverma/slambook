@@ -15,12 +15,8 @@ class Loader extends React.Component {
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                className={"loader"}
             >
-                <Modal.Header>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                        Loading...
-                    </Modal.Title>
-                </Modal.Header>
                 <Modal.Body>
                     <Spinner animation="border" role="status" className="spinner-full-screen">
                         <span className="visually-hidden">Loading...</span>

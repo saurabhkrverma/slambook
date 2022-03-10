@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux"
-import { Row, Dropdown, Button } from "react-bootstrap";
+import {Row, Dropdown, Button, Image} from "react-bootstrap";
 import { getPostsAction, deletePostAction  } from "../actions/post";
 import Post from "./functionalComponents/posts.js";
 import { sortPosts } from "../utils/commonUtils";
@@ -118,7 +118,7 @@ class Posts extends React.Component {
         } else {
             return (
                 <div className={"post-pagination-tab"}>
-                    That's all !!
+                    <Image className="profile-pic" src={"/icons/no-more-posts.png"} roundedCircle={true} fluid={true}></Image>
                 </div>
             )
         }
