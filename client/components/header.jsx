@@ -47,7 +47,7 @@ class Header extends React.Component {
             <Row>
                 <Navbar expand="lg" bg="dark" variant="dark"  collapseOnSelect className={"header"} fixed={"top"}>
                     <Navbar.Brand href="/">
-                        <Image className={"header-app-icon"} src={"/icons/slambook-4.png"} roundedCircle={true} fluid={true}></Image>
+                        <Image className={"header-app-icon"} src={"/icons/slambook-logo.png"} roundedCircle={true} fluid={true}></Image>
                         slambook
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
