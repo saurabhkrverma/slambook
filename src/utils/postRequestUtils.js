@@ -29,8 +29,7 @@ export const generateOTPAndSendMail = (req) => {
     const submitterEmail = _.get(req, "body.submitterEmail", "").toLowerCase();
     const submitterName = _.get(req, "body.submitterName", "").toLowerCase();
     const { otp,otpHash } = generateOTPAndHash(submitterEmail, submitterName);
-    console.log("otp", otp);
     // no need to wait for email to be sent
-    // sendOTPViaEmail(submitterEmail, submitterName, otp);
+    sendOTPViaEmail(submitterEmail, submitterName, otp);
     return otpHash;
 }
