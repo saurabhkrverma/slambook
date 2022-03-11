@@ -10,7 +10,6 @@
 .notification-alert-count {
   position: relative;
   bottom: 0px;
-  height: 15px;
   line-height: 15px;
   top: -5px;
   border-radius: 15px;
@@ -18,6 +17,8 @@
   font-size: smaller;
   display: inline-block;
   width: 15px;
-  height: 15px;
+  height: auto;
   text-align: center;
+  font-weight: 600;
+  padding: 0 2px;
 }

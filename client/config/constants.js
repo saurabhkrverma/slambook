@@ -35,6 +35,27 @@ export const ACTIONS = {
     UPDATE_CURRENT_PAGE_NUMBER: "UPDATE_CURRENT_PAGE_NUMBER"
 }
 
+export const SAMPLE_QUESTIONS = [
+    {
+        "question":"My name in your phone",
+    },
+    {
+        "question":"A nick name for me",
+    },
+    {
+        "question":"Name for my autobiography",
+    },
+    {
+        "question":"superpower you wish to give me",
+    },
+    {
+        "question": "A message for me",
+    },
+    {
+        "question": "your all time favourite movie",
+    }
+]
+
 
 export const DEFAULT_COLLECTION = {
     "collectionId": "create_collection",

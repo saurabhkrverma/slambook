@@ -1,6 +1,7 @@
-import {Button, Card, Carousel, Row, Form, InputGroup, FormControl} from "react-bootstrap";
+import {Button, Card, Dropdown, DropdownButton, Form, InputGroup, FormControl} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
+import { SAMPLE_QUESTIONS }  from "../../config/constants";
 
 const _copyLink = (collection) => {
     const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
@@ -59,20 +60,75 @@ const _renderFooter = (collection, props) => {
     }
 }
 
-const  _questionnaire = (collection, props) => {
-    const questionnaires = props.values.questionnaire.map((obj, index) => {
-        const fieldError = _.get(props, `errors.questionnaire.${index}.question`);
-        const fieldValue = _.get(obj, "question");
+const _createSampleQuestionsDropdownOptions = (sampleQuestions = SAMPLE_QUESTIONS) => {
+    const questionOptions = sampleQuestions.map((sampleQuestion, index)=>{
         return (
-            <Form.Group className="mb-3" key={`questionnaire.${index}.question`}>
+            <Dropdown.Item eventKey={sampleQuestion.question}>{sampleQuestion.question}</Dropdown.Item>
+        )
+    })
+    questionOptions.push(<Dropdown.Divider />);
+    questionOptions.push(<Dropdown.Item eventKey="">Write new question</Dropdown.Item>);
+    return questionOptions;
+}
+
+const _renderSampleQuestionsDropdown = (collection, props, index) => {
+    if(!collection.sampleCollection) {
+        return null;
+    }
+    const onSelectHandler = (eventKey, event) => {
+        props.values.questionnaire[index].question = eventKey;
+        let elem = document.getElementById(`${collection.collectionId}.questionnaire.${index}.question`);
+        elem.value = eventKey;
+        props.handleChange(`questionnaire.${index}.question`);
+    }
+    return (
+        <DropdownButton variant="primary" title="Questions" id={`questionnaire.${index}.question-dropdown`} onSelect={onSelectHandler}>
+            {_createSampleQuestionsDropdownOptions(SAMPLE_QUESTIONS)}
+        </DropdownButton>
+    )
+}
+
+const _test = (collection, props, index, fieldError, fieldValue) => {
+    if(collection.sampleCollection) {
+        return (
+            <>
                 <Form.Control className="form-control" name={`questionnaire.${index}.question`}
-                              placeholder={"question here"}
+                              placeholder={"your question here"}
                               onChange={props.handleChange}
                               value={fieldValue}
                               disabled={!collection.sampleCollection}
                               isValid={!fieldError}
-                              isInvalid={!!fieldError}/>
+                              isInvalid={!!fieldError}
+                              id={`${collection.collectionId}.questionnaire.${index}.question`}/>
                 <Form.Control.Feedback type="invalid">{fieldError}</Form.Control.Feedback>
+            </>
+        )
+    } else {
+        return (
+            <Form.Control className="form-control slambook-questionnaire-static" name={`questionnaire.${index}.question`}
+                          placeholder={"your question here"}
+                          onChange={props.handleChange}
+                          value={fieldValue}
+                          disabled={!collection.sampleCollection}
+                          isValid={!fieldError}
+                          isInvalid={!!fieldError}
+                          id={`${collection.collectionId}.questionnaire.${index}.question`}/>
+        )
+    }
+}
+
+const  _questionnaire = (collection, props) => {
+    const questionnaires = props.values.questionnaire.map((obj, index) => {
+        const fieldError = _.get(props, `errors.questionnaire.${index}.question`);
+        let fieldValue = _.get(obj, "question");
+        return (
+            <Form.Group className="mb-3" key={`questionnaire.${index}.question`}>
+                <InputGroup className="mb-3">
+
+                    { _renderSampleQuestionsDropdown(collection, props, index) }
+                    { _test(collection, props, index, fieldError, fieldValue) }
+
+                </InputGroup>
             </Form.Group>
         )
     });
@@ -116,9 +172,9 @@ const  _renderSubmitButton = (collection, props) => {
 
 export const Collection = (collection, handleSubmit, validationSchema={}) => {
     return (
-            <Card bg={"light"}
+            <Card bg={"dark"}
                   key={`${collection.collectionId}-collection`}
-                  text={"dark"}
+                  text={"light"}
                   className="collections-card col-sm-10 col-md-3"
                   border="secondary">
                 <Card.Header as="h5">{(collection.sampleCollection) ? collection.name : `${collection.collectionName}`}</Card.Header>
@@ -130,6 +186,8 @@ export const Collection = (collection, handleSubmit, validationSchema={}) => {
                                 {_renderNameField(collection,props)}
 
                                 {(collection.sampleCollection ? <hr/>: null)}
+
+                                {(collection.sampleCollection ? <Form.Label><i>{`Questions: select from sample or write your very own`}</i></Form.Label> : <Form.Label><i>{"Questions in your slambook"}</i></Form.Label>)}
 
                                 <FieldArray
                                     name="questionnaire"
