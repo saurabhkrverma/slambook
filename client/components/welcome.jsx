@@ -96,18 +96,18 @@ class Welcome extends React.Component {
         }
 
         return (
-            <Row>
-                <Col className={"col-12  col-md-6"}>
+            <Row className={"welcome-page-container"}>
+                <Col className={"col-12  col-md-4"}>
                     <div className="jumbotron jumbotron-fluid">
                         <div className="container">
                             <h1 className="display-4">Slambook</h1>
                             <p className="lead">
-                                Welcome to slambook !! we help you connect with your friends and relive the 90s &#128512;
+                                Welcome to slambook !! we help you connect with your friends and see only what you asked for &#128512;
                             </p>
                         </div>
                     </div>
                 </Col>
-                <Col className={"col-12  col-md-6"}>
+                <Col className={"col-12  col-md-4"}>
                     {this.renderForm()}
                 </Col>
             </Row>
