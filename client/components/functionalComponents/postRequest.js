@@ -81,9 +81,9 @@ const  _renderPosts = (post, props) => {
 
 export const Post = (post, handleSubmit, validationSchema) => {
     return (
-        <Card bg={"light"}
+        <Card bg={"dark"}
               key={`${post.collectionId}-post`}
-              text={"dark"}
+              text={"light"}
               className="collections-card col-sm-10 col-md-3"
               border="secondary">
             <Card.Header as="h5">{`${post.collectionName}`}</Card.Header>

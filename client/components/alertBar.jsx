@@ -46,7 +46,6 @@ class AlertBar extends React.Component {
         if(consolidateErrors || consolidateMessages){
             const closeAlertBox = setTimeout(this.closeAlertBar,5000);
         }
-
         return (
             <Collapse in={(consolidateErrors || consolidateMessages)}>
                 <div>

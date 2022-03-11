@@ -65,9 +65,9 @@ export const UserDetails = (user, handleSubmit, validationSchema) => {
         "email":user.email
     };
     return (
-        <Card bg={"light"}
+        <Card bg={"dark"}
               key={"text"}
-              text={"dark"}
+              text={"light"}
               className="collections-card col-sm-10 col-md-3"
               border="secondary">
             <Card.Header as="h5">{"User Details"}</Card.Header>
