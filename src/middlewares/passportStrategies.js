@@ -26,30 +26,12 @@ const initialisePassportStrategies = (req, res, next) => {
 
 // configure passport to use the facebook strategy
     passport.use(new FacebookStrategy({
-            clientID: "4829763920406236",
-            clientSecret: "7bdf5926b713319f2e35d768bcbf601d",
-            callbackURL: "http://localhost:5000/auth/facebook/callback",
+            clientID: process.env.FACEBOOK_CLIENT_ID,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+            callbackURL: process.env.FACEBOOK_CALLBACK_URL,
             profile: ['id', 'displayName', 'name', 'profileUrl', 'email']
         }, async (accessToken, refreshToken, profile, done) => {
             console.log("check this:", profile);
-            // FD data
-        // {
-        //     id: '5227572593920381',
-        //         username: undefined,
-        //     displayName: 'Saurabh Verma',
-        //     name: {
-        //     familyName: undefined,
-        //         givenName: undefined,
-        //         middleName: undefined
-        // },
-        //     gender: undefined,
-        //         profileUrl: undefined,
-        //     provider: 'facebook',
-        //     _raw: '{"name":"Saurabh Verma","id":"5227572593920381"}',
-        //     _json: { name: 'Saurabh Verma', id: '5227572593920381' }
-        // }
-
-        // return done(null, profile);
             return facebookStrategyCallback(accessToken, refreshToken, profile, done);
         }
     ));
