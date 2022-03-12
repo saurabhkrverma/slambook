@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Row, Col, Spinner, Modal} from 'react-bootstrap';
+import {Row, Col, Spinner, Modal, Image} from 'react-bootstrap';
 import { Navigate } from "react-router-dom";
 import UserRegistration from './userRegistration.jsx';
 import Login from './login.jsx';

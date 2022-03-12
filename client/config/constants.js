@@ -4,6 +4,13 @@ export const CONSTANTS = {
     "ORDER_OLDEST_FIRST": "ORDER_OLDEST_FIRST"
 };
 
+export const MESSAGES = {
+    COLLECTIONS: {
+        "SHARE_TITLE": "Share the slambook",
+        "SHARE_TEXT": "Hi, please fill my slambook page!"
+    }
+}
+
 export const ACTIONS = {
     // users
     RECEIVE_CURRENT_USER: "RECEIVE_CURRENT_USER",

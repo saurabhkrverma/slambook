@@ -1,7 +1,7 @@
 import {Button, Card, Dropdown, DropdownButton, Form, InputGroup, FormControl} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
-import { SAMPLE_QUESTIONS }  from "../../config/constants";
+import { SAMPLE_QUESTIONS, MESSAGES }  from "../../config/constants";
 
 const _copyLink = (collection) => {
     const shareLink = window.location.origin + "/public/post/" + collection.collectionId;
@@ -21,8 +21,8 @@ const _copyLink = (collection) => {
 const _openShare = async (collection) => {
     const url = window.location.origin + "/public/post/" + collection.collectionId
     const shareData = {
-        title: 'Share the slambook',
-        text: `Select the available option to share it with your friends`,
+        title: MESSAGES.COLLECTIONS.SHARE_TITLE,
+        text: MESSAGES.COLLECTIONS.SHARE_TEXT,
         url: `${url}`
       }
       await navigator.share(shareData)
