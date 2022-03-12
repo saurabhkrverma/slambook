@@ -13,8 +13,6 @@ export const DIST_DIR = path.join(__dirname, "./dist");
 
 // const mongoConnectionURI = `mongodb://localhost:27017/slambook`
 
-//const mongoConnectionURI = `mongodb+srv://sauraverma:Dushyant%407@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
-
 const mongoConnectionURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
@@ -29,7 +27,7 @@ app.use(session({
     store: MongoStore.create({
         mongoUrl: mongoConnectionURI
     }),
-    secret: 'moina',
+    secret: 'slambook',
     resave: false,
     saveUninitialized: true,
     cookie: {

@@ -20,7 +20,7 @@ const copyPlugin = new CopyWebpackPlugin({
 })
 
 module.exports = {
-    mode: "development",
+    mode: (process.env.NODE_ENV || "development"),
     devtool: 'source-map',
     entry: ["./client/index.js"],
     output: {
