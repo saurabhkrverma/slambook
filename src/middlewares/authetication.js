@@ -4,10 +4,19 @@ const authenticateRequest = (req, res, next) => {
     // URLs for which loginable account is not needed
     if(config.whitelistUrls[req.url]){
         next();
+    } else if(/^\/auth/i.test(req.url)) {
+        next();
+    } else if(/^\/public/i.test(req.url)) {
+        next();
     } else if(req.isAuthenticated()){
         next();
     } else {
-        res.redirect("/");
+        const regexp = /^\/api/i;
+        if(regexp.test(req.url)){
+            return res.status(401).send();
+        } else {
+            return res.redirect("/");
+        }
     }
 }
 

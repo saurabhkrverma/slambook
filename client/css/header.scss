@@ -1,0 +1,16 @@
+.navbar.header {
+  .header-app-icon {
+    height: 50px;
+  }
+
+  .nav-item:hover {
+    border-radius: 15px;
+    background-color: grey;
+    color: white;
+  }
+
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 2px 12px;
+}

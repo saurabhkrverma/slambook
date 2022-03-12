@@ -4,14 +4,16 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import {v4 as uuid} from 'uuid';
-import { authentication } from './src/middlewares';
+import { authentication, passportStrategies } from './src/middlewares';
 import routes from './src/routes';
 const app = express();
 import path from "path";
 
-const DIST_DIR = path.join(__dirname, "./dist");
+export const DIST_DIR = path.join(__dirname, "./dist");
 
-const mongoConnectionURI = `mongodb+srv://sauraverma:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
+// const mongoConnectionURI = `mongodb://localhost:27017/slambook`
+
+const mongoConnectionURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.ppbaa.mongodb.net/slambook?retryWrites=true&w=majority`;
 
 // middleware to use the json parser
 app.use(express.json());
@@ -25,10 +27,19 @@ app.use(session({
     store: MongoStore.create({
         mongoUrl: mongoConnectionURI
     }),
-    secret: 'moina',
+    secret: 'slambook',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        sameSite: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: parseInt(30*60*1000)
+    },
 }));
+// enabling secure cookie for heroku
+app.set('trust proxy', 1);
+// setup passport strategies
+app.use(passportStrategies.initialisePassportStrategies);
 // initialise passport
 app.use(passport.initialize());
 // ask passport to use the session object
@@ -51,10 +62,3 @@ try {
 } catch (error) {
     console.log(error);
 }
-
-
-
-
-
-
-

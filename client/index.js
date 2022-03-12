@@ -1,10 +1,34 @@
 import React from "react";
 import ReactDom from "react-dom";
+import Container from 'react-bootstrap/Container';
+import {BrowserRouter} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import createSlamBookStore from './store';
+import Header from './components/header.jsx'
+import AlertBar from './components/alertBar.jsx'
+import Loader from "./components/loader.jsx";
+import Router from "./components/router.jsx";
+import  { BreakpointProvider } from 'react-socks';
+import './css/index.scss';
+import { initializeAppAction }  from "./actions/app";
 
-const Init = () => {
-    return (
-        <div>Welcome to slambook homepage :)</div>
-    )
+const Init =  async () => {
+    const slamBookStore =  await createSlamBookStore();
+    slamBookStore.dispatch(initializeAppAction());
+    return ReactDom.render(
+        <Provider store={slamBookStore}>
+            <Container fluid>
+                <BrowserRouter>
+                    <BreakpointProvider>
+                        <Header/>
+                        <AlertBar />
+                        <Loader/>
+                        <Router/>
+                    </BreakpointProvider>
+                </BrowserRouter>
+            </Container>
+
+        </Provider>, document.getElementById('root'));
 }
 
-ReactDom.render(<Init/>, document.getElementById('root'));
+Init();

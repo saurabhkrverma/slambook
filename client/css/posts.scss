@@ -1,0 +1,79 @@
+
+
+.posts-section-header, .posts-no-post {
+  text-align: center;
+}
+
+.post-options {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.collections-card-post {
+
+  .card-body {
+    div {
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+  }
+  margin-top: 35px !important;
+  border: none;
+  box-shadow: rgba(234, 181, 113, 0.5) 1.95px 1.95px 2.6px;
+}
+
+.card-header-post-container {
+  box-shadow: rgba(234, 181, 113, 0.5) 0px 1px 2px 0px, rgba(234, 181, 113, 0.5) 0px 1px 3px 1px;
+}
+
+.card-header {
+
+  .card-header-post {
+
+    .bi-person-circle.profile-pic {
+      top: -37px !important;
+      background: white;
+      border-radius: 25px;
+    }
+
+    .profile-pic {
+      position: relative;
+      top: -33px;
+      left: 44%;
+      height: 50px;
+      width: 50px;
+      font-size: 50px;
+    }
+
+    span {
+      margin-top: -29px;
+    }
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  border-bottom: none;
+  text-align: center;
+}
+
+.card-collection-footer-post {
+  background-color: #EAB571;
+}
+
+.post-pagination-tab {
+
+  .page-item {
+    .page-link {
+      background-color: #f8f9fa;
+      color: black;
+    }
+  }
+
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+

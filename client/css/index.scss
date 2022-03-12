@@ -1,0 +1,32 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "./header.scss";
+@import "./collections.scss";
+@import "./collectionsWidget.scss";
+@import "./posts.scss";
+@import "./login.scss";
+@import "./home.scss";
+@import "./notifications.scss";
+@import "./alert.scss";
+@import "./loader.scss";
+@import "./welcome.scss";
+
+body {
+  font-family:Montserrat,sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  background-image: radial-gradient( rgba(255, 220, 178, 0.7), rgba(145, 64, 0, 0.7));
+  height: 100vh;
+}
+
+.page-body {
+  padding-top: 129px;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.form-label {
+  overflow-wrap: anywhere
+}

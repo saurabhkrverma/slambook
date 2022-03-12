@@ -1,0 +1,11 @@
+.loader {
+
+  .modal-dialog {
+    display: grid !important;
+    place-content: center;
+  }
+
+  .modal-content {
+    width: auto !important;
+  }
+}
