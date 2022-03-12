@@ -44,7 +44,7 @@ class Login extends React.Component {
                     &nbsp; login with google
                 </Button>
 
-                <Button variant="outline-primary" onClick={this.clickOauthFacebookButton}>
+                <Button variant="outline-primary" onClick={this.clickOauthFacebookButton} disabled>
                     <i className="bi bi-facebook"></i>
                     &nbsp; login with facebook
                 </Button>

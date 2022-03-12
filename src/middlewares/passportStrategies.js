@@ -2,11 +2,10 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 import passport from "passport";
-import { Strategy as FacebookStrategy } from "passport-facebook";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Strategy as LocalStrategy } from "passport-local";
 import User from "../models/user";
-import { localStrategyCallback, googleStrategyCallback, facebookStrategyCallback } from "../utils/loginRequestUtils";
+import { localStrategyCallback, googleStrategyCallback } from "../utils/loginRequestUtils";
 
 const initialisePassportStrategies = (req, res, next) => {
 
@@ -23,18 +22,6 @@ const initialisePassportStrategies = (req, res, next) => {
             done (err, null);
         }
     });
-
-// configure passport to use the facebook strategy
-    passport.use(new FacebookStrategy({
-            clientID: process.env.FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-            callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-            profile: ['id', 'displayName', 'name', 'profileUrl', 'email']
-        }, async (accessToken, refreshToken, profile, done) => {
-            console.log("check this:", profile);
-            return facebookStrategyCallback(accessToken, refreshToken, profile, done);
-        }
-    ));
 
 // configure passport to use the google strategy
     passport.use(new GoogleStrategy({
