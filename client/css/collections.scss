@@ -14,7 +14,8 @@
 
 .collections-cards .collections-card {
   padding: 0;
-  margin: 12px
+  margin: 12px;
+  box-shadow: rgba(105, 105, 105, 0.5) 1.95px 1.95px 2.6px;
 }
 
 .collections-card .collections-card-body-loading{
@@ -24,7 +25,7 @@
 }
 
 .card-header {
-  box-shadow: rgba(234, 181, 113, 0.5) 0px 1px 2px 0px, rgba(234, 181, 113, 0.5) 0px 1px 3px 1px;
+  box-shadow: rgba(248, 248, 255, 0.5) 0px 1px 2px 0px, rgba(248, 248, 255, 0.5) 0px 1px 3px 1px;
 }
 
 .card-header .card-header-content {
@@ -39,7 +40,7 @@
 .card-collection-footer {
   div {
     text-align: center;
-    color: #EAB571;
+    color: #f8f8ff;
   }
 }
 
@@ -57,16 +58,16 @@
 }
 
 .dropdown-toggle.btn.btn-primary {
-  background-color: #EAB571;
+  background-color: #f8f8ff;
   color: black;
   border-color: black
 }
 
 .dropdown-menu.show {
-  background-color: antiquewhite;
+  background-color: aliceblue;
 }
 
 .dropdown-item:hover {
   background-color: black;
-  color: antiquewhite;
+  color: aliceblue;
 }

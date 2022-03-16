@@ -20,11 +20,11 @@
   }
   margin-top: 35px !important;
   border: none;
-  box-shadow: rgba(234, 181, 113, 0.5) 1.95px 1.95px 2.6px;
+  box-shadow: rgba(105, 105, 105, 0.5) 1.95px 1.95px 2.6px;
 }
 
 .card-header-post-container {
-  box-shadow: rgba(234, 181, 113, 0.5) 0px 1px 2px 0px, rgba(234, 181, 113, 0.5) 0px 1px 3px 1px;
+  box-shadow: rgba(248, 248, 255, 0.5) 0px 1px 2px 0px, rgba(248, 248, 255, 0.5) 0px 1px 3px 1px;
 }
 
 .card-header {
@@ -33,7 +33,7 @@
 
     .bi-person-circle.profile-pic {
       top: -37px !important;
-      background: white;
+      background-color: aliceblue;
       border-radius: 25px;
     }
 
@@ -44,6 +44,7 @@
       height: 50px;
       width: 50px;
       font-size: 50px;
+      background-color: aliceblue;
     }
 
     span {
@@ -59,7 +60,7 @@
 }
 
 .card-collection-footer-post {
-  background-color: #EAB571;
+  background-color: #f8f8ff;
 }
 
 .post-pagination-tab {
@@ -74,6 +75,11 @@
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+.no-more-posts {
+  height: 50px;
+  width: 50px;
 }
 
 

@@ -118,7 +118,7 @@ class Posts extends React.Component {
         } else {
             return (
                 <div className={"post-pagination-tab"}>
-                    <Image className="profile-pic" src={"/icons/no-more-posts.png"} roundedCircle={true} fluid={true}></Image>
+                    <Image className="no-more-posts" src={"/icons/no-more-posts.png"} roundedCircle={true} fluid={true}></Image>
                 </div>
             )
         }
