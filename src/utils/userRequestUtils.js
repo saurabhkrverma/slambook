@@ -35,7 +35,7 @@ export const generateOTPAndSendMail = (req) => {
 export const sendWelcomeEmail = async (user) => {
     const email = _.get(user, "email", "").toLowerCase();
     const firstName = _.get(user, "firstName", "guest").toLowerCase();
-    const filePath = path.join(__dirname, '../templates/welcomeEmailTemplate.html');
+    const filePath = path.join(__dirname, '../static/templates/welcomeEmailTemplate.html');
     const source = fs.readFileSync(filePath, 'utf-8').toString();
     const template = handlebars.compile(source);
     const replacements = {
