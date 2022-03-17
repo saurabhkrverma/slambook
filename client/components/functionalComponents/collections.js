@@ -172,9 +172,9 @@ const  _renderSubmitButton = (collection, props) => {
 
 export const Collection = (collection, handleSubmit, validationSchema={}) => {
     return (
-            <Card bg={"dark"}
+            <Card bg={"primary"}
                   key={`${collection.collectionId}-collection`}
-                  text={"light"}
+                  text={"dark"}
                   className="collections-card col-sm-10 col-md-3"
                   border="secondary">
                 <Card.Header as="h5">{(collection.sampleCollection) ? collection.name : `${collection.collectionName}`}</Card.Header>

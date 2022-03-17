@@ -1,24 +1,38 @@
 import React from "react";
 import _ from "lodash";
-import {Button, Card, Form, FormControl, Image, InputGroup} from "react-bootstrap";
+import {Button, Card, Form, Image, Popover, OverlayTrigger} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 
 const _renderCardHeader = (post) => {
     const user = _.get(post, 'user', {});
+    const submitterEmail = _.get(post, 'submitterEmail', "unknown");
+    const popover = (
+        <Popover id={`${post.collectionId}-${submitterEmail}-popover`}>
+            <Popover.Header as="h3">Post details</Popover.Header>
+            <Popover.Body>
+                This post was submitted from {submitterEmail}.
+            </Popover.Body>
+        </Popover>
+    );
     if(_.isEmpty(user)) {
         let userName = _.get(post,"submitterName", "Anonymous");
         return (
-            <div className={"card-header-post"}>
-                <Image className="profile-pic" src={"/icons/default-user-icon.png"} roundedCircle={true} fluid={true}></Image>
-                <span> {`${post.collectionName} by ${userName}`} </span>
-            </div>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                <div className={"card-header-post"}>
+                    <Image className="profile-pic" src={"/icons/default-user-icon.png"} roundedCircle={true} fluid={true}></Image>
+                    <span> {`${post.collectionName} by ${userName}`} </span>
+                </div>
+            </OverlayTrigger>
         )
     } else {
         return (
-            <div className={"card-header-post"}>
-                <Image className={"profile-pic"} src={post.user.profilePic} roundedCircle={true} fluid={true}></Image>
-                <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
-            </div>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+                <div className={"card-header-post"}>
+                    <Image className={"profile-pic"} src={post.user.profilePic} roundedCircle={true} fluid={true}></Image>
+                    <span> {`${post.collectionName} by ${post.user.firstName}`} </span>
+                </div>
+            </OverlayTrigger>
+
         )
     }
 }

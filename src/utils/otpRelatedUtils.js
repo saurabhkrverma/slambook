@@ -25,7 +25,7 @@ export const generateOTPAndHash = (email, name) => {
 
 export const sendOTPViaEmail = async (email, name, otp) => {
     try {
-        const filePath = path.join(__dirname, '../templates/otpMailTemplate.html');
+        const filePath = path.join(__dirname, '../static/templates/otpMailTemplate.html');
         const source = fs.readFileSync(filePath, 'utf-8').toString();
         const template = handlebars.compile(source);
         const replacements = {
