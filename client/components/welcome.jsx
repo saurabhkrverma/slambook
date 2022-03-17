@@ -102,7 +102,7 @@ class Welcome extends React.Component {
                         <div className="container">
                             <h1 className="display-4">Slambook</h1>
                             <p className="lead">
-                                Welcome to slambook !! we help you connect with your friends and see only what you asked for &#128512;
+                                Welcome to slambook !! we help you connect with your friends and bring the attention back to you &#128512;
                             </p>
                         </div>
                     </div>
