@@ -36,8 +36,8 @@ export const sendOTPViaEmail = async (email, name, otp) => {
         const mailOptions = {
             from: process.env.GOOGLE_CLIENT_ID,
             to: email,
-            subject: 'Your OTP for slambook post',
-            text: `Hi ${name}, your otp for slambook's post submission is ${otp}`,
+            subject: 'Your OTP for slambook',
+            text: `Hi ${name}, your otp for slambook is ${otp}`,
             html: htmlToSend
         };
         const transporter = await constructEmailTransporter();
