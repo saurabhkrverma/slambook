@@ -1,4 +1,14 @@
-import {Button, Card, Dropdown, DropdownButton, Form, InputGroup, FormControl} from "react-bootstrap";
+import {
+    Button,
+    Card,
+    Dropdown,
+    DropdownButton,
+    Form,
+    InputGroup,
+    FormControl,
+    Image,
+    OverlayTrigger, Popover
+} from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
 import { SAMPLE_QUESTIONS, MESSAGES }  from "../../config/constants";
@@ -18,14 +28,61 @@ const _copyLink = (collection) => {
     }
 }
 
-const _openShare = async (collection) => {
-    const url = window.location.origin + "/public/post/" + collection.collectionId
+const _openShare = (collection) => {
+    const url = window.location.origin + "/public/post/" + collection.collectionId;
     const shareData = {
         title: MESSAGES.COLLECTIONS.SHARE_TITLE,
         text: MESSAGES.COLLECTIONS.SHARE_TEXT,
         url: `${url}`
-      }
-      await navigator.share(shareData)
+    }
+    navigator.share(shareData) ;
+}
+
+const _renderShareButton = (collection) => {
+    const url = window.location.origin + "/public/post/" + collection.collectionId;
+    const shareLink = encodeURIComponent(url);
+    const shareButton = (
+        <span id={`share_link_${collection.collectionId}_clipboard`}>
+            <i className="bi bi-share"></i>
+        </span>
+    );
+
+    const whatsappShareButton = (
+        <span>
+            <span id={`share_link_${collection.collectionId}_whatsapp`}>
+                <i className="bi bi-whatsapp"></i>
+            </span>
+            &nbsp;
+            <a href={`https://api.whatsapp.com/send?text=${shareLink}`} data-action="share/whatsapp/share" target="_blank">whatsapp</a>
+        </span>
+    )
+
+    const popover = (
+        <Popover id={'test'}>
+            <Popover.Header as="h3">share via</Popover.Header>
+            <Popover.Body>
+                <span id={`share_link_${collection.collectionId}_clipboard`}>
+                    {whatsappShareButton}
+                </span>
+            </Popover.Body>
+        </Popover>
+    );
+
+    if(navigator && navigator.share) {
+        return (
+            <Button variant="outline-success" id="button-addon2" onClick={()=>{_openShare(collection)}} >
+                {shareButton}
+            </Button>
+        )
+    } else {
+        return (
+            <OverlayTrigger trigger="click" placement="top" overlay={popover}>
+                <Button variant="outline-success" id="button-addon2" >
+                    {shareButton}
+                </Button>
+            </OverlayTrigger>
+        )
+    }
 }
 
 const _renderFooter = (collection, props) => {
@@ -39,18 +96,14 @@ const _renderFooter = (collection, props) => {
                 <InputGroup className="mb-3">
                     <FormControl aria-describedby="basic-addon2" type="text" id={`share_link_${collection.collectionId}`} value={shareLink} disabled={true}/>
                     <Button variant="outline-success" id="button-addon1" onClick={()=>{_copyLink(collection)}} >
-                        <span id={`share_link_${collection.collectionId}_clipboard`}>
+                        <span id={`copy_link_${collection.collectionId}_clipboard`}>
                             <i className="bi bi-clipboard"></i>
                         </span>
-                        <span id={`share_link_${collection.collectionId}_clipboard_check`} hidden={true}>
+                        <span id={`copy_link_${collection.collectionId}_clipboard_check`} hidden={true}>
                             <i className="bi bi-clipboard-check"></i>
                         </span>
                     </Button>
-                    {navigator.share && <Button variant="outline-success" id="button-addon1" onClick={async ()=>{_openShare(collection)}} >
-                        <span>
-                            <i className="bi bi-share"></i>
-                        </span>
-                    </Button>}
+                    {_renderShareButton(collection)}
                 </InputGroup>
 
             </Card.Footer>
