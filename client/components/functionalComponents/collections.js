@@ -7,7 +7,7 @@ import {
     InputGroup,
     FormControl,
     Image,
-    OverlayTrigger, Popover
+    OverlayTrigger, Popover, ButtonGroup
 } from "react-bootstrap";
 import { FieldArray, Formik} from "formik";
 import React from "react";
@@ -48,13 +48,28 @@ const _renderShareButton = (collection) => {
     );
 
     const whatsappShareButton = (
-        <span>
-            <span id={`share_link_${collection.collectionId}_whatsapp`}>
-                <i className="bi bi-whatsapp"></i>
-            </span>
-            &nbsp;
-            <a href={`https://api.whatsapp.com/send?text=${shareLink}`} data-action="share/whatsapp/share" target="_blank">whatsapp</a>
-        </span>
+        <ButtonGroup className="me-2">
+            <Button variant="outline-secondary" id={`share_link_${collection.collectionId}_whatsapp`}>
+                <a href={`https://api.whatsapp.com/send?text=${shareLink}`} data-action="share/whatsapp/share" target="_blank">
+                    <i className="bi bi-whatsapp"></i>
+                </a>
+            </Button>
+            <Button variant="outline-secondary" id={`share_link_${collection.collectionId}_facebook`}>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} data-action="share/facebook/share" target="_blank">
+                    <i className="bi bi-facebook"></i>
+                </a>
+            </Button>
+            <Button variant="outline-secondary" id={`share_link_${collection.collectionId}_twitter`}>
+                <a href={`https://twitter.com/share?url=${shareLink}`} data-action="share/twitter/share" target="_blank">
+                    <i className="bi bi-twitter"></i>
+                </a>
+            </Button>
+            <Button variant="outline-secondary" id={`share_link_${collection.collectionId}_linkedin`}>
+                <a href={`https://www.linkedin.com/sharing/share-offsite/?url==${shareLink}`} data-action="share/linkedin/share" target="_blank">
+                    <i className="bi bi-linkedin"></i>
+                </a>
+            </Button>
+        </ButtonGroup>
     )
 
     const popover = (
